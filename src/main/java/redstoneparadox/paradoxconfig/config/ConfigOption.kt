@@ -20,10 +20,9 @@ open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: Stri
     }
 
     internal fun deserialize(deserializer: ConfigDeserializer) {
-        val newVal = deserializer.readOption<T>(key)
-        if (!type.isInstance(newVal)) {
-            throw Exception("Received a value but it did not match the type")
+        val newVal = deserializer.readOption(key)
+        if (newVal != null && type.isInstance(newVal)) {
+            value = newVal as T
         }
-        value = newVal
     }
 }

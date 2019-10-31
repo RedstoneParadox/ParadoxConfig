@@ -1,5 +1,7 @@
 package redstoneparadox.paradoxconfig.serialization
 
+import kotlin.reflect.KClass
+
 /**
  * Classes that implement this are used to deserialize a string
  * representation of the config into an intermediate
@@ -43,7 +45,7 @@ interface ConfigDeserializer {
      * Called to read the value of an option in the
      * current category.
      */
-    fun <T> readOption(key: String): T?
+    fun readOption(key: String): Any?
 
     /**
      * Used to clear the current contents of the deserializer
