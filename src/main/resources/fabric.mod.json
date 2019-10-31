@@ -32,5 +32,9 @@
   },
   "suggests": {
     "flamingo": "*"
+  },
+
+  "custom": {
+    "paradoxconfig": ["redstoneparadox.paradoxconfig.misc.TestConfig"]
   }
 }
