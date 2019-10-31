@@ -30,7 +30,7 @@ interface ConfigSerializer {
      * @param value The value of the option.
      * @param comment The comment for this option.
      */
-    fun <T> writeOption(key: String, value: T, comment: String)
+    fun writeOption(key: String, value: Any, comment: String)
 
     /**
      * Called when the config class has finished passing data
