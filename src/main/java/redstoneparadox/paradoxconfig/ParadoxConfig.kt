@@ -2,7 +2,6 @@ package redstoneparadox.paradoxconfig
 
 import net.fabricmc.loader.api.FabricLoader
 import redstoneparadox.paradoxconfig.config.AbstractConfig
-import redstoneparadox.paradoxconfig.config.ConfigCategory
 import redstoneparadox.paradoxconfig.misc.runTests
 import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
@@ -10,10 +9,10 @@ import java.io.File
 import java.io.FileNotFoundException
 import kotlin.reflect.full.createInstance
 
+internal var initialized: Boolean = false
+
 @Suppress("unused")
 fun init() {
-    newInitConfig()
-
     if (FabricLoader.getInstance().isDevelopmentEnvironment) {
         runTests()
     }
@@ -41,7 +40,9 @@ internal fun getConfigData(): Collection<ConfigData> {
     return data;
 }
 
-internal fun newInitConfig() {
+internal fun initConfigs() {
+    if (initialized) return
+
     val configData = getConfigData()
     val baseClass = AbstractConfig::class
 
@@ -80,6 +81,8 @@ internal fun newInitConfig() {
             println("Could not find serializer or deserializer for mod ${data.modName}. Configs for ${data.modName} will not be loaded.")
         }
     }
+
+    initialized = true
 }
 
 internal class ConfigData(val serializerName: String, val deserializerName: String, val configNames: Collection<String>, val modName: String)

@@ -11,8 +11,6 @@ open class ConfigCategory(val key : String = "", val comment: String = "") {
     internal fun init() {
         val kclass = this::class
 
-        println("Being initialized!")
-
         for (innerclass in kclass.nestedClasses) {
             val obj = innerclass.objectInstance
             if (obj is ConfigCategory) {

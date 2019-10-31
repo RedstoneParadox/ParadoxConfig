@@ -5,6 +5,10 @@
   "mixins": [
   ],
   "client": [
+    "client.MainMixin"
+  ],
+  "server": [
+    "server.MinecraftServerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
