@@ -7,7 +7,7 @@ import redstoneparadox.paradoxconfig.misc.runTests
 @Suppress("unused")
 fun init() {
     for (path in getConfigClassNames()) {
-        println(path)
+        initConfigs()
     }
 
     if (FabricLoader.getInstance().isDevelopmentEnvironment) {
