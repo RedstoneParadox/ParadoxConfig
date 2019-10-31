@@ -16,8 +16,12 @@ interface ConfigDeserializer {
      *
      *  @param source The contents of the config
      *  file in string form.
+     *
+     *  @return Whether or not the config was
+     *  successfully converted to an intermediary
+     *  representation.
      */
-    fun receiveSource(source: String)
+    fun receiveSource(source: String): Boolean
 
     /**
      * Called to enter a sub-category in the current
@@ -46,6 +50,4 @@ interface ConfigDeserializer {
      * when it's used for more than one config file.
      */
     fun clear()
-
-    fun wasSuccessful(): Boolean
 }

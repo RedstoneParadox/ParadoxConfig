@@ -60,8 +60,7 @@ internal fun newInitConfig() {
                 if (config is AbstractConfig) {
                     val configFile = File(FabricLoader.getInstance().configDirectory, config.file)
                     var configString = configFile.readText()
-                    deserializer.receiveSource(configString)
-                    if (deserializer.wasSuccessful()) config.deserialize(deserializer)
+                    if (deserializer.receiveSource(configString)) config.deserialize(deserializer)
                     config.serialize(serializer)
                     configString = serializer.complete()
                     configFile.writeText(configString)
