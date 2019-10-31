@@ -1,7 +1,7 @@
 package redstoneparadox.paradoxconfig.serialization.jankson
 
 import blue.endless.jankson.JsonObject
-import blue.endless.jankson.JsonPrimitive
+import io.github.cottonmc.jankson.JanksonFactory
 import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import java.util.*
 
@@ -9,6 +9,8 @@ class JanksonConfigSerializer: ConfigSerializer {
 
     var currentObject: JsonObject = JsonObject()
     val objectStack: Stack<JsonObject> = Stack()
+
+    private val jankson = JanksonFactory.createJankson()
 
     override fun addCategory(key: String, comment: String) {
         val newObject = JsonObject()
@@ -22,7 +24,7 @@ class JanksonConfigSerializer: ConfigSerializer {
     }
 
     override fun writeOption(key: String, value: Any, comment: String) {
-        currentObject.put(key, JsonPrimitive(value), comment)
+        currentObject.put(key, jankson.toJson(value), comment)
     }
 
     override fun complete(): String {

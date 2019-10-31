@@ -1,13 +1,11 @@
 package redstoneparadox.paradoxconfig.serialization.jankson
 
-import blue.endless.jankson.Jankson
-import blue.endless.jankson.JsonElement
 import blue.endless.jankson.JsonObject
 import blue.endless.jankson.JsonPrimitive
 import blue.endless.jankson.impl.SyntaxError
+import io.github.cottonmc.jankson.JanksonFactory
 import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
-import java.util.*
-import kotlin.reflect.KClass
+import java.util.Stack
 
 @Suppress("unused")
 class JanksonConfigDeserializer: ConfigDeserializer {
@@ -18,9 +16,8 @@ class JanksonConfigDeserializer: ConfigDeserializer {
     override fun receiveSource(source: String): Boolean {
         if (source.isNotEmpty()) {
             try {
-                currentObject = Jankson
-                    .builder()
-                    .build()
+                currentObject = JanksonFactory
+                    .createJankson()
                     .load(source)
 
                 return true
