@@ -23,17 +23,14 @@ internal fun getConfigData(): Collection<ConfigData> {
 
     for (mod in FabricLoader.getInstance().allMods) {
         if (mod.metadata.containsCustomValue("paradoxconfig")) {
-            val configData = mod.metadata.getCustomValue("paradoxconfig").asObject
-            val serializerName = configData["serializer"].asString
-            val deserializerName = configData["deserializer"].asString
-            val classNames = configData["classes"].asArray
+            val classNames = mod.metadata.getCustomValue("paradoxconfig").asArray
 
             val configNames = arrayListOf<String>()
             for (className in classNames) {
                 configNames.add(className.asString)
             }
 
-            data.add(ConfigData(serializerName, deserializerName, configNames, mod.metadata.name))
+            data.add(ConfigData(configNames, mod.metadata.name))
         }
     }
 
@@ -47,43 +44,33 @@ internal fun initConfigs() {
     val baseClass = AbstractConfig::class
 
     for (data in configData) {
-        try {
-            val serializer = Class.forName(data.serializerName).kotlin.createInstance()
-            val deserializer = Class.forName(data.deserializerName).kotlin.createInstance()
+        for (configName in data.configNames) {
+            val config = Class.forName(configName).kotlin.objectInstance
+            if (config is AbstractConfig) {
+                config.init()
 
-            if (serializer !is ConfigSerializer || deserializer !is ConfigDeserializer) {
-                println("Could not find serializer or deserializer for mod ${data.modName}. Configs for ${data.modName} will not be loaded.")
-                continue
-            }
+                val serializer = config.serializer
+                val deserializer = config.deserializer
+                val configFile = File(FabricLoader.getInstance().configDirectory, config.file)
 
-            for (configName in data.configNames) {
-                val config = Class.forName(configName).kotlin.objectInstance
-
-                if (config is AbstractConfig) {
-                    config.init()
-
-                    val configFile = File(FabricLoader.getInstance().configDirectory, config.file)
-                    try {
-                        val configString = configFile.readText()
-                        if (deserializer.receiveSource(configString)) config.deserialize(deserializer)
-                    } catch (e: FileNotFoundException) {
-                        println("Config file for $configName not found so a new one will be created.")
-                    }
-                    config.serialize(serializer)
-                    val configString = serializer.complete()
-                    configFile.writeText(configString)
+                try {
+                    val configString = configFile.readText()
+                    if (deserializer.receiveSource(configString)) config.deserialize(deserializer)
+                } catch (e: FileNotFoundException) {
+                    println("Config file for $configName not found so a new one will be created.")
                 }
-                else {
-                    println("Object $configName either doesn't extend ${baseClass.simpleName} or is not an object.")
-                }
+                config.serialize(serializer)
+                val configString = serializer.complete()
+                configFile.writeText(configString)
             }
-        } catch (e: ClassNotFoundException) {
-            println("Could not find serializer or deserializer for mod ${data.modName}. Configs for ${data.modName} will not be loaded.")
+            else {
+                println("Object $configName either doesn't extend ${baseClass.simpleName} or is not an object.")
+            }
         }
     }
 
     initialized = true
 }
 
-internal class ConfigData(val serializerName: String, val deserializerName: String, val configNames: Collection<String>, val modName: String)
+internal class ConfigData(val configNames: Collection<String>, val modName: String)
 

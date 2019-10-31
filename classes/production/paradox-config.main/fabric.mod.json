@@ -35,10 +35,6 @@
   },
 
   "custom": {
-    "paradoxconfig": {
-      "serializer": "redstoneparadox.paradoxconfig.serialization.jankson.JanksonConfigSerializer",
-      "deserializer": "redstoneparadox.paradoxconfig.serialization.jankson.JanksonConfigDeserializer",
-      "classes": ["redstoneparadox.paradoxconfig.misc.TestConfig"]
-    }
+    "paradoxconfig": ["redstoneparadox.paradoxconfig.misc.TestConfig"]
   }
 }
