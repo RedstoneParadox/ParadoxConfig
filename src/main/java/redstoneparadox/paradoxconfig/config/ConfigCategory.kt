@@ -1,6 +1,9 @@
 package redstoneparadox.paradoxconfig.config
 
-open class ConfigCategory(val key : String = "") {
+import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
+import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
+
+open class ConfigCategory(val key : String = "", val comment: String = "") {
 
     private val optionsMap: HashMap<String, ConfigOption<*>> = HashMap()
     private val categoriesMap: HashMap<String, ConfigCategory> = HashMap()
@@ -17,6 +20,34 @@ open class ConfigCategory(val key : String = "") {
                 obj.init()
             }
         }
+    }
+
+    internal fun serialize(configSerializer: ConfigSerializer) {
+        if (key.isNotEmpty()) configSerializer.addCategory(key, comment)
+
+        for (category in categoriesMap.values) {
+            category.serialize(configSerializer)
+        }
+
+        for (option in optionsMap.values) {
+            option.serialize(configSerializer)
+        }
+
+        if (key.isNotEmpty()) configSerializer.exitCategory()
+    }
+
+    internal fun deserialize(configDeserializer: ConfigDeserializer) {
+        if (key.isNotEmpty()) configDeserializer.enterCategory(key)
+
+        for (category in categoriesMap.values) {
+            category.deserialize(configDeserializer)
+        }
+
+        for (option in optionsMap.values) {
+            option.deserialize(configDeserializer)
+        }
+
+        if (key.isNotEmpty()) configDeserializer.exitCategory()
     }
 
     protected fun option(default: Boolean, key: String, comment: String = ""): ConfigOption<Boolean> {
