@@ -35,6 +35,10 @@
   },
 
   "custom": {
-    "paradoxconfig": ["redstoneparadox.paradoxconfig.misc.TestConfig"]
+    "paradoxconfig": {
+      "serializer": "",
+      "deserializer": "",
+      "classes": ["redstoneparadox.paradoxconfig.misc.TestConfig"]
+    }
   }
 }
