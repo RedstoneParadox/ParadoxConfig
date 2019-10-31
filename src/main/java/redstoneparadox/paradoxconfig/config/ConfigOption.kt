@@ -1,6 +1,5 @@
 package redstoneparadox.paradoxconfig.config
 
-import java.lang.IllegalArgumentException
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
