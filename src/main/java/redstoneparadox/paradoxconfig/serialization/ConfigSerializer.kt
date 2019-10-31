@@ -37,4 +37,10 @@ interface ConfigSerializer {
      * @return The string-representation of the config.
      */
     fun complete(): String
+
+    /**
+     * Used to clear the current contents of the serializer when
+     * it's used for more than one config file.
+     */
+    fun clear()
 }

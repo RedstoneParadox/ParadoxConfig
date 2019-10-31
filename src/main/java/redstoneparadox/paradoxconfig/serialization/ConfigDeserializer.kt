@@ -37,4 +37,10 @@ interface ConfigDeserializer {
      * current category.
      */
     fun <T> readOption(key: String): T
+
+    /**
+     * Used to clear the current contents of the deserializer
+     * when it's used for more than one config file.
+     */
+    fun clear()
 }
