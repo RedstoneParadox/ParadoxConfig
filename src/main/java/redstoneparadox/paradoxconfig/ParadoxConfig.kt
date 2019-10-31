@@ -59,6 +59,8 @@ internal fun newInitConfig() {
                 val config = Class.forName(configName).kotlin.objectInstance
 
                 if (config is AbstractConfig) {
+                    config.init()
+
                     val configFile = File(FabricLoader.getInstance().configDirectory, config.file)
                     try {
                         val configString = configFile.readText()
