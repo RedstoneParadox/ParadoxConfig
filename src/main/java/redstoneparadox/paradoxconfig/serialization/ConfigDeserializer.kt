@@ -1,10 +1,10 @@
 package redstoneparadox.paradoxconfig.serialization
 
 /**
- * Classes that implement this are used to deserialize raw config data
- * into an intermediate representation such as GSON objects and provide
- * information to the config class about option values during
- * initialization.
+ * Classes that implement this are used to deserialize a string
+ * representation of the config into an intermediate
+ * representation. The config then uses this class to read
+ * option values.
  */
 interface ConfigDeserializer {
 
@@ -17,15 +17,24 @@ interface ConfigDeserializer {
     fun receiveSource(source: String)
 
     /**
-     * Used by the config to get the serialized value of an option
-     * during initialization.
+     * Called to enter a sub-category in the current
+     * category. Note that this will not be called
+     * for the outermost category as it is expected
+     * that the deserializer will already be there.
      *
-     * @param key The full config key for an option in the form of
-     * a String [Collection]. The very last element represents the
-     * key for the option itself while the preceding elements
-     * (if any) represent the sub-categories in order.
-     *
-     * @return The value of the config option. Can be null.
+     * @param key The lookup key of the category.
      */
-    fun getSetting(key: Collection<String>): Any?
+    fun enterCategory(key: String)
+
+    /**
+     * Called to exit the current sub-category and
+     * return to the outer category.
+     */
+    fun exitCategory()
+
+    /**
+     * Called to read the value of an option in the
+     * current category.
+     */
+    fun <T> readOption(key: String): T
 }

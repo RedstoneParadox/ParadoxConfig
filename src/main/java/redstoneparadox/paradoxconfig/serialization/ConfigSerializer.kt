@@ -7,27 +7,27 @@ package redstoneparadox.paradoxconfig.serialization
 interface ConfigSerializer {
 
     /**
-     * Used to add a category to the serializer's intermediate
-     * representation.
+     * Called to add a sub-category to the current category.
      *
-     * @param key The full config key for the category passed
-     * as a String [Collection]. Each element of the
-     * collection represents sub-categories of the top-most
-     * category in order.
+     * @param key The category key
+     * @param comment The category's comment.
      */
-    fun writeCategory(key: Collection<String>)
+    fun addCategory(key: String, comment: String)
 
     /**
-     * Used to add an option to the serializer's intermediate
+     * Called to return to the outer category.
+     */
+    fun exitCategory()
+
+    /**
+     * Called to write an option to the intermediate
      * representation.
      *
-     * @param key The full config key for the option passed as
-     * a String [Collection]. The last element of the
-     * collection represents the key for the option while the
-     * preceding elements represent the keys leading to the
-     * category this option is contained in.
+     * @param key The option key.
+     * @param value The value of the option.
+     * @param comment The comment for this option.
      */
-    fun <T> writeOption(key: Collection<String>, t: T)
+    fun <T> writeOption(key: String, value: T, comment: String)
 
     /**
      * Called when the config class has finished passing data
