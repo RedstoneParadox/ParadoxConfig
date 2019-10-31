@@ -6,12 +6,12 @@ import redstoneparadox.paradoxconfig.misc.runTests
 
 @Suppress("unused")
 fun init() {
-    if (FabricLoader.getInstance().isDevelopmentEnvironment) {
-        runTests()
-    }
-
     for (path in getConfigClassNames()) {
         println(path)
+    }
+
+    if (FabricLoader.getInstance().isDevelopmentEnvironment) {
+        runTests()
     }
 }
 
