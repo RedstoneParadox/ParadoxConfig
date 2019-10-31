@@ -43,7 +43,7 @@ interface ConfigDeserializer {
      * Called to read the value of an option in the
      * current category.
      */
-    fun <T> readOption(key: String): T
+    fun <T> readOption(key: String): T?
 
     /**
      * Used to clear the current contents of the deserializer
