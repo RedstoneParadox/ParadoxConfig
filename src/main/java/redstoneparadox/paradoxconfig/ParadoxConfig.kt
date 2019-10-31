@@ -7,6 +7,7 @@ import redstoneparadox.paradoxconfig.misc.runTests
 import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import java.io.File
+import java.io.FileNotFoundException
 import kotlin.reflect.full.createInstance
 
 @Suppress("unused")
@@ -59,10 +60,14 @@ internal fun newInitConfig() {
 
                 if (config is AbstractConfig) {
                     val configFile = File(FabricLoader.getInstance().configDirectory, config.file)
-                    var configString = configFile.readText()
-                    if (deserializer.receiveSource(configString)) config.deserialize(deserializer)
+                    try {
+                        val configString = configFile.readText()
+                        if (deserializer.receiveSource(configString)) config.deserialize(deserializer)
+                    } catch (e: FileNotFoundException) {
+                        println("Config file for $configName not found so a new one will be created.")
+                    }
                     config.serialize(serializer)
-                    configString = serializer.complete()
+                    val configString = serializer.complete()
                     configFile.writeText(configString)
                 }
                 else {
