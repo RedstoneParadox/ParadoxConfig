@@ -2,8 +2,14 @@ package redstoneparadox.paradoxconfig.config
 
 import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
+import kotlin.reflect.KClass
 
-open class ConfigCategory(val key : String = "", val comment: String = "") {
+/**
+ * Inheritors of this class represent a category in your config file. For the
+ * root category, please extend [RootConfigCategory] instead so the metadata
+ * for saving and loading the config can be provided.
+ */
+abstract class ConfigCategory(val key : String = "", val comment: String = "") {
 
     private val optionsMap: HashMap<String, ConfigOption<*>> = HashMap()
     private val categoriesMap: HashMap<String, ConfigCategory> = HashMap()
@@ -48,32 +54,76 @@ open class ConfigCategory(val key : String = "", val comment: String = "") {
         if (key.isNotEmpty()) configDeserializer.exitCategory()
     }
 
+    /**
+     * Creates a config option holding a [Boolean] value, a comment, and a config key.
+     *
+     * @param default The default value.
+     * @param key The config key for this option in it's category.
+     * @param comment (optional) Adds a short description to the option.
+     *
+     * @return A [ConfigOption] delegate that holds a [Boolean].
+     */
     protected fun option(default: Boolean, key: String, comment: String = ""): ConfigOption<Boolean> {
-        val option = ConfigOption(boolType, default, key, "$comment [Values: true/false]")
-        optionsMap[key] = option
-        return option
+        return option(boolType, default, key, comment)
     }
 
+    /**
+     * Creates a config option holding a [String] value, a comment, and a config key.
+     *
+     * @param default The default value.
+     * @param key The config key for this option in it's category.
+     * @param comment (optional) Adds a short description to the option.
+     *
+     * @return A [ConfigOption] delegate that holds a [String].
+     */
     protected fun option(default: String, key: String, comment: String = ""): ConfigOption<String> {
-        val option = ConfigOption(stringType, default, key, "$comment [Values: any string]")
-        optionsMap[key] = option
-        return option
+        return option(stringType, default, key, comment)
     }
 
+    /**
+     * Creates a config option holding a [Long] value, a comment, and a config key.
+     *
+     * @param default The default value.
+     * @param key The config key for this option in it's category.
+     * @param comment (optional) Adds a short description to the option.
+     *
+     * @return A [ConfigOption] delegate that holds a [Long].
+     */
     protected fun option(default: Long, key: String, comment: String = ""): ConfigOption<Long> {
-        val option = ConfigOption(longType, default, key, "$comment [Values: any whole number]")
-        optionsMap[key] = option
-        return option
+        return option(longType, default, key, comment)
     }
 
+    /**
+     * Creates a config option holding a [Double] value, a comment, and a config key.
+     *
+     * @param default The default value.
+     * @param key The config key for this option in it's category.
+     * @param comment (optional) Adds a short description to the option.
+     *
+     * @return A [ConfigOption] delegate that holds a [Double].
+     */
     protected fun option(default: Double, key: String, comment: String = ""): ConfigOption<Double> {
-        val option = ConfigOption(doubleType, default, key, "$comment [Values: any decimal number]")
-        optionsMap[key] = option
-        return option
+        return option(doubleType, default, key, comment)
     }
 
+    /**
+     * Creates a config option holding a [Long] value that's limited to a certain range,
+     * a comment, and a config key.
+     *
+     * @param default The default value.
+     * @param key The config key for this option in it's category.
+     * @param comment (optional) Adds a short description to the option.
+     *
+     * @return A [RangeConfigOption] delegate that holds a [Long] and it's valid range.
+     */
     protected fun rangedOption(default: Long, range: LongRange, key: String, comment: String = ""): RangeConfigOption<Long> {
         val option = RangeConfigOption(longType, default, key, "$comment [Values: ${range.first} to ${range.last}]", range)
+        optionsMap[key] = option
+        return option
+    }
+
+    private fun <T : Any> option(type: KClass<T>, default: T, key: String, comment: String): ConfigOption<T> {
+        val option = ConfigOption(type, default, key, comment)
         optionsMap[key] = option
         return option
     }

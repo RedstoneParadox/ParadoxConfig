@@ -1,13 +1,10 @@
 package redstoneparadox.paradoxconfig
 
 import net.fabricmc.loader.api.FabricLoader
-import redstoneparadox.paradoxconfig.config.AbstractConfig
+import redstoneparadox.paradoxconfig.config.RootConfigCategory
 import redstoneparadox.paradoxconfig.misc.runTests
-import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
-import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import java.io.File
 import java.io.FileNotFoundException
-import kotlin.reflect.full.createInstance
 
 internal var initialized: Boolean = false
 
@@ -41,12 +38,12 @@ internal fun initConfigs() {
     if (initialized) return
 
     val configData = getConfigData()
-    val baseClass = AbstractConfig::class
+    val baseClass = RootConfigCategory::class
 
     for (data in configData) {
         for (configName in data.configNames) {
             val config = Class.forName(configName).kotlin.objectInstance
-            if (config is AbstractConfig) {
+            if (config is RootConfigCategory) {
                 config.init()
 
                 val serializer = config.serializer
