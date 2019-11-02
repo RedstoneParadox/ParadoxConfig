@@ -5,7 +5,7 @@ package redstoneparadox.paradoxconfig.serialization
  * the config class and write them into raw config data.
  *
  * Note that any classes that implement this interface must contain a
- * 0-parameter constructor
+ * 0-parameter constructor.
  */
 interface ConfigSerializer {
 

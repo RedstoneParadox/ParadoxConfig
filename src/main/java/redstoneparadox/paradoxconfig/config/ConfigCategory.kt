@@ -61,7 +61,7 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
      * @param key The config key for this option.
      * @param comment (optional) a comment for this option.
      *
-     * @return A [ConfigOption] delegate that holds option values of type [T]
+     * @return A [ConfigOption] delegate that holds option values of type [T].
      */
     protected inline fun <reified T: Any> option(default: T, key: String, comment: String = ""): ConfigOption<T> {
         val option = ConfigOption(T::class, default, key, comment)
@@ -70,13 +70,15 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
     }
 
     /**
-     * Created a config option holding a value of type [T] which is bounded by
+     * Creates a config option holding a value of type [T] which is bounded by
      * a [ClosedRange]. Note that [T] must extend [Comparable]
      *
      * @param default The default value for this option.
      * @param range The range to bound this option to.
      * @param key The config key for this option.
      * @param comment The comment for this option.
+     *
+     * @return A [RangeConfigOption] delegate that holds an option value of type [T].
      */
     protected inline fun <reified T> option(default: T, range: ClosedRange<T>, key: String, comment: String = ""): RangeConfigOption<T> where T: Any, T: Comparable<T> {
         val option = RangeConfigOption(T::class, default, key, comment, range)
@@ -84,6 +86,17 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
         return option
     }
 
+    /**
+     * Created a config option of a [MutableCollection] holding values of type.
+     * [T].
+     *
+     * @param default The default value for this option.
+     * @param key The config key for this option.
+     * @param comment (optional) The comment for this option.
+     *
+     * @return A [CollectionConfigOption] holding a [MutableCollection]
+     * implementer containing values of type [T].
+     */
     protected inline fun <reified T: Any, reified U: MutableCollection<T>> option(default: U, key: String, comment: String = ""): CollectionConfigOption<T, U> {
         val option = CollectionConfigOption(T::class, U::class, comment, key, default)
         optionsMap[key] = option
