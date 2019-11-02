@@ -2,7 +2,6 @@ package redstoneparadox.paradoxconfig.config
 
 import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
-import kotlin.reflect.KClass
 
 /**
  * Inheritors of this class represent a category in your config file. For the
@@ -81,6 +80,12 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
      */
     protected inline fun <reified T> option(default: T, range: ClosedRange<T>, key: String, comment: String = ""): RangeConfigOption<T> where T: Any, T: Comparable<T> {
         val option = RangeConfigOption(T::class, default, key, comment, range)
+        optionsMap[key] = option
+        return option
+    }
+
+    protected inline fun <reified T: Any, reified U: MutableCollection<T>> option(default: U, key: String, comment: String = ""): CollectionConfigOption<T, U> {
+        val option = CollectionConfigOption(T::class, U::class, comment, key, default)
         optionsMap[key] = option
         return option
     }
