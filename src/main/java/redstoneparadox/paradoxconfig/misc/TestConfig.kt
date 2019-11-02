@@ -1,7 +1,7 @@
 package redstoneparadox.paradoxconfig.misc
 
-import redstoneparadox.paradoxconfig.config.RootConfigCategory
 import redstoneparadox.paradoxconfig.config.ConfigCategory
+import redstoneparadox.paradoxconfig.config.RootConfigCategory
 import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import redstoneparadox.paradoxconfig.serialization.jankson.JanksonConfigDeserializer

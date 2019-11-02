@@ -27,7 +27,9 @@ internal fun getConfigData(): Collection<ConfigData> {
                 configNames.add(className.asString)
             }
 
-            data.add(ConfigData(configNames, mod.metadata.name))
+            if (mod.metadata.id == "paradoxconfig" && !FabricLoader.getInstance().isDevelopmentEnvironment) continue
+
+            data.add(ConfigData(configNames, mod.metadata.id))
         }
     }
 
@@ -54,7 +56,7 @@ internal fun initConfigs() {
                     val configString = configFile.readText()
                     if (deserializer.receiveSource(configString)) config.deserialize(deserializer)
                 } catch (e: FileNotFoundException) {
-                    println("Config file for $configName not found so a new one will be created.")
+                    println("Config file for ${config.file} not found so a new one will be created.")
                 }
                 config.serialize(serializer)
                 val configString = serializer.complete()
@@ -69,5 +71,5 @@ internal fun initConfigs() {
     initialized = true
 }
 
-internal class ConfigData(val configNames: Collection<String>, val modName: String)
+internal class ConfigData(val configNames: Collection<String>, val modid: String)
 
