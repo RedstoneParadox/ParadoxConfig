@@ -15,11 +15,11 @@ open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: Stri
         this.value = value
     }
 
-    internal fun serialize(serializer: ConfigSerializer) {
+    internal open fun serialize(serializer: ConfigSerializer) {
         serializer.writeOption(key, value, comment)
     }
 
-    internal fun deserialize(deserializer: ConfigDeserializer) {
+    internal open fun deserialize(deserializer: ConfigDeserializer) {
         val newVal = deserializer.readOption(key)
         if (newVal != null && type.isInstance(newVal)) {
             value = newVal as T
