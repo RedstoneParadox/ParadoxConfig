@@ -47,6 +47,9 @@ interface ConfigDeserializer {
      */
     fun readOption(key: String): Any?
 
+
+    fun readCollectionOption(key: String): Collection<Any>?
+
     /**
      * Used to clear the current contents of the deserializer
      * when it's used for more than one config file.

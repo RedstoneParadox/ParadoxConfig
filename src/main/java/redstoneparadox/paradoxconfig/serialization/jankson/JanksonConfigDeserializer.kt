@@ -1,5 +1,6 @@
 package redstoneparadox.paradoxconfig.serialization.jankson
 
+import blue.endless.jankson.JsonArray
 import blue.endless.jankson.JsonObject
 import blue.endless.jankson.JsonPrimitive
 import blue.endless.jankson.impl.SyntaxError
@@ -48,6 +49,21 @@ class JanksonConfigDeserializer: ConfigDeserializer {
 
         if (option is JsonPrimitive) {
             return option.value
+        }
+        return null
+    }
+
+    override fun readCollectionOption(key: String): MutableCollection<Any>? {
+        val option = currentObject?.get(key)
+
+        if (option is JsonArray) {
+            val collection = mutableListOf<Any>()
+            for (element in option) {
+                if (element is JsonPrimitive) {
+                    collection.add(element.value)
+                }
+            }
+            return collection
         }
         return null
     }
