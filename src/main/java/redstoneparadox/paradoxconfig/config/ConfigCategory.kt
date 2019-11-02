@@ -11,7 +11,8 @@ import kotlin.reflect.KClass
  */
 abstract class ConfigCategory(val key : String = "", val comment: String = "") {
 
-    private val optionsMap: HashMap<String, ConfigOption<*>> = HashMap()
+    @PublishedApi
+    internal val optionsMap: HashMap<String, ConfigOption<*>> = HashMap()
     private val categoriesMap: HashMap<String, ConfigCategory> = HashMap()
 
     internal fun init() {
@@ -55,83 +56,32 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
     }
 
     /**
-     * Creates a config option holding a [Boolean] value, a comment, and a config key.
+     * Creates a config option holding a value of type [T].
      *
-     * @param default The default value.
-     * @param key The config key for this option in it's category.
-     * @param comment (optional) Adds a short description to the option.
+     * @param default The default value for this option.
+     * @param key The config key for this option.
+     * @param comment (optional) a comment for this option.
      *
-     * @return A [ConfigOption] delegate that holds a [Boolean].
+     * @return A [ConfigOption] delegate that holds option values of type [T]
      */
-    protected fun option(default: Boolean, key: String, comment: String = ""): ConfigOption<Boolean> {
-        return option(boolType, default, key, comment)
-    }
-
-    /**
-     * Creates a config option holding a [String] value, a comment, and a config key.
-     *
-     * @param default The default value.
-     * @param key The config key for this option in it's category.
-     * @param comment (optional) Adds a short description to the option.
-     *
-     * @return A [ConfigOption] delegate that holds a [String].
-     */
-    protected fun option(default: String, key: String, comment: String = ""): ConfigOption<String> {
-        return option(stringType, default, key, comment)
-    }
-
-    /**
-     * Creates a config option holding a [Long] value, a comment, and a config key.
-     *
-     * @param default The default value.
-     * @param key The config key for this option in it's category.
-     * @param comment (optional) Adds a short description to the option.
-     *
-     * @return A [ConfigOption] delegate that holds a [Long].
-     */
-    protected fun option(default: Long, key: String, comment: String = ""): ConfigOption<Long> {
-        return option(longType, default, key, comment)
-    }
-
-    /**
-     * Creates a config option holding a [Double] value, a comment, and a config key.
-     *
-     * @param default The default value.
-     * @param key The config key for this option in it's category.
-     * @param comment (optional) Adds a short description to the option.
-     *
-     * @return A [ConfigOption] delegate that holds a [Double].
-     */
-    protected fun option(default: Double, key: String, comment: String = ""): ConfigOption<Double> {
-        return option(doubleType, default, key, comment)
-    }
-
-    /**
-     * Creates a config option holding a [Long] value that's limited to a certain range,
-     * a comment, and a config key.
-     *
-     * @param default The default value.
-     * @param key The config key for this option in it's category.
-     * @param comment (optional) Adds a short description to the option.
-     *
-     * @return A [RangeConfigOption] delegate that holds a [Long] and it's valid range.
-     */
-    protected fun rangedOption(default: Long, range: LongRange, key: String, comment: String = ""): RangeConfigOption<Long> {
-        val option = RangeConfigOption(longType, default, key, "$comment [Values: ${range.first} to ${range.last}]", range)
+    protected inline fun <reified T: Any> option(default: T, key: String, comment: String = ""): ConfigOption<T> {
+        val option = ConfigOption(T::class, default, key, comment)
         optionsMap[key] = option
         return option
     }
 
-    private fun <T : Any> option(type: KClass<T>, default: T, key: String, comment: String): ConfigOption<T> {
-        val option = ConfigOption(type, default, key, comment)
+    /**
+     * Created a config option holding a value of type [T] which is bounded by
+     * a [ClosedRange]. Note that [T] must extend [Comparable]
+     *
+     * @param default The default value for this option.
+     * @param range The range to bound this option to.
+     * @param key The config key for this option.
+     * @param comment The comment for this option.
+     */
+    protected inline fun <reified T> option(default: T, range: ClosedRange<T>, key: String, comment: String = ""): RangeConfigOption<T> where T: Any, T: Comparable<T> {
+        val option = RangeConfigOption(T::class, default, key, comment, range)
         optionsMap[key] = option
         return option
-    }
-
-    private companion object {
-        val boolType = Boolean::class
-        val stringType = String::class
-        val longType = Long::class
-        val doubleType = Double::class
     }
 }
