@@ -64,6 +64,17 @@ interface ConfigDeserializer {
     fun readCollectionOption(key: String): Collection<Any>?
 
     /**
+     * Called to read the value of a dictionary option in
+     * the current category
+     *
+     * @param key The key for this option in the current
+     * category.
+     *
+     * @return The value of the requested option.
+     */
+    fun readDictionaryOption(key: String): Map<Any, Any>?
+
+    /**
      * Used to clear the current contents of the deserializer
      * when it's used for more than one config file.
      */

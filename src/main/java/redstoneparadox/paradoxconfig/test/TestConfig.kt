@@ -1,4 +1,4 @@
-package redstoneparadox.paradoxconfig.misc
+package redstoneparadox.paradoxconfig.test
 
 import redstoneparadox.paradoxconfig.config.ConfigCategory
 import redstoneparadox.paradoxconfig.config.RootConfigCategory
@@ -16,6 +16,8 @@ object TestConfig: RootConfigCategory("test.json5") {
     val testTwo: Long by option(2L, 1..3L, "other", "")
 
     val collection: List<String> by option(arrayListOf("hi", "hey", "howdy", "hi"), "collection")
+
+    val dictionary: HashMap<String, Long> by option(hashMapOf("one" to 1L, "two" to 2L, "three" to 3L), "dictionary")
 
     object InnerTestConfig: ConfigCategory("inner") {
         val testThree: Boolean by option(false, "third")

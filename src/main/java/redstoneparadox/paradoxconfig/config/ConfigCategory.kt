@@ -102,4 +102,21 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
         optionsMap[key] = option
         return option
     }
+
+    /**
+     * Creates a config option of a [MutableMap] with keys of type
+     * [K] and values of type [V]
+     *
+     * @param default The default value for this option.
+     * @param key the config key for this option.
+     * @param comment (optional) The comment for this option.
+     *
+     * @return A [DictionaryConfigOption] holding an implementation of
+     * [MutableMap] with keys of type [K] to values of type [V]
+     */
+    protected inline fun <reified K: Any, reified  V: Any, reified T: MutableMap<K, V>> option(default: T, key: String, comment: String = ""): DictionaryConfigOption<K, V, T> {
+        val option = DictionaryConfigOption(K::class, V::class, T::class, default, key, comment)
+        optionsMap[key] = option
+        return option
+    }
 }

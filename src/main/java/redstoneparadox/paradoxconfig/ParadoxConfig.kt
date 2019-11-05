@@ -2,7 +2,7 @@ package redstoneparadox.paradoxconfig
 
 import net.fabricmc.loader.api.FabricLoader
 import redstoneparadox.paradoxconfig.config.RootConfigCategory
-import redstoneparadox.paradoxconfig.misc.runTests
+import redstoneparadox.paradoxconfig.test.runTests
 import java.io.File
 import java.io.FileNotFoundException
 

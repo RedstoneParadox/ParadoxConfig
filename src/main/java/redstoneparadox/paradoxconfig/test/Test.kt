@@ -1,4 +1,4 @@
-package redstoneparadox.paradoxconfig.misc
+package redstoneparadox.paradoxconfig.test
 
 fun runTests() {
     println("Is the test successful? ${TestConfig.test}")
@@ -7,6 +7,10 @@ fun runTests() {
 
     for (greeting in TestConfig.collection) {
         println(greeting)
+    }
+
+    for ((name, number) in TestConfig.dictionary) {
+        println("$name to $number")
     }
 }
 
