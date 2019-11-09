@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "paradoxconfig",
+  "id": "pconfig",
   "version": "1.0.0",
 
   "name": "Paradox Config",
@@ -23,7 +23,7 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "pconfig.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.4.0",
