@@ -2,10 +2,9 @@ package redstoneparadox.paradoxconfig.serialization
 
 /**
  * Classes that implement this are used to serialize config options from
- * the config class and write them into raw config data.
- *
- * Note that any classes that implement this interface must contain a
- * 0-parameter constructor.
+ * the config class and transform them into an intermediate
+ * representation. The class itself is then responsible for transforming
+ * the data into a string representation.
  */
 interface ConfigSerializer {
 

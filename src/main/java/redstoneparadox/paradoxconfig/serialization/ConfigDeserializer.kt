@@ -5,9 +5,6 @@ package redstoneparadox.paradoxconfig.serialization
  * representation of the config into an intermediate
  * representation. The config then uses this class to read
  * option values.
- *
- * Note that any classes that implement this interface must contain a
- * 0-parameter constructor.
  */
 interface ConfigDeserializer {
 
