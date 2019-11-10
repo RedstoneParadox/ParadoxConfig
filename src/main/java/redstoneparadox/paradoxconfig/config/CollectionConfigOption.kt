@@ -2,6 +2,7 @@ package redstoneparadox.paradoxconfig.config
 
 import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import kotlin.reflect.KClass
+import kotlin.reflect.full.cast
 
 class CollectionConfigOption<T: Any, U: MutableCollection<T>>(private val innerType: KClass<T>, collectionType: KClass<U>, comment: String, key: String, value: U): ConfigOption<U>(collectionType, value, key, comment) {
 
@@ -9,9 +10,9 @@ class CollectionConfigOption<T: Any, U: MutableCollection<T>>(private val innerT
         val collection = deserializer.readCollectionOption(key)
         if (collection != null) {
             value.clear()
-            for (thing in collection) {
-                if (innerType.isInstance(thing)) {
-                    value.add(thing as T)
+            for (any in collection) {
+                if (innerType.isInstance(any)) {
+                    value.add(innerType.cast(any))
                 }
             }
         }

@@ -4,6 +4,7 @@ import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
+import kotlin.reflect.full.cast
 
 open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: String, val comment: String) {
 
@@ -17,7 +18,7 @@ open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: Stri
 
     internal open fun set(any: Any?) {
         if (type.isInstance(any)) {
-            value = any as T
+            value = type.cast(any)
         }
     }
 
@@ -26,9 +27,9 @@ open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: Stri
     }
 
     internal open fun deserialize(deserializer: ConfigDeserializer) {
-        val newVal = deserializer.readOption(key)
-        if (newVal != null && type.isInstance(newVal)) {
-            value = newVal as T
+        val any = deserializer.readOption(key)
+        if (any != null && type.isInstance(any)) {
+            value = type.cast(any)
         }
     }
 }
