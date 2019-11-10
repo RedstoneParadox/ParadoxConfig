@@ -7,6 +7,7 @@ import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 import redstoneparadox.paradoxconfig.CONFIGS
 import redstoneparadox.paradoxconfig.MODID
+import redstoneparadox.paradoxconfig.util.compareTo
 
 /**
  * Created by RedstoneParadox on 11/9/2019.
@@ -24,10 +25,25 @@ fun registerConditions() {
             else if (configID != null) {
                 val config = CONFIGS[configID]
                 val value = (it["value"] as? JsonPrimitive)?.value
+                val predicate = (it["predicate"] as? JsonPrimitive)?.value as? String
                 val option = (it["option"] as? JsonPrimitive)?.value as? String
 
                 if (config != null && value != null && option != null) {
-                    return@registerCondition config[option] == value
+                    val op = config[option]
+                    if (predicate != null) {
+                        return@registerCondition when (predicate) {
+                            "==" -> op == value
+                            "!=" -> op != value
+                            "<" -> if (op is Number && value is Number) op < value else false
+                            ">" -> if (op is Number && value is Number) op > value else false
+                            "<=" -> if (op is Number && value is Number) op <= value else false
+                            ">=" -> if (op is Number && value is Number) op >= value else false
+                            else -> false
+                        }
+                    }
+                    else {
+                        return@registerCondition op == value
+                    }
                 }
             }
         }

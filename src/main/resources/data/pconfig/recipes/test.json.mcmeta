@@ -6,6 +6,14 @@
 			    "value": true,
 			    "option": "cheater"
 			}
+		},
+		{
+		    "pconfig:option": {
+                "config": "pconfig:test.json5",
+                "value": 2,
+                "predicate": "<"
+            	"option": "other"
+            }
 		}
 	]
 }
