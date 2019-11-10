@@ -38,6 +38,7 @@ dependencies {
     // You may need to force-disable transitiveness on them.
 
     modImplementation "io.github.cottonmc:Jankson:${project.jankson_version}"
+    modImplementation "io.github.cottonmc:LibCD:${project.libcd_version}"
 }
 
 processResources {

@@ -1,15 +1,23 @@
 package redstoneparadox.paradoxconfig
 
 import net.fabricmc.loader.api.FabricLoader
+import redstoneparadox.paradoxconfig.conditions.registerConditions
 import redstoneparadox.paradoxconfig.config.RootConfigCategory
 import redstoneparadox.paradoxconfig.test.runTests
 import java.io.File
 import java.io.FileNotFoundException
 
+const val MODID: String = "pconfig"
+
 internal var initialized: Boolean = false
+internal val CONFIGS: HashMap<String, RootConfigCategory> = hashMapOf()
 
 @Suppress("unused")
 fun init() {
+    if (FabricLoader.getInstance().isModLoaded("libcd")) {
+        registerConditions()
+    }
+
     if (FabricLoader.getInstance().isDevelopmentEnvironment) {
         runTests()
     }
@@ -45,8 +53,11 @@ internal fun initConfigs() {
     for (data in configData) {
         for (configName in data.configNames) {
             val config = Class.forName(configName).kotlin.objectInstance
+
             if (config is RootConfigCategory) {
                 config.init()
+
+                CONFIGS["${data.modid}:${config.file}"] = config
 
                 val serializer = config.serializer
                 val deserializer = config.deserializer

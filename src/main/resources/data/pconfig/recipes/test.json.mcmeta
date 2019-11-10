@@ -1,0 +1,11 @@
+{
+	"when": [
+		{
+			"pconfig:option": {
+			    "config": "pconfig:test.json5",
+			    "value": true,
+			    "option": "cheater"
+			}
+		}
+	]
+}
