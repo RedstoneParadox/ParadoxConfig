@@ -27,21 +27,21 @@ internal fun getConfigData(): Collection<ConfigData> {
     val data = arrayListOf<ConfigData>();
 
     for (mod in FabricLoader.getInstance().allMods) {
-        if (mod.metadata.containsCustomValue("paradoxconfig")) {
-            val classNames = mod.metadata.getCustomValue("paradoxconfig").asArray
+        if (mod.metadata.containsCustomValue(MODID)) {
+            val classNames = mod.metadata.getCustomValue(MODID).asArray
 
             val configNames = arrayListOf<String>()
             for (className in classNames) {
                 configNames.add(className.asString)
             }
 
-            if (mod.metadata.id == "paradoxconfig" && !FabricLoader.getInstance().isDevelopmentEnvironment) continue
+            if (mod.metadata.id == MODID && !FabricLoader.getInstance().isDevelopmentEnvironment) continue
 
             data.add(ConfigData(configNames, mod.metadata.id))
         }
     }
 
-    return data;
+    return data
 }
 
 internal fun initConfigs() {
