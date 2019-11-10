@@ -1,6 +1,7 @@
 package redstoneparadox.paradoxconfig
 
 import net.fabricmc.loader.api.FabricLoader
+import org.apache.logging.log4j.LogManager
 import redstoneparadox.paradoxconfig.conditions.registerConditions
 import redstoneparadox.paradoxconfig.config.RootConfigCategory
 import redstoneparadox.paradoxconfig.test.runTests
@@ -19,6 +20,7 @@ fun init() {
     }
 
     if (FabricLoader.getInstance().isDevelopmentEnvironment) {
+        PConfigLogger.log("Hello, world!")
         runTests()
     }
 }
@@ -83,4 +85,21 @@ internal fun initConfigs() {
 }
 
 internal class ConfigData(val configNames: Collection<String>, val modid: String)
+
+internal object PConfigLogger {
+    private val LOGGER = LogManager.getFormatterLogger(MODID)
+    private val MODNAME = "ParadoxConfig"
+
+    internal fun log(msg: String) {
+        LOGGER.info("[$MODNAME] $msg")
+    }
+
+    internal fun warn(msg: String) {
+        LOGGER.warn("[$MODNAME] $msg")
+    }
+
+    internal fun error(msg: String) {
+        LOGGER.warn("[$MODNAME] $msg")
+    }
+}
 
