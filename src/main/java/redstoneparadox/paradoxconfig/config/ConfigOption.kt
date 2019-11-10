@@ -15,6 +15,12 @@ open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: Stri
         this.value = value
     }
 
+    internal open fun set(any: Any?) {
+        if (type.isInstance(any)) {
+            value = any as T
+        }
+    }
+
     internal open fun serialize(serializer: ConfigSerializer) {
         serializer.writeOption(key, value, comment)
     }

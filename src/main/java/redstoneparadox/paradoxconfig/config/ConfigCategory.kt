@@ -119,4 +119,31 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
         optionsMap[key] = option
         return option
     }
+
+    operator fun get(key: String): Any? {
+        return get(key.splitToSequence("."))
+    }
+
+    private fun get(key: Sequence<String>): Any? {
+        val first = key.first()
+        return if (key.last() == first) {
+            optionsMap[first]?.value
+        } else {
+            categoriesMap[first]?.get(key.drop(1))
+        }
+    }
+
+    operator fun set(key: String, value: Any) {
+        set(key.splitToSequence("."), value)
+    }
+
+    private fun set(key: Sequence<String>, value: Any) {
+        val first = key.first()
+        if (key.last() == first) {
+            optionsMap[first]?.set(value)
+        }
+        else {
+            categoriesMap[first]?.set(key.drop(1), value)
+        }
+    }
 }
