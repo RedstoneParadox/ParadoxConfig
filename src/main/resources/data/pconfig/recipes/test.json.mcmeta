@@ -11,15 +11,22 @@
 		    "pconfig:option": {
                 "config": "pconfig:test.json5",
                 "value": 2,
-                "predicate": "<"
+                "predicate": "<",
             	"option": "other"
             }
 		},
 		{
 		    "pconfig:contains": {
-		        "config": "pconfig:test.json5"
-		        "contains": [ "Bonjour" ],
+		        "config": "pconfig:test.json5",
+		        "contains": [ "hi" ],
 		        "option": "collection"
+		    }
+		},
+		{
+		    "pconfig:option": {
+		        "config": "pconfig:test.json5",
+		        "value": true,
+		        "option": "inner.third"
 		    }
 		}
 	]
