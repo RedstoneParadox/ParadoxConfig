@@ -14,6 +14,13 @@
                 "predicate": "<"
             	"option": "other"
             }
+		},
+		{
+		    "pconfig:contains": {
+		        "config": "pconfig:test.json5"
+		        "contains": [ "Bonjour" ],
+		        "option": "collection"
+		    }
 		}
 	]
 }
