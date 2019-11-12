@@ -19,9 +19,13 @@ object TestConfig: RootConfigCategory("test.json5") {
 
     val dictionary: HashMap<String, Long> by option(hashMapOf("one" to 1L, "two" to 2L, "three" to 3L), "dictionary")
 
+    val aaa: Boolean by option(true, "aaa")
+
     val cheater: Boolean by option(false, "cheater", "Diamonds to diamonds!")
 
     object InnerTestConfig: ConfigCategory("inner") {
         val testThree: Boolean by option(false, "third")
     }
+
+    object OtherInnerCategory: ConfigCategory("other_inner")
 }

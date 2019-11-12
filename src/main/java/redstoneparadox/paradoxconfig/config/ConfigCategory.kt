@@ -46,12 +46,12 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
     internal fun serialize(configSerializer: ConfigSerializer) {
         if (key.isNotEmpty()) configSerializer.addCategory(key, comment)
 
-        for (category in categoryList) {
-            category.serialize(configSerializer)
-        }
-
         for (option in optionsList) {
             option.serialize(configSerializer)
+        }
+
+        for (category in categoryList) {
+            category.serialize(configSerializer)
         }
 
         if (key.isNotEmpty()) configSerializer.exitCategory()
@@ -60,12 +60,12 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
     internal fun deserialize(configDeserializer: ConfigDeserializer) {
         if (key.isNotEmpty()) configDeserializer.enterCategory(key)
 
-        for (category in categoryList) {
-            category.deserialize(configDeserializer)
-        }
-
         for (option in optionsList) {
             option.deserialize(configDeserializer)
+        }
+
+        for (category in categoryList) {
+            category.deserialize(configDeserializer)
         }
 
         if (key.isNotEmpty()) configDeserializer.exitCategory()
