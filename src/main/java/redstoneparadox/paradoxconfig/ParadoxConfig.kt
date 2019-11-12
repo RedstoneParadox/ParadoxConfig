@@ -63,13 +63,19 @@ internal fun initConfigs() {
 
                 val serializer = config.serializer
                 val deserializer = config.deserializer
-                val configFile = File(FabricLoader.getInstance().configDirectory, config.file)
+                val configFile = File(FabricLoader.getInstance().configDirectory, "${data.modid}/${config.file}")
 
                 try {
                     val configString = configFile.readText()
                     if (deserializer.receiveSource(configString)) config.deserialize(deserializer)
                 } catch (e: FileNotFoundException) {
                     println("Config file for ${config.file} not found so a new one will be created.")
+                    try {
+                        configFile.parentFile.mkdirs()
+                    } catch (e: SecurityException) {
+                        e.printStackTrace()
+                        continue
+                    }
                 }
                 config.serialize(serializer)
                 val configString = serializer.complete()
