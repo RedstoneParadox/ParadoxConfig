@@ -3,6 +3,9 @@ package redstoneparadox.paradoxconfig.config
 import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import kotlin.reflect.KClass
+import kotlin.reflect.KProperty1
+import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.jvm.isAccessible
 
 /**
  * Inheritors of this class represent a category in your config file. For the
@@ -15,14 +18,27 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
     internal val optionsMap: HashMap<String, ConfigOption<*>> = HashMap()
     private val categoriesMap: HashMap<String, ConfigCategory> = HashMap()
 
+    internal val optionsList: MutableList<ConfigOption<*>> = mutableListOf()
+    private val categoryList: MutableList<ConfigCategory> = mutableListOf()
+
     internal fun init() {
         val kclass = this::class
 
         for (innerclass in kclass.nestedClasses) {
-            val obj = innerclass.objectInstance
-            if (obj is ConfigCategory) {
-                categoriesMap[obj.key] = obj
-                obj.init()
+            val category = innerclass.objectInstance
+            if (category is ConfigCategory) {
+                categoriesMap[category.key] = category
+                categoryList.add(category)
+                category.init()
+            }
+        }
+
+        for (property in kclass.declaredMemberProperties) {
+            property.isAccessible = true
+            val delegate = (property as KProperty1<ConfigCategory, *>).getDelegate(this)
+            if (delegate is ConfigOption<*>) {
+                optionsMap[delegate.key] = delegate
+                optionsList.add(delegate)
             }
         }
     }
@@ -30,11 +46,11 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
     internal fun serialize(configSerializer: ConfigSerializer) {
         if (key.isNotEmpty()) configSerializer.addCategory(key, comment)
 
-        for (category in categoriesMap.values) {
+        for (category in categoryList) {
             category.serialize(configSerializer)
         }
 
-        for (option in optionsMap.values) {
+        for (option in optionsList) {
             option.serialize(configSerializer)
         }
 
@@ -44,11 +60,11 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
     internal fun deserialize(configDeserializer: ConfigDeserializer) {
         if (key.isNotEmpty()) configDeserializer.enterCategory(key)
 
-        for (category in categoriesMap.values) {
+        for (category in categoryList) {
             category.deserialize(configDeserializer)
         }
 
-        for (option in optionsMap.values) {
+        for (option in optionsList) {
             option.deserialize(configDeserializer)
         }
 
@@ -66,9 +82,7 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
      */
     protected inline fun <reified T: Any> option(default: T, key: String, comment: String = ""): ConfigOption<T> {
         val kClass = T::class
-        val option = ConfigOption(kClass, default, key, "$comment [Values: ${getPossibleValues(kClass)}]")
-        optionsMap[key] = option
-        return option
+        return ConfigOption(kClass, default, key, "$comment [Values: ${getPossibleValues(kClass)}]")
     }
 
     /**
@@ -84,9 +98,7 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
      */
     protected inline fun <reified T> option(default: T, range: ClosedRange<T>, key: String, comment: String = ""): RangeConfigOption<T> where T: Any, T: Comparable<T> {
         val kClass = T::class
-        val option = RangeConfigOption(kClass, default, key, "$comment [Values: ${getPossibleValues(kClass)} in $range]", range)
-        optionsMap[key] = option
-        return option
+        return RangeConfigOption(kClass, default, key, "$comment [Values: ${getPossibleValues(kClass)} in $range]", range)
     }
 
     /**
@@ -102,9 +114,7 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
      */
     protected inline fun <reified T: Any, reified U: MutableCollection<T>> option(default: U, key: String, comment: String = ""): CollectionConfigOption<T, U> {
         val kClass = T::class
-        val option = CollectionConfigOption(kClass, U::class, "$comment [Collection of ${getPossibleValues(kClass)}]", key, default)
-        optionsMap[key] = option
-        return option
+        return CollectionConfigOption(kClass, U::class, "$comment [Collection of ${getPossibleValues(kClass)}]", key, default)
     }
 
     /**
@@ -121,9 +131,7 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
     protected inline fun <reified K: Any, reified  V: Any, reified T: MutableMap<K, V>> option(default: T, key: String, comment: String = ""): DictionaryConfigOption<K, V, T> {
         val keyClass = K::class
         val valueClass = V::class
-        val option = DictionaryConfigOption(keyClass, valueClass, T::class, default, key, "$comment [Keys: ${getPossibleValues(keyClass)}, Values: ${getPossibleValues(valueClass)}]")
-        optionsMap[key] = option
-        return option
+        return DictionaryConfigOption(keyClass, valueClass, T::class, default, key, "$comment [Keys: ${getPossibleValues(keyClass)}, Values: ${getPossibleValues(valueClass)}]")
     }
 
     operator fun get(key: String): Any? {
