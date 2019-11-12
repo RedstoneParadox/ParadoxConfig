@@ -73,7 +73,7 @@ internal fun initConfigs() {
 private fun loadConfig(config: RootConfigCategory, modid: String) {
     val serializer = config.serializer
     val deserializer = config.deserializer
-    val configFile = File(FabricLoader.getInstance().configDirectory, "${modid}/1${config.file}")
+    val configFile = File(FabricLoader.getInstance().configDirectory, "${modid}/${config.file}")
 
     try {
         val configString = configFile.readText()
