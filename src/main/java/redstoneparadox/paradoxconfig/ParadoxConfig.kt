@@ -58,28 +58,8 @@ internal fun initConfigs() {
 
             if (config is RootConfigCategory) {
                 config.init()
-
                 CONFIGS["${data.modid}:${config.file}"] = config
-
-                val serializer = config.serializer
-                val deserializer = config.deserializer
-                val configFile = File(FabricLoader.getInstance().configDirectory, "${data.modid}/${config.file}")
-
-                try {
-                    val configString = configFile.readText()
-                    if (deserializer.receiveSource(configString)) config.deserialize(deserializer)
-                } catch (e: FileNotFoundException) {
-                    println("Config file for ${config.file} not found so a new one will be created.")
-                    try {
-                        configFile.parentFile.mkdirs()
-                    } catch (e: SecurityException) {
-                        e.printStackTrace()
-                        continue
-                    }
-                }
-                config.serialize(serializer)
-                val configString = serializer.complete()
-                configFile.writeText(configString)
+                loadConfig(config, data.modid)
             }
             else {
                 println("Object $configName either doesn't extend ${baseClass.simpleName} or is not an object.")
@@ -88,6 +68,29 @@ internal fun initConfigs() {
     }
 
     initialized = true
+}
+
+private fun loadConfig(config: RootConfigCategory, modid: String) {
+    val serializer = config.serializer
+    val deserializer = config.deserializer
+    val configFile = File(FabricLoader.getInstance().configDirectory, "${modid}/1${config.file}")
+
+    try {
+        val configString = configFile.readText()
+        if (deserializer.receiveSource(configString)) config.deserialize(deserializer)
+    } catch (e: FileNotFoundException) {
+        PConfigLogger.log("Config file $modid:${config.file} was not found; a new one will be created.")
+        try {
+            configFile.parentFile.mkdirs()
+        } catch (e: SecurityException) {
+            PConfigLogger.error("Could not create config file $modid:${config.file} due to security issues.")
+            e.printStackTrace()
+            return
+        }
+    }
+    config.serialize(serializer)
+    val configString = serializer.complete()
+    configFile.writeText(configString)
 }
 
 internal class ConfigData(val configNames: Collection<String>, val modid: String)
