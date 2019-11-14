@@ -1,6 +1,7 @@
 package redstoneparadox.paradoxconfig
 
 import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
 import redstoneparadox.paradoxconfig.conditions.registerConditions
 import redstoneparadox.paradoxconfig.config.RootConfigCategory
@@ -22,6 +23,18 @@ fun init() {
     if (FabricLoader.getInstance().isDevelopmentEnvironment) {
         PConfigLogger.log("Hello, world!")
         runTests()
+    }
+}
+
+/**
+ * Reloads the specified config file.
+ *
+ * @param id The identifier (mod id + path) of the config.
+ */
+fun forceReloadConfig(id: Identifier) {
+    val config = CONFIGS[id.toString()]
+    if (config != null) {
+        loadConfig(config, id.namespace)
     }
 }
 
