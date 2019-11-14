@@ -5,7 +5,6 @@ import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
 import redstoneparadox.paradoxconfig.conditions.registerConditions
 import redstoneparadox.paradoxconfig.config.RootConfigCategory
-import redstoneparadox.paradoxconfig.test.runTests
 import java.io.File
 import java.io.FileNotFoundException
 
@@ -18,11 +17,6 @@ internal val CONFIGS: HashMap<String, RootConfigCategory> = hashMapOf()
 fun init() {
     if (FabricLoader.getInstance().isModLoaded("libcd")) {
         registerConditions()
-    }
-
-    if (FabricLoader.getInstance().isDevelopmentEnvironment) {
-        PConfigLogger.log("Hello, world!")
-        runTests()
     }
 }
 

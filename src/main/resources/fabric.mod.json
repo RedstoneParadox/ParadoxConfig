@@ -35,6 +35,6 @@
   },
 
   "custom": {
-    "pconfig": ["redstoneparadox.paradoxconfig.test.TestConfig"]
+    "pconfig": ["redstoneparadox.paradoxconfig.example.MyConfig"]
   }
 }
