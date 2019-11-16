@@ -1,5 +1,6 @@
 package redstoneparadox.paradoxconfig.example
 
+import blue.endless.jankson.JsonElement
 import redstoneparadox.paradoxconfig.config.ConfigCategory
 import redstoneparadox.paradoxconfig.config.RootConfigCategory
 import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
@@ -8,7 +9,7 @@ import redstoneparadox.paradoxconfig.serialization.jankson.JanksonConfigDeserial
 import redstoneparadox.paradoxconfig.serialization.jankson.JanksonConfigSerializer
 
 object MyConfig: RootConfigCategory("myconfig.json5") {
-    override val serializer: ConfigSerializer = JanksonConfigSerializer()
+    override val serializer: ConfigSerializer<*> = JanksonConfigSerializer()
     override val deserializer: ConfigDeserializer = JanksonConfigDeserializer()
 
     var bool: Boolean by option(true, "bool")

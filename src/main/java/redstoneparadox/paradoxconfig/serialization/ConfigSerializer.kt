@@ -1,12 +1,20 @@
 package redstoneparadox.paradoxconfig.serialization
 
+import kotlin.reflect.KClass
+
 /**
  * Classes that implement this are used to serialize config options from
  * the config class and transform them into an intermediate
  * representation. The class itself is then responsible for transforming
  * the data into a string representation.
  */
-interface ConfigSerializer {
+interface ConfigSerializer<E> {
+
+    fun serializeValue(value: Any): E?
+
+    fun createCollection(): MutableCollection<E>
+
+    fun createDictionary(): MutableMap<String, E>
 
     /**
      * Called to add a sub-category to the current category.
@@ -20,6 +28,8 @@ interface ConfigSerializer {
      * Called to return to the outer category.
      */
     fun exitCategory()
+
+    fun putValue(key: String, value: E, comment: String)
 
     /**
      * Called to write an option to the intermediate

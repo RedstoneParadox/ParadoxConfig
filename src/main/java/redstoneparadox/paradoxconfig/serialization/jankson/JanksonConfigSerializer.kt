@@ -1,16 +1,29 @@
 package redstoneparadox.paradoxconfig.serialization.jankson
 
-import blue.endless.jankson.JsonObject
+import blue.endless.jankson.*
 import io.github.cottonmc.jankson.JanksonFactory
+import net.minecraft.util.Identifier
 import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import java.util.*
 
-class JanksonConfigSerializer: ConfigSerializer {
+class JanksonConfigSerializer: ConfigSerializer<JsonElement> {
 
     var currentObject: JsonObject = JsonObject()
     val objectStack: Stack<JsonObject> = Stack()
 
     private val jankson = JanksonFactory.createJankson()
+
+    override fun serializeValue(value: Any): JsonElement? {
+        return when (value) {
+            is String, is Char, is Byte, is Short, is Int, is Long, is Float, is Double -> JsonPrimitive(value)
+            is Identifier -> JsonPrimitive(value.toString())
+            else -> null
+        }
+    }
+
+    override fun createCollection(): MutableCollection<JsonElement> = JsonArray()
+
+    override fun createDictionary(): MutableMap<String, JsonElement> = JsonObject()
 
     override fun addCategory(key: String, comment: String) {
         val newObject = JsonObject()
@@ -21,6 +34,10 @@ class JanksonConfigSerializer: ConfigSerializer {
 
     override fun exitCategory() {
         currentObject = objectStack.pop()
+    }
+
+    override fun putValue(key: String, value: JsonElement, comment: String) {
+        currentObject.put(key, value,comment)
     }
 
     override fun writeOption(key: String, value: Any, comment: String) {
