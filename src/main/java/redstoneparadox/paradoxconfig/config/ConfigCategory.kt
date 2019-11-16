@@ -43,7 +43,7 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
         }
     }
 
-    internal fun serialize(configSerializer: ConfigSerializer) {
+    internal fun serialize(configSerializer: ConfigSerializer<*>) {
         if (key.isNotEmpty()) configSerializer.addCategory(key, comment)
 
         for (option in optionsList) {
@@ -128,10 +128,9 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
      * @return A [DictionaryConfigOption] holding an implementation of
      * [MutableMap] with keys of type [K] to values of type [V]
      */
-    protected inline fun <reified K: Any, reified  V: Any, reified T: MutableMap<K, V>> option(default: T, key: String, comment: String = ""): DictionaryConfigOption<K, V, T> {
-        val keyClass = K::class
+    protected inline fun <reified  V: Any, reified T: MutableMap<String, V>> option(default: T, key: String, comment: String = ""): DictionaryConfigOption<V, T> {
         val valueClass = V::class
-        return DictionaryConfigOption(keyClass, valueClass, T::class, default, key, "$comment [Keys: ${getPossibleValues(keyClass)}, Values: ${getPossibleValues(valueClass)}]")
+        return DictionaryConfigOption(valueClass, T::class, default, key, "$comment [Keys: any string, Values: ${getPossibleValues(valueClass)}]")
     }
 
     operator fun get(key: String): Any? {
