@@ -9,8 +9,8 @@ import redstoneparadox.paradoxconfig.serialization.jankson.JanksonConfigDeserial
 import redstoneparadox.paradoxconfig.serialization.jankson.JanksonConfigSerializer
 
 object MyConfig: RootConfigCategory("myconfig.json5") {
-    override val serializer: ConfigSerializer<*> = JanksonConfigSerializer()
-    override val deserializer: ConfigDeserializer = JanksonConfigDeserializer()
+    override val serializer: ConfigSerializer<JsonElement> = JanksonConfigSerializer()
+    override val deserializer: ConfigDeserializer<JsonElement> = JanksonConfigDeserializer()
 
     var bool: Boolean by option(true, "bool")
 

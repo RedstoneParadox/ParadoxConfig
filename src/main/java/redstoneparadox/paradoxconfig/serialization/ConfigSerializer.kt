@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
  * the data into a string representation.
  *
  * @param E The base element type of the intermediate representation.
- * if you were working with GSON, for example, this would be
+ * If you were working with GSON, for example, this would be
  * [com.google.gson.JsonElement].
  */
 interface ConfigSerializer<E: Any> {

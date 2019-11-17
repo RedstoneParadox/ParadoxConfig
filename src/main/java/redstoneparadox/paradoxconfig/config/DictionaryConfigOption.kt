@@ -24,14 +24,16 @@ class DictionaryConfigOption<V: Any, T: MutableMap<String, V>>(private val valTy
         }
     }
 
-    override fun deserialize(deserializer: ConfigDeserializer) {
-        val dictionary = deserializer.readDictionaryOption(key)
-
-        if (dictionary != null) {
-            value.clear()
-            for((dKey, dVal) in dictionary.entries) {
-                if (dKey is String && valType.isInstance(dVal)) {
-                    value[dKey] = valType.cast(dVal)
+    override fun <E: Any> deserialize(deserializer: ConfigDeserializer<E>) {
+        val dictionary = deserializer.readValue(key)
+        if (dictionary is Map<*, *>) {
+            val entries = dictionary.entries
+            for ((dKey, dValue) in entries) {
+                if (dKey is String && deserializer.eClass.isInstance(dValue)) {
+                    val result = deserializer.tryDeserialize(deserializer.eClass.cast(dValue), valType)
+                    if (result != null) {
+                        value[dKey] = result
+                    }
                 }
             }
         }

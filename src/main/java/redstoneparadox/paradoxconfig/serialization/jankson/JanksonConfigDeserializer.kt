@@ -6,11 +6,15 @@ import blue.endless.jankson.JsonObject
 import blue.endless.jankson.JsonPrimitive
 import blue.endless.jankson.impl.SyntaxError
 import io.github.cottonmc.jankson.JanksonFactory
+import net.minecraft.util.Identifier
 import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import java.util.Stack
+import kotlin.reflect.KClass
+import kotlin.reflect.full.cast
 
 @Suppress("unused")
-class JanksonConfigDeserializer: ConfigDeserializer {
+class JanksonConfigDeserializer: ConfigDeserializer<JsonElement> {
+    override val eClass: KClass<JsonElement> = JsonElement::class
 
     private var currentObject: JsonObject? = null
     private val objectStack: Stack<JsonObject?> = Stack()
@@ -30,6 +34,20 @@ class JanksonConfigDeserializer: ConfigDeserializer {
         return false
     }
 
+    override fun <R: Any> tryDeserialize(e: JsonElement, rClass: KClass<R>): R? {
+        if (e is JsonPrimitive) {
+            val any = when (val value = e.value) {
+                is Char, is Double, is Long -> value
+                is Byte, is Short, is Int -> (value as Number).toLong()
+                is Float -> value.toDouble()
+                is String -> if (rClass == Identifier::class) Identifier.tryParse(value) else value
+                else -> null
+            }
+            if (rClass.isInstance(any)) return rClass.cast(any)
+        }
+        return null
+    }
+
     override fun enterCategory(key: String) {
         val subcategory = currentObject?.get(key)
 
@@ -45,45 +63,7 @@ class JanksonConfigDeserializer: ConfigDeserializer {
         currentObject = objectStack.pop()
     }
 
-    override fun readOption(key: String): Any? {
-        val option = currentObject?.get(key)
-
-        if (option is JsonPrimitive) {
-            return option.value
-        }
-        return null
-    }
-
-    override fun readCollectionOption(key: String): MutableCollection<Any>? {
-        val option = currentObject?.get(key)
-
-        if (option is JsonArray) {
-            val collection = mutableListOf<Any>()
-            for (element in option) {
-                if (element is JsonPrimitive) {
-                    collection.add(element.value)
-                }
-            }
-            return collection
-        }
-        return null
-    }
-
-    override fun readDictionaryOption(key: String): Map<Any, Any>? {
-        val option = currentObject?.get(key)
-
-        if (option is JsonObject) {
-            val map = mutableMapOf<Any, Any>()
-            for ((jkey, def) in option) {
-                if (def is JsonPrimitive) {
-                    map[jkey] = def.value
-                }
-            }
-            return map
-        }
-
-        return null
-    }
+    override fun readValue(key: String): JsonElement? = currentObject?.get(key)
 
     override fun clear() {
         currentObject = null

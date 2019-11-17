@@ -16,5 +16,5 @@ import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
  */
 abstract class RootConfigCategory(val file: String): ConfigCategory() {
     abstract val serializer: ConfigSerializer<*>
-    abstract val deserializer: ConfigDeserializer
+    abstract val deserializer: ConfigDeserializer<*>
 }

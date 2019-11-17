@@ -1,12 +1,19 @@
 package redstoneparadox.paradoxconfig.serialization
 
+import kotlin.reflect.KClass
+
 /**
  * Classes that implement this are used to deserialize a string
  * representation of the config into an intermediate
  * representation. The config then uses this class to read
  * option values.
+ *
+ * @param E The base element type of the intermediate representation.
+ * If you were working with GSON, for example, this would be
+ * [com.google.gson.JsonElement].
  */
-interface ConfigDeserializer {
+interface ConfigDeserializer<E: Any> {
+    val eClass: KClass<E>
 
     /**
      *  Used to pass the source to your deserializer class.
@@ -19,6 +26,18 @@ interface ConfigDeserializer {
      *  representation.
      */
     fun receiveSource(source: String): Boolean
+
+    /**
+     * Called to covert an element of type [E] to a
+     * value of type [R].
+     *
+     * @param e The element to deserialize.
+     * @param rClass The class to deserialize to.
+     *
+     * @return The deserialized value or null if
+     * deserialization was not successful
+     */
+    fun <R: Any> tryDeserialize(e: E, rClass: KClass<R>): R?
 
     /**
      * Called to enter a sub-category in the current
@@ -38,38 +57,30 @@ interface ConfigDeserializer {
     fun exitCategory()
 
     /**
-     * Called to read the value of an option in the
-     * current category.
+     * Called to read an option value. Should return the
+     * value as-is.
      *
-     * @param key The key for this option in the
-     * current category.
+     * @param key The key for this option
      *
-     * @return The value of the requested option.
+     * @return A value of type [E] or null if the option
+     * is not present.
      */
-    fun readOption(key: String): Any?
+    fun readValue(key: String): E?
 
+    @Deprecated("No longer used.")
+    fun readOption(key: String): Any? {
+        return null
+    }
 
-    /**
-     * Called to read the value of a collection option in
-     * the current category.
-     *
-     * @param key The key for this option in the current
-     * category.
-     *
-     * @return The value of the requested option.
-     */
-    fun readCollectionOption(key: String): Collection<Any>?
+    @Deprecated("No longer used.")
+    fun readCollectionOption(key: String): Collection<Any>? {
+        return null
+    }
 
-    /**
-     * Called to read the value of a dictionary option in
-     * the current category
-     *
-     * @param key The key for this option in the current
-     * category.
-     *
-     * @return The value of the requested option.
-     */
-    fun readDictionaryOption(key: String): Map<Any, Any>?
+    @Deprecated("No longer used.")
+    fun readDictionaryOption(key: String): Map<Any, Any>? {
+        return null
+    }
 
     /**
      * Used to clear the current contents of the deserializer

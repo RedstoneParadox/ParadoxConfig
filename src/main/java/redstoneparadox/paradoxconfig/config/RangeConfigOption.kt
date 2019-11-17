@@ -16,10 +16,13 @@ class RangeConfigOption<T>(type: KClass<T>, value: T, key: String, comment: Stri
         }
     }
 
-    override fun deserialize(deserializer: ConfigDeserializer) {
-        val any = deserializer.readOption(key)
-        if (any != null && type.isInstance(any)) {
-            if (range.contains(type.cast(any))) value = type.cast(any)
+    override fun <E: Any> deserialize(deserializer: ConfigDeserializer<E>) {
+        val any = deserializer.readValue(key)
+        if (any != null) {
+            val result = deserializer.tryDeserialize(any, type)
+            if (result != null && range.contains(result)) {
+                value = result
+            }
         }
     }
 }

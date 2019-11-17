@@ -57,7 +57,7 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
         if (key.isNotEmpty()) configSerializer.exitCategory()
     }
 
-    internal fun deserialize(configDeserializer: ConfigDeserializer) {
+    internal fun deserialize(configDeserializer: ConfigDeserializer<*>) {
         if (key.isNotEmpty()) configDeserializer.enterCategory(key)
 
         for (option in optionsList) {

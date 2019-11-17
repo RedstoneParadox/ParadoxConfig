@@ -24,13 +24,17 @@ class CollectionConfigOption<T: Any, U: MutableCollection<T>>(private val innerT
         }
     }
 
-    override fun deserialize(deserializer: ConfigDeserializer) {
-        val collection = deserializer.readCollectionOption(key)
-        if (collection != null) {
+    override fun <E: Any> deserialize(deserializer: ConfigDeserializer<E>) {
+        val collection = deserializer.readValue(key)
+        if (collection is Collection<*>) {
+            val iterator = collection.iterator()
             value.clear()
-            for (any in collection) {
-                if (innerType.isInstance(any)) {
-                    value.add(innerType.cast(any))
+            for (any in iterator) {
+                if (deserializer.eClass.isInstance(any)) {
+                    val result = deserializer.tryDeserialize(deserializer.eClass.cast(any), innerType)
+                    if (result != null) {
+                        value.add(result)
+                    }
                 }
             }
         }
