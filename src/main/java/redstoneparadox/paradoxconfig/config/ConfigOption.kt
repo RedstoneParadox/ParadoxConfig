@@ -22,8 +22,11 @@ open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: Stri
         }
     }
 
-    internal open fun serialize(serializer: ConfigSerializer) {
-        serializer.writeOption(key, value, comment)
+    internal open fun <E: Any> serialize(serializer: ConfigSerializer<E>) {
+        val serialized = serializer.trySerialize(value)
+        if (serialized != null) {
+            serializer.writeValue(key, serialized, comment)
+        }
     }
 
     internal open fun deserialize(deserializer: ConfigDeserializer) {

@@ -5,15 +5,17 @@ import io.github.cottonmc.jankson.JanksonFactory
 import net.minecraft.util.Identifier
 import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import java.util.*
+import kotlin.reflect.KClass
 
 class JanksonConfigSerializer: ConfigSerializer<JsonElement> {
+    override val eClass: KClass<JsonElement> = JsonElement::class
 
     var currentObject: JsonObject = JsonObject()
     val objectStack: Stack<JsonObject> = Stack()
 
     private val jankson = JanksonFactory.createJankson()
 
-    override fun serializeValue(value: Any): JsonElement? {
+    override fun trySerialize(value: Any): JsonElement? {
         return when (value) {
             is String, is Char, is Byte, is Short, is Int, is Long, is Float, is Double -> JsonPrimitive(value)
             is Identifier -> JsonPrimitive(value.toString())
@@ -36,12 +38,8 @@ class JanksonConfigSerializer: ConfigSerializer<JsonElement> {
         currentObject = objectStack.pop()
     }
 
-    override fun putValue(key: String, value: JsonElement, comment: String) {
-        currentObject.put(key, value,comment)
-    }
-
-    override fun writeOption(key: String, value: Any, comment: String) {
-        currentObject.put(key, jankson.toJson(value), comment)
+    override fun writeValue(key: String, value: JsonElement, comment: String) {
+        currentObject.put(key, value, comment)
     }
 
     override fun complete(): String {

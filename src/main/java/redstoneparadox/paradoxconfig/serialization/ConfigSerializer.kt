@@ -7,13 +7,43 @@ import kotlin.reflect.KClass
  * the config class and transform them into an intermediate
  * representation. The class itself is then responsible for transforming
  * the data into a string representation.
+ *
+ * @param E The base element type of the intermediate representation.
+ * if you were working with GSON, for example, this would be
+ * [com.google.gson.JsonElement].
  */
-interface ConfigSerializer<E> {
+interface ConfigSerializer<E: Any> {
+    val eClass: KClass<E>
 
-    fun serializeValue(value: Any): E?
+    /**
+     * Called by the config to serialize a value to
+     * an instance of [E].
+     *
+     * @param value The value to serialize.
+     *
+     * @return An instance of [E] or null if the
+     * [value] could not be serialized.
+     */
+    fun trySerialize(value: Any): E?
 
+    /**
+     * Creates a [MutableCollection] that can hold
+     * elements of type [E]. The collection itself
+     * should extend [E] (this is not enforced
+     * with generics due to limitations).
+     *
+     * @return A [MutableCollection]
+     */
     fun createCollection(): MutableCollection<E>
 
+    /**
+     * Creates a [MutableMap] with [String] keys
+     * a values of type [E]. The map itself
+     * should extend [E] (this is not enforced
+     * with generics due to limitations).
+     *
+     * @return a [MutableMap]
+     */
     fun createDictionary(): MutableMap<String, E>
 
     /**
@@ -29,17 +59,15 @@ interface ConfigSerializer<E> {
      */
     fun exitCategory()
 
-    fun putValue(key: String, value: E, comment: String)
-
     /**
-     * Called to write an option to the intermediate
-     * representation.
+     * Called to write an option value to the config.
      *
-     * @param key The option key.
-     * @param value The value of the option.
+     * @param key The key for this option in the current
+     * category.
+     * @param value The value to write.
      * @param comment The comment for this option.
      */
-    fun writeOption(key: String, value: Any, comment: String)
+    fun writeValue(key: String, value: E, comment: String)
 
     /**
      * Called when the config class has finished passing data
