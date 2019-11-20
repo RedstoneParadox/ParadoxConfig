@@ -1,9 +1,6 @@
 package redstoneparadox.paradoxconfig.serialization.jankson
 
-import blue.endless.jankson.JsonArray
-import blue.endless.jankson.JsonElement
-import blue.endless.jankson.JsonObject
-import blue.endless.jankson.JsonPrimitive
+import blue.endless.jankson.*
 import blue.endless.jankson.impl.SyntaxError
 import io.github.cottonmc.jankson.JanksonFactory
 import net.minecraft.util.Identifier

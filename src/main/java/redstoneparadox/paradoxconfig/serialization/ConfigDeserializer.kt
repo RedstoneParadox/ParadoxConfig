@@ -67,17 +67,17 @@ interface ConfigDeserializer<E: Any> {
      */
     fun readValue(key: String): E?
 
-    @Deprecated("No longer used.")
+    @Deprecated("No longer called.")
     fun readOption(key: String): Any? {
         return null
     }
 
-    @Deprecated("No longer used.")
+    @Deprecated("No longer called.")
     fun readCollectionOption(key: String): Collection<Any>? {
         return null
     }
 
-    @Deprecated("No longer used.")
+    @Deprecated("No longer called.")
     fun readDictionaryOption(key: String): Map<Any, Any>? {
         return null
     }

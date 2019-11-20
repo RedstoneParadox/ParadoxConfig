@@ -69,6 +69,11 @@ interface ConfigSerializer<E: Any> {
      */
     fun writeValue(key: String, value: E, comment: String)
 
+    @Deprecated("No longer called.")
+    fun writeOption(key: String, value: Any, comment: String) {
+        
+    }
+
     /**
      * Called when the config class has finished passing data
      * to the serialize so that it can save the config data
