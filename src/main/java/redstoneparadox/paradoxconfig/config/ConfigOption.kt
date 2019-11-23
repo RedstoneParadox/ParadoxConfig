@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.cast
 
-open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: String, val comment: String) {
+open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: String, val comment: String, private var temp: T?) {
 
     open operator fun getValue(thisRef : Any?, property: KProperty<*>): T {
         return value
@@ -20,6 +20,29 @@ open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: Stri
         if (type.isInstance(any)) {
             value = type.cast(any)
         }
+    }
+
+    // Only to be used by config screens.
+    fun setTemp(any: Any) {
+        if (type.isInstance(any)) {
+            temp = type.cast(any)
+        }
+        else {
+            temp == null
+        }
+    }
+
+    // Only to be used by config screen builders
+    fun getCurrent(): T {
+        if (temp != null) {
+            return temp as T
+        }
+        return value
+    }
+
+    fun save() {
+        if (temp != null) value = temp as T
+        temp = null
     }
 
     internal open fun <E: Any> serialize(serializer: ConfigSerializer<E>) {
