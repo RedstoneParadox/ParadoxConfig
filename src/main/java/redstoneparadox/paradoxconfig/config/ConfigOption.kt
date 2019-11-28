@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.cast
 
-open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: String, val comment: String, private var temp: T?) {
+open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: String, val comment: String, private var temp: T? = null) {
 
     open operator fun getValue(thisRef : Any?, property: KProperty<*>): T {
         return value
