@@ -1,7 +1,7 @@
 package redstoneparadox.paradoxconfig.serialization.jankson
 
 import blue.endless.jankson.*
-import blue.endless.jankson.impl.SyntaxError
+import blue.endless.jankson.api.SyntaxError
 import io.github.cottonmc.jankson.JanksonFactory
 import net.minecraft.util.Identifier
 import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
