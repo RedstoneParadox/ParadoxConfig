@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "id": "pconfig",
-  "version": "1.0.0",
+  "version": "0.3.0-alpha",
 
   "name": "Paradox Config",
-  "description": "A Kotlin-based configuration mod for Minecraft.",
+  "description": "A Kotlin-based configuration api for Minecraft mods.",
   "authors": [
-    "Me!"
+    "RedstoneParadox"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/RedstoneParadox/paradox-config"
   },
 
   "license": "MIT",
