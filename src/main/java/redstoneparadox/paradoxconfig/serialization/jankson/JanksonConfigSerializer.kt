@@ -17,7 +17,7 @@ class JanksonConfigSerializer: ConfigSerializer<JsonElement> {
 
     override fun trySerialize(value: Any): JsonElement? {
         return when (value) {
-            is String, is Char, is Byte, is Short, is Int, is Long, is Float, is Double -> JsonPrimitive(value)
+            is String, is Char, is Byte, is Short, is Int, is Long, is Float, is Double, is Boolean -> JsonPrimitive(value)
             is Identifier -> JsonPrimitive(value.toString())
             else -> null
         }

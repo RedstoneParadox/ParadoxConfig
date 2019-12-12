@@ -34,7 +34,7 @@ class JanksonConfigDeserializer: ConfigDeserializer<JsonElement> {
     override fun <R: Any> tryDeserialize(e: JsonElement, rClass: KClass<R>): R? {
         if (e is JsonPrimitive) {
             val any = when (val value = e.value) {
-                is Char, is Double, is Long -> value
+                is Char, is Double, is Long, is Boolean -> value
                 is Byte, is Short, is Int -> (value as Number).toLong()
                 is Float -> value.toDouble()
                 is String -> if (rClass == Identifier::class) Identifier.tryParse(value) else value
