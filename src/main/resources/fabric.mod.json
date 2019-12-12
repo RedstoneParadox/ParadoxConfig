@@ -18,7 +18,7 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
+    "preLaunch": [
       "redstoneparadox.paradoxconfig.ParadoxConfigKt::init"
     ]
   },
