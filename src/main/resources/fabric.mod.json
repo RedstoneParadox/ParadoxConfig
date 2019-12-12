@@ -19,7 +19,10 @@
   "environment": "*",
   "entrypoints": {
     "preLaunch": [
-      "redstoneparadox.paradoxconfig.ParadoxConfigKt::init"
+      {
+        "adapter": "kotlin",
+        "value": "redstoneparadox.paradoxconfig.ParadoxConfig"
+      }
     ]
   },
   "mixins": [

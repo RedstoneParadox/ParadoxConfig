@@ -6,8 +6,8 @@ import blue.endless.jankson.JsonPrimitive
 import io.github.cottonmc.libcd.condition.ConditionalData
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
-import redstoneparadox.paradoxconfig.CONFIGS
-import redstoneparadox.paradoxconfig.MODID
+import redstoneparadox.paradoxconfig.ParadoxConfig.CONFIGS
+import redstoneparadox.paradoxconfig.ParadoxConfig.MODID
 import redstoneparadox.paradoxconfig.util.compareTo
 
 /**
