@@ -15,6 +15,8 @@ internal val CONFIGS: HashMap<String, RootConfigCategory> = hashMapOf()
 
 @Suppress("unused")
 fun init() {
+    initConfigs()
+
     if (FabricLoader.getInstance().isModLoaded("libcd")) {
         registerConditions()
     }
