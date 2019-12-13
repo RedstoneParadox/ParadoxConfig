@@ -1,6 +1,7 @@
 plugins {
     id 'fabric-loom'
     id 'maven-publish'
+    id "com.jfrog.bintray" version "1.7.3"
     id "org.jetbrains.kotlin.jvm"
 }
 
@@ -84,9 +85,37 @@ jar {
     from "LICENSE"
 }
 
+bintray {
+    user = System.getenv('BINTRAY_USER')
+    key = System.getenv('BINTRAY_KEY')
+    publications = ['MyPublication']
+    pkg {
+        repo = 'mods'
+        name = 'paradox-config'
+        licenses = ['MIT']
+        vcsUrl = 'https://github.com/RedstoneParadox/paradox-config.git'
+        version {
+            name = project.mod_version
+        }
+    }
+}
+
 // configure the maven publication
 publishing {
     publications {
+        MyPublication(MavenPublication) {
+
+            groupId project.maven_group
+            artifactId project.archives_base_name
+            version project.version
+            artifact(remapJar) {
+                builtBy remapJar
+            }
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+        }
+
         mavenJava(MavenPublication) {
             // add all the jars that should be included when publishing to maven
             artifact(remapJar) {
@@ -100,8 +129,7 @@ publishing {
 
     // select the repositories you want to publish to
     repositories {
-        // uncomment to publish to the local maven
-        // mavenLocal()
+        mavenLocal()
     }
 }
 
