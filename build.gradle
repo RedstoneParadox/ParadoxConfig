@@ -18,6 +18,7 @@ minecraft {
 
 repositories {
     maven { url = "http://maven.fabricmc.net/" }
+    maven { url = "https://dl.bintray.com/redstoneparadox/mods" }
     maven {
         name = 'CottonMC'
         url = 'http://server.bbkr.space:8081/artifactory/libs-release'
@@ -51,6 +52,11 @@ dependencies {
     modImplementation ("com.github.Siphalor:nbt-crafting:1.15-SNAPSHOT") {
         transitive = false
     }
+
+    modImplementation("io.github.redstoneparadox:OakTree:${project.oak_tree_version}") {
+        exclude group: 'net.fabricmc.fabric-api'
+    }
+    include "io.github.redstoneparadox:OakTree:${project.oak_tree_version}"
 }
 
 processResources {
