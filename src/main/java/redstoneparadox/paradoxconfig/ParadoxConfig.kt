@@ -4,7 +4,6 @@ import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
-import redstoneparadox.paradoxconfig.ParadoxConfig.MODID
 import redstoneparadox.paradoxconfig.conditions.registerConditions
 import redstoneparadox.paradoxconfig.config.RootConfigCategory
 import java.io.File
@@ -12,9 +11,10 @@ import java.io.FileNotFoundException
 
 object ParadoxConfig: PreLaunchEntrypoint {
     const val MODID: String = "pconfig"
-
     internal var initialized: Boolean = false
     internal val CONFIGS: HashMap<String, RootConfigCategory> = hashMapOf()
+    private val LOGGER = LogManager.getFormatterLogger(MODID)
+    private const val MOD_NAME = "ParadoxConfig"
 
     @Suppress("unused")
     override fun onPreLaunch() {
@@ -58,7 +58,7 @@ object ParadoxConfig: PreLaunchEntrypoint {
         return data
     }
 
-    internal fun initConfigs() {
+    private fun initConfigs() {
         if (initialized) return
 
         val configData = getConfigData()
@@ -72,8 +72,7 @@ object ParadoxConfig: PreLaunchEntrypoint {
                     config.init()
                     CONFIGS["${data.modid}:${config.file}"] = config
                     loadConfig(config, data.modid)
-                }
-                else {
+                } else {
                     println("Object $configName either doesn't extend ${baseClass.simpleName} or is not an object.")
                 }
             }
@@ -91,11 +90,11 @@ object ParadoxConfig: PreLaunchEntrypoint {
             val configString = configFile.readText()
             if (deserializer.receiveSource(configString)) config.deserialize(deserializer)
         } catch (e: FileNotFoundException) {
-            PConfigLogger.log("Config file $modid:${config.file} was not found; a new one will be created.")
+            log("Config file $modid:${config.file} was not found; a new one will be created.")
             try {
                 configFile.parentFile.mkdirs()
             } catch (e: SecurityException) {
-                PConfigLogger.error("Could not create config file $modid:${config.file} due to security issues.")
+                error("Could not create config file $modid:${config.file} due to security issues.")
                 e.printStackTrace()
                 return
             }
@@ -104,24 +103,19 @@ object ParadoxConfig: PreLaunchEntrypoint {
         val configString = serializer.complete()
         configFile.writeText(configString)
     }
-}
 
-internal class ConfigData(val configNames: Collection<String>, val modid: String)
-
-internal object PConfigLogger {
-    private val LOGGER = LogManager.getFormatterLogger(MODID)
-    private val MODNAME = "ParadoxConfig"
+    internal class ConfigData(val configNames: Collection<String>, val modid: String)
 
     internal fun log(msg: String) {
-        LOGGER.info("[$MODNAME] $msg")
+        LOGGER.info("[$MOD_NAME] $msg")
     }
 
     internal fun warn(msg: String) {
-        LOGGER.warn("[$MODNAME] $msg")
+        LOGGER.warn("[$MOD_NAME] $msg")
     }
 
     internal fun error(msg: String) {
-        LOGGER.warn("[$MODNAME] $msg")
+        LOGGER.warn("[$MOD_NAME] $msg")
     }
 }
 

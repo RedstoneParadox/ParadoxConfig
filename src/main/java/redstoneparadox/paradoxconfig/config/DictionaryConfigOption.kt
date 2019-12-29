@@ -1,6 +1,6 @@
 package redstoneparadox.paradoxconfig.config
 
-import redstoneparadox.paradoxconfig.PConfigLogger
+import redstoneparadox.paradoxconfig.ParadoxConfig
 import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import kotlin.reflect.KClass
@@ -20,7 +20,7 @@ class DictionaryConfigOption<V: Any, T: MutableMap<String, V>>(private val valTy
             serializer.writeValue(key, serializer.eClass.cast(out), comment)
         }
         else {
-            PConfigLogger.error("Mismatch between expected and actual class of ${serializer::class}")
+            ParadoxConfig.error("Mismatch between expected and actual class of ${serializer::class}")
         }
     }
 
