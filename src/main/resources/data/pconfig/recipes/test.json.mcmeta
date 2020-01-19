@@ -2,32 +2,10 @@
 	"when": [
 		{
 			"pconfig:option": {
-			    "config": "pconfig:test.json5",
+			    "config": "pconfig:myconfig.json5",
 			    "value": true,
-			    "option": "cheater"
+			    "option": "bool"
 			}
-		},
-		{
-		    "pconfig:option": {
-                "config": "pconfig:test.json5",
-                "value": 2,
-                "predicate": "<",
-            	"option": "other"
-            }
-		},
-		{
-		    "pconfig:contains": {
-		        "config": "pconfig:test.json5",
-		        "contains": [ "hi" ],
-		        "option": "collection"
-		    }
-		},
-		{
-		    "pconfig:option": {
-		        "config": "pconfig:test.json5",
-		        "value": true,
-		        "option": "inner.third"
-		    }
 		}
 	]
 }

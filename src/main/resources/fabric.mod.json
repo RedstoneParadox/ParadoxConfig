@@ -18,13 +18,13 @@
 
   "environment": "*",
   "entrypoints": {
-    "preLaunch": [
+    "libcd": [
       {
         "adapter": "kotlin",
         "value": "redstoneparadox.paradoxconfig.conditions.ParadoxConfigCD"
       }
     ],
-    "libcd": [
+    "preLaunch": [
       {
         "adapter": "kotlin",
         "value": "redstoneparadox.paradoxconfig.ParadoxConfig"
