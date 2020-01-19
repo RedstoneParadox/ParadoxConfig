@@ -5,7 +5,6 @@ import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
 import redstoneparadox.paradoxconfig.ParadoxConfig.MODID
-import redstoneparadox.paradoxconfig.conditions.registerConditions
 import redstoneparadox.paradoxconfig.config.RootConfigCategory
 import java.io.File
 import java.io.FileNotFoundException
@@ -19,10 +18,6 @@ object ParadoxConfig: PreLaunchEntrypoint {
     @Suppress("unused")
     override fun onPreLaunch() {
         initConfigs()
-
-        if (FabricLoader.getInstance().isModLoaded("libcd")) {
-            registerConditions()
-        }
     }
 
     /**
