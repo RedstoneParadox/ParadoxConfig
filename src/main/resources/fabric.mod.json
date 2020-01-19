@@ -40,7 +40,7 @@
     "fabric-language-kotlin": "*"
   },
   "suggests": {
-    "flamingo": "*"
+    "libcd": ">=2.2.1"
   },
 
   "custom": {
