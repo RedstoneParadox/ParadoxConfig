@@ -38,6 +38,9 @@
   },
 
   "custom": {
-    "pconfig": ["redstoneparadox.paradoxconfig.example.MyConfig"]
+    "pconfig": {
+      "package": "redstoneparadox.paradoxconfig.example",
+      "configs": ["MyConfig"]
+    }
   }
 }
