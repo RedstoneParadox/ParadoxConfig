@@ -61,15 +61,19 @@ object ParadoxConfig: PreLaunchEntrypoint {
 
         for (data in configData) {
             for (configName in data.configNames) {
-                val config = Class.forName(configName).kotlin.objectInstance
+                try {
+                    val config = Class.forName(configName).kotlin.objectInstance
 
-                if (config is RootConfigCategory) {
-                    config.init()
-                    CONFIGS["${data.modid}:${config.file}"] = config
-                    loadConfig(config, data.modid)
-                }
-                else {
-                    println("Object $configName either doesn't extend ${baseClass.simpleName} or is not an object.")
+                    if (config is RootConfigCategory) {
+                        config.init()
+                        CONFIGS["${data.modid}:${config.file}"] = config
+                        loadConfig(config, data.modid)
+                    }
+                    else {
+                        println("Object $configName either doesn't extend ${baseClass.simpleName} or is not an object.")
+                    }
+                } catch (e: ClassNotFoundException) {
+                    e.printStackTrace()
                 }
             }
         }
