@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "redstoneparadox.paradoxconfig.mixin",
+  "package": "io.github.redstoneparadox.paradoxconfig.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],

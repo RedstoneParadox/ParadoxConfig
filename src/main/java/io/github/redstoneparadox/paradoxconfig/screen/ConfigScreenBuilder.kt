@@ -1,4 +1,4 @@
-package redstoneparadox.paradoxconfig.screen
+package io.github.redstoneparadox.paradoxconfig.screen
 
 import net.minecraft.client.gui.screen.Screen
 

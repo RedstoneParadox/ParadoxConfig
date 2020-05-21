@@ -1,7 +1,7 @@
-package redstoneparadox.paradoxconfig.config
+package io.github.redstoneparadox.paradoxconfig.config
 
-import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
-import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
+import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
+import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.cast

@@ -1,9 +1,8 @@
-package redstoneparadox.paradoxconfig
+package io.github.redstoneparadox.paradoxconfig
 
-import me.sargunvohra.mcmods.autoconfig1u.serializer.ConfigSerializer
 import net.fabricmc.loader.api.FabricLoader
-import redstoneparadox.paradoxconfig.config.RootConfigCategory
-import redstoneparadox.paradoxconfig.util.NewConfigData
+import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
+import io.github.redstoneparadox.paradoxconfig.util.NewConfigData
 import java.io.File
 import java.io.FileNotFoundException
 

@@ -21,7 +21,13 @@
     "preLaunch": [
       {
         "adapter": "kotlin",
-        "value": "redstoneparadox.paradoxconfig.ParadoxConfig"
+        "value": "io.github.redstoneparadox.paradoxconfig.ParadoxConfig"
+      }
+    ],
+    "libcd": [
+      {
+        "adapter": "kotlin",
+        "value": "io.github.redstoneparadox.paradoxconfig.conditions.ParadoxConfigConditions"
       }
     ]
   },

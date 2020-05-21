@@ -1,9 +1,9 @@
-package redstoneparadox.paradoxconfig.serialization.jankson
+package io.github.redstoneparadox.paradoxconfig.serialization.jankson
 
 import blue.endless.jankson.*
 import io.github.cottonmc.jankson.JanksonFactory
 import net.minecraft.util.Identifier
-import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
+import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import java.util.*
 import kotlin.reflect.KClass
 

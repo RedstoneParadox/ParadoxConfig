@@ -1,12 +1,12 @@
-package redstoneparadox.paradoxconfig.example
+package io.github.redstoneparadox.paradoxconfig.example
 
 import blue.endless.jankson.JsonElement
-import redstoneparadox.paradoxconfig.config.ConfigCategory
-import redstoneparadox.paradoxconfig.config.RootConfigCategory
-import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
-import redstoneparadox.paradoxconfig.serialization.ConfigSerializer
-import redstoneparadox.paradoxconfig.serialization.jankson.JanksonConfigDeserializer
-import redstoneparadox.paradoxconfig.serialization.jankson.JanksonConfigSerializer
+import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
+import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
+import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
+import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
+import io.github.redstoneparadox.paradoxconfig.serialization.jankson.JanksonConfigDeserializer
+import io.github.redstoneparadox.paradoxconfig.serialization.jankson.JanksonConfigSerializer
 
 object MyConfig: RootConfigCategory("myconfig.json5") {
     override val serializer: ConfigSerializer<JsonElement> = JanksonConfigSerializer()

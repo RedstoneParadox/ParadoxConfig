@@ -1,7 +1,6 @@
-package redstoneparadox.paradoxconfig.config.type
+package io.github.redstoneparadox.paradoxconfig.config.type
 
 import net.minecraft.util.Identifier
-import kotlin.reflect.KClass
 
 abstract class Type<T, U> {
     abstract fun fromU(u: U?): T
