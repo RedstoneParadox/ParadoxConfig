@@ -4,7 +4,6 @@ import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import org.apache.logging.log4j.LogManager
 import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
-import io.github.redstoneparadox.paradoxconfig.config.type.OptionType
 import io.github.redstoneparadox.paradoxconfig.util.NewConfigData
 
 object ParadoxConfig: PreLaunchEntrypoint {
