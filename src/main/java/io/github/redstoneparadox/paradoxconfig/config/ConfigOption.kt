@@ -22,29 +22,6 @@ open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: Stri
         }
     }
 
-    // Only to be used by config screens.
-    fun setTemp(any: Any) {
-        if (type.isInstance(any)) {
-            temp = type.cast(any)
-        }
-        else {
-            temp == null
-        }
-    }
-
-    // Only to be used by config screen builders
-    fun getCurrent(): T {
-        if (temp != null) {
-            return temp as T
-        }
-        return value
-    }
-
-    fun save() {
-        if (temp != null) value = temp as T
-        temp = null
-    }
-
     internal open fun <E: Any> serialize(serializer: ConfigSerializer<E>) {
         val serialized = serializer.trySerialize(value)
         if (serialized != null) {
