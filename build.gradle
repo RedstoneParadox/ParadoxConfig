@@ -45,9 +45,12 @@ dependencies {
 
     modImplementation "io.github.cottonmc:Jankson-Fabric:${project.jankson_version}"
     modImplementation "io.github.cottonmc:LibCD:${project.libcd_version}"
+    /*
     modImplementation ("io.github.prospector:modmenu:${project.modmenu_version}"){
         transitive = false
     }
+    */
+
     /*
     modImplementation ("com.github.Siphalor:nbt-crafting:1.15-SNAPSHOT") {
         transitive = false

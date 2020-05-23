@@ -41,7 +41,7 @@
 
   "custom": {
     "pconfig": {
-      "package": "redstoneparadox.paradoxconfig.example",
+      "package": "io.github.redstoneparadox.paradoxconfig.example",
       "configs": ["MyConfig"]
     }
   }
