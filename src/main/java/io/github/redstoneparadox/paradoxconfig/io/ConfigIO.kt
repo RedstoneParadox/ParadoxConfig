@@ -16,7 +16,7 @@ interface ConfigIO {
      * Function to get the file extension
      * for this ConfigIO.
      */
-    fun fileExtension(): String
+    val fileExtension: String
 
     fun read(string: String, config: ConfigCategory)
 
@@ -26,13 +26,13 @@ interface ConfigIO {
         private val FORMATS: MutableMap<String, ConfigIO> = mutableMapOf()
 
         fun addFormat(configIO: ConfigIO) {
-            val ext = configIO.fileExtension()
+            val ext = configIO.fileExtension
 
             if (FORMATS.containsKey(ext)) {
                 throw Exception("ConfigIO for file format $ext was already registered!")
             }
 
-            FORMATS[configIO.fileExtension()] = configIO
+            FORMATS[configIO.fileExtension] = configIO
         }
 
         fun getConfigIO(ext: String): ConfigIO {
