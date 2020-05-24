@@ -2,6 +2,7 @@ package io.github.redstoneparadox.paradoxconfig.config
 
 import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
+import io.github.redstoneparadox.paradoxconfig.util.toImmutable
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.declaredMemberProperties
@@ -41,6 +42,14 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
                 optionsList.add(delegate)
             }
         }
+    }
+
+    fun getSubcategories(): List<ConfigCategory> {
+        return categoryList.toImmutable()
+    }
+
+    fun getOptions(): List<ConfigOption<*>> {
+        return optionsList.toImmutable()
     }
 
     internal fun serialize(configSerializer: ConfigSerializer<*>) {
