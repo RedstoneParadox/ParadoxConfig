@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.cast
 
-open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: String, val comment: String) {
+open class ConfigOption<T: Any>(protected val type: KClass<T>, var value: T, val key: String, protected val comment: String) {
 
     open operator fun getValue(thisRef : Any?, property: KProperty<*>): T {
         return value
@@ -16,10 +16,14 @@ open class ConfigOption<T: Any>(val type: KClass<T>, var value: T, val key: Stri
         this.value = value
     }
 
-    internal open fun set(any: Any?) {
+    open fun set(any: Any?) {
         if (type.isInstance(any)) {
             value = type.cast(any)
         }
+    }
+
+    open fun get(): Any {
+        return value
     }
 
     internal open fun <E: Any> serialize(serializer: ConfigSerializer<E>) {

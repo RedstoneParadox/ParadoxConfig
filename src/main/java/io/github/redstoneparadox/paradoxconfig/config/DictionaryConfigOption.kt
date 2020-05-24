@@ -38,4 +38,20 @@ class DictionaryConfigOption<V: Any, T: MutableMap<String, V>>(private val valTy
             }
         }
     }
+
+    override fun set(any: Any?) {
+        if (any is MutableMap<*, *>) {
+            for (element in any.keys) {
+                if (element !is String) {
+                    return
+                }
+            }
+            for (element in any.values) {
+                if (!valType.isInstance(element)) {
+                    return
+                }
+            }
+            type.cast(any)
+        }
+    }
 }

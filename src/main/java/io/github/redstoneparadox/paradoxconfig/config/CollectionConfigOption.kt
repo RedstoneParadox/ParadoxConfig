@@ -39,4 +39,15 @@ class CollectionConfigOption<T: Any, U: MutableCollection<T>>(private val innerT
             }
         }
     }
+
+    override fun set(any: Any?) {
+        if (any is MutableCollection<*>) {
+            for (element in any) {
+                if (!innerType.isInstance(element)) {
+                    return
+                }
+            }
+            value = type.cast(any)
+        }
+    }
 }
