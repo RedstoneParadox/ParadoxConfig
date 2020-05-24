@@ -1,10 +1,14 @@
 package io.github.redstoneparadox.paradoxconfig.io
 
+import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import io.github.redstoneparadox.paradoxconfig.util.unwrap
 
 /**
  * Classes that implement this interface are used to read
  * and write config files using a specific format.
+ *
+ * Implementors should not do any saving or loading
+ * themselves.
  */
 interface ConfigIO {
 
@@ -13,6 +17,10 @@ interface ConfigIO {
      * for this ConfigIO.
      */
     fun fileExtension(): String
+
+    fun read(string: String, config: ConfigCategory)
+
+    fun write(config: ConfigCategory): String
 
     companion object {
         private val FORMATS: MutableMap<String, ConfigIO> = mutableMapOf()
