@@ -140,7 +140,7 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
     private fun get(key: Sequence<String>): Any? {
         val first = key.first()
         return if (key.last() == first) {
-            optionsMap[first]?.value
+            optionsMap[first]?.get()
         } else {
             categoriesMap[first]?.get(key.drop(1))
         }
