@@ -1,5 +1,7 @@
 package io.github.redstoneparadox.paradoxconfig
 
+import io.github.redstoneparadox.paradoxconfig.io.ConfigIO
+import io.github.redstoneparadox.paradoxconfig.io.JanksonConfigIO
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import org.apache.logging.log4j.LogManager
@@ -12,6 +14,8 @@ object ParadoxConfig: PreLaunchEntrypoint {
 
     @Suppress("unused")
     override fun onPreLaunch() {
+        ConfigIO.addFormat(JanksonConfigIO())
+
         for (entrypoint in FabricLoader.getInstance().getEntrypoints("pconfigFormat", ConfigFormatInitializer::class.java)) {
             entrypoint.initializeConfigFormat()
         }
