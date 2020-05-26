@@ -19,7 +19,7 @@ class JanksonConfigIO: ConfigIO {
         deserializeCategory(json, config)
     }
 
-    fun deserializeCategory(json: JsonObject, category: ConfigCategory) {
+    private fun deserializeCategory(json: JsonObject, category: ConfigCategory) {
         for (subcategory in category.getSubcategories()) {
             val obj = json[subcategory.key]
             if (obj is JsonObject) deserializeCategory(obj, subcategory)
@@ -31,7 +31,7 @@ class JanksonConfigIO: ConfigIO {
         }
     }
 
-    fun deserializeOption(json: JsonElement, option: ConfigOption<*>) {
+    private fun deserializeOption(json: JsonElement, option: ConfigOption<*>) {
         val any = jankson.marshaller.marshall(option.getKClass().java, json)
         option.set(any)
     }
@@ -40,7 +40,7 @@ class JanksonConfigIO: ConfigIO {
         return serializeCategory(config).first.toJson(true, true)
     }
 
-    fun serializeCategory(category: ConfigCategory): Pair<JsonObject, String> {
+    private fun serializeCategory(category: ConfigCategory): Pair<JsonObject, String> {
         val obj = JsonObject()
 
         for (subcategory in category.getSubcategories()) {
@@ -56,7 +56,7 @@ class JanksonConfigIO: ConfigIO {
         return Pair(obj, category.comment)
     }
 
-    fun serializeOption(option: ConfigOption<*>): Pair<JsonElement, String> {
+    private fun serializeOption(option: ConfigOption<*>): Pair<JsonElement, String> {
         val element = jankson.marshaller.serialize(option.get())
         return Pair(element, option.comment)
     }
