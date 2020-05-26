@@ -51,7 +51,12 @@ class DictionaryConfigOption<V: Any, T: MutableMap<String, V>>(private val valTy
                     return
                 }
             }
-            type.cast(any)
+            value.clear()
+            type.cast(any).forEach { value[it.key] = it.value }
         }
+    }
+
+    fun getValueKClass(): KClass<V> {
+        return valType
     }
 }

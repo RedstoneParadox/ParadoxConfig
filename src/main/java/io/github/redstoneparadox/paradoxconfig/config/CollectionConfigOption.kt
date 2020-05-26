@@ -6,7 +6,7 @@ import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import kotlin.reflect.KClass
 import kotlin.reflect.full.cast
 
-class CollectionConfigOption<T: Any, U: MutableCollection<T>>(private val innerType: KClass<T>, collectionType: KClass<U>, comment: String, key: String, value: U): ConfigOption<U>(collectionType, value, key, comment) {
+class CollectionConfigOption<E: Any, U: MutableCollection<E>>(private val innerType: KClass<E>, collectionType: KClass<U>, comment: String, key: String, value: U): ConfigOption<U>(collectionType, value, key, comment) {
 
     override fun <E: Any> serialize(serializer: ConfigSerializer<E>) {
         val out = serializer.createCollection()
@@ -47,7 +47,12 @@ class CollectionConfigOption<T: Any, U: MutableCollection<T>>(private val innerT
                     return
                 }
             }
-            value = type.cast(any)
+            value.clear()
+            value.addAll(type.cast(any))
         }
+    }
+
+    fun getElementKClass(): KClass<E> {
+        return innerType
     }
 }

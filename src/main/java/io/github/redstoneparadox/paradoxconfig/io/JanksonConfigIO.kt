@@ -1,18 +1,33 @@
 package io.github.redstoneparadox.paradoxconfig.io
 
-import blue.endless.jankson.Jankson
-import blue.endless.jankson.JsonElement
-import blue.endless.jankson.JsonObject
-import blue.endless.jankson.JsonPrimitive
+import blue.endless.jankson.*
 import io.github.cottonmc.jankson.JanksonFactory
+import io.github.redstoneparadox.paradoxconfig.config.CollectionConfigOption
 import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import io.github.redstoneparadox.paradoxconfig.config.ConfigOption
+import io.github.redstoneparadox.paradoxconfig.config.DictionaryConfigOption
 
 class JanksonConfigIO: ConfigIO {
-    private val jankson: Jankson = JanksonFactory.createJankson()
+    private val jankson: Jankson
 
     override val fileExtension: String
         get() = "json5"
+
+    init {
+        val builder = JanksonFactory.builder()
+
+        /*
+        builder
+
+            .registerSerializer(MutableCollection::class.java) { collection, marshaller ->
+                val array = JsonArray()
+                collection.forEach { marshaller.serialize(it) }
+                return@registerSerializer array
+            }
+         */
+
+        jankson = builder.build()
+    }
 
     override fun read(string: String, config: ConfigCategory) {
         val json = jankson.load(string)
@@ -32,8 +47,20 @@ class JanksonConfigIO: ConfigIO {
     }
 
     private fun deserializeOption(json: JsonElement, option: ConfigOption<*>) {
-        val any = jankson.marshaller.marshall(option.getKClass().java, json)
-        option.set(any)
+        if (json is JsonArray && option is CollectionConfigOption<*, *>) {
+            val collection = mutableListOf<Any>()
+            json.forEach { collection.add(jankson.marshaller.marshall(option.getElementKClass().java, it)) }
+            option.set(collection)
+        }
+        else if (json is JsonObject && option is DictionaryConfigOption<*, *>) {
+            val map = mutableMapOf<String, Any>()
+            json.forEach { map[it.key] = jankson.marshaller.marshall(option.getValueKClass().java, it.value) }
+            option.set(map)
+        }
+        else {
+            val any = jankson.marshaller.marshall(option.getKClass().java, json)
+            option.set(any)
+        }
     }
 
     override fun write(config: ConfigCategory): String {
@@ -57,7 +84,20 @@ class JanksonConfigIO: ConfigIO {
     }
 
     private fun serializeOption(option: ConfigOption<*>): Pair<JsonElement, String> {
-        val element = jankson.marshaller.serialize(option.get())
+        val any = option.get()
+
+        if (any is Collection<*>) {
+            val array = JsonArray()
+            any.forEach { array.add(jankson.marshaller.serialize(it)) }
+            return Pair(array, option.comment)
+        }
+        if (any is Map<*, *>) {
+            val obj = JsonObject()
+            any.keys.forEach { if (it is String) { obj[it] = jankson.marshaller.serialize(any[it]) } }
+            return Pair(obj, option.comment)
+        }
+
+        val element = jankson.marshaller.serialize(any)
         return Pair(element, option.comment)
     }
 }
