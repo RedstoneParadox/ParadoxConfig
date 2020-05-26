@@ -3,6 +3,7 @@ package io.github.redstoneparadox.paradoxconfig.io
 import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonElement
 import blue.endless.jankson.JsonObject
+import blue.endless.jankson.JsonPrimitive
 import io.github.cottonmc.jankson.JanksonFactory
 import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import io.github.redstoneparadox.paradoxconfig.config.ConfigOption
@@ -14,7 +15,25 @@ class JanksonConfigIO: ConfigIO {
         get() = "json5"
 
     override fun read(string: String, config: ConfigCategory) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val json = jankson.load(string)
+        deserializeCategory(json, config)
+    }
+
+    fun deserializeCategory(json: JsonObject, category: ConfigCategory) {
+        for (subcategory in category.getSubcategories()) {
+            val obj = json[subcategory.key]
+            if (obj is JsonObject) deserializeCategory(obj, subcategory)
+        }
+
+        for (option in category.getOptions()) {
+            val element = json[option.key]
+            if (element != null) deserializeOption(element, option)
+        }
+    }
+
+    fun deserializeOption(json: JsonElement, option: ConfigOption<*>) {
+        val any = jankson.marshaller.marshall(option.getKClass().java, json)
+        option.set(any)
     }
 
     override fun write(config: ConfigCategory): String {
