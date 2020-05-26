@@ -12,6 +12,7 @@ import kotlin.reflect.KClass
  * If you were working with GSON, for example, this would be
  * [com.google.gson.JsonElement].
  */
+@Deprecated("Not used by new serialization system.")
 interface ConfigDeserializer<E: Any> {
     val eClass: KClass<E>
 

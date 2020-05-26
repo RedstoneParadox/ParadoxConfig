@@ -8,6 +8,7 @@ import kotlin.reflect.full.cast
 
 class DictionaryConfigOption<V: Any, T: MutableMap<String, V>>(private val valType: KClass<V>, mapType: KClass<T>, value: T, key: String, comment: String): ConfigOption<T>(mapType, value, key, comment) {
 
+    @Deprecated("Not used by new serialization system.")
     override fun <E: Any> serialize(serializer: ConfigSerializer<E>) {
         val out = serializer.createDictionary()
         for ((string, def) in value) {
@@ -24,6 +25,7 @@ class DictionaryConfigOption<V: Any, T: MutableMap<String, V>>(private val valTy
         }
     }
 
+    @Deprecated("Not used by new serialization system.")
     override fun <E: Any> deserialize(deserializer: ConfigDeserializer<E>) {
         val dictionary = deserializer.readValue(key)
         if (dictionary is Map<*, *>) {

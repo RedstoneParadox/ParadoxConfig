@@ -16,6 +16,7 @@ class RangeConfigOption<T>(type: KClass<T>, value: T, key: String, comment: Stri
         }
     }
 
+    @Deprecated("Not used by new serialization system.")
     override fun <E: Any> deserialize(deserializer: ConfigDeserializer<E>) {
         val any = deserializer.readValue(key)
         if (any != null) {

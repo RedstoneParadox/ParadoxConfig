@@ -14,6 +14,7 @@ import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
  * @property deserializer The [ConfigDeserializer] to use when
  *                        deserializing the config from a file.
  */
+@Deprecated("Not used by new serialization system.", ReplaceWith("ConfigCategory"))
 abstract class RootConfigCategory(val file: String): ConfigCategory() {
     abstract val serializer: ConfigSerializer<*>
     abstract val deserializer: ConfigDeserializer<*>

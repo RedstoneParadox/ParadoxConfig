@@ -7,6 +7,7 @@ import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import java.util.*
 import kotlin.reflect.KClass
 
+@Deprecated("Used by old serialization system.")
 class JanksonConfigSerializer: ConfigSerializer<JsonElement> {
     override val eClass: KClass<JsonElement> = JsonElement::class
 

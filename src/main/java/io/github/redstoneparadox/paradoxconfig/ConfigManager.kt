@@ -10,6 +10,7 @@ import java.io.File
 import java.io.FileNotFoundException
 
 object ConfigManager {
+    @Deprecated("Uses old serialization system.")
     private val OLD_CONFIGS: MutableMap<String, RootConfigCategory> = mutableMapOf()
     private val CONFIGS: MutableMap<String, ConfigCategory> = mutableMapOf()
 

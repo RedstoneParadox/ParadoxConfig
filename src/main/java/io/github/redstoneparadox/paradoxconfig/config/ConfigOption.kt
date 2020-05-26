@@ -30,6 +30,7 @@ open class ConfigOption<T: Any>(protected val type: KClass<T>, protected var val
         return type
     }
 
+    @Deprecated("Not used by new serialization system.")
     internal open fun <E: Any> serialize(serializer: ConfigSerializer<E>) {
         val serialized = serializer.trySerialize(value)
         if (serialized != null) {
@@ -37,6 +38,7 @@ open class ConfigOption<T: Any>(protected val type: KClass<T>, protected var val
         }
     }
 
+    @Deprecated("Not used by new serialization system.")
     internal open fun <E: Any> deserialize(deserializer: ConfigDeserializer<E>) {
         val any = deserializer.readValue(key)
         if (any != null) {

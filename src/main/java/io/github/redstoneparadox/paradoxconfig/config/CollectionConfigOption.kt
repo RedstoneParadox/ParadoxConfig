@@ -8,6 +8,7 @@ import kotlin.reflect.full.cast
 
 class CollectionConfigOption<E: Any, U: MutableCollection<E>>(private val innerType: KClass<E>, collectionType: KClass<U>, comment: String, key: String, value: U): ConfigOption<U>(collectionType, value, key, comment) {
 
+    @Deprecated("Not used by new serialization system.")
     override fun <E: Any> serialize(serializer: ConfigSerializer<E>) {
         val out = serializer.createCollection()
         for (entry in value) {
@@ -24,6 +25,7 @@ class CollectionConfigOption<E: Any, U: MutableCollection<E>>(private val innerT
         }
     }
 
+    @Deprecated("Not used by new serialization system.")
     override fun <E: Any> deserialize(deserializer: ConfigDeserializer<E>) {
         val collection = deserializer.readValue(key)
         if (collection is Collection<*>) {

@@ -10,6 +10,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.full.cast
 
 @Suppress("unused")
+@Deprecated("Used by old serialization system.")
 class JanksonConfigDeserializer: ConfigDeserializer<JsonElement> {
     override val eClass: KClass<JsonElement> = JsonElement::class
 
