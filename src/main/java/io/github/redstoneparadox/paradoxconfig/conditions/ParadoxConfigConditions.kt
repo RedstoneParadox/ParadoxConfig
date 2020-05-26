@@ -5,10 +5,11 @@ import blue.endless.jankson.JsonObject
 import blue.endless.jankson.JsonPrimitive
 import io.github.cottonmc.libcd.api.LibCDInitializer
 import io.github.cottonmc.libcd.api.condition.ConditionManager
+import io.github.redstoneparadox.paradoxconfig.ConfigManager
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.CONFIGS
-import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.MODID
+import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.MOD_ID
 import io.github.redstoneparadox.paradoxconfig.util.compareTo
 
 /**
@@ -16,17 +17,17 @@ import io.github.redstoneparadox.paradoxconfig.util.compareTo
  */
 object ParadoxConfigConditions: LibCDInitializer {
     override fun initConditions(manager: ConditionManager) {
-        manager.registerCondition(Identifier(MODID, "option")) {
+        manager.registerCondition(Identifier(MOD_ID, "option")) {
 
             if (it is JsonObject) {
                 val configID = (it["config"] as? JsonPrimitive)?.value as? String
 
 
-                if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "${MODID}:test.json5") {
+                if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "${MOD_ID}:test.json5") {
                     return@registerCondition false
                 }
                 else if (configID != null) {
-                    val config = CONFIGS[configID]
+                    val config = ConfigManager.getConfig(configID)
                     val value = (it["value"] as? JsonPrimitive)?.value
                     val predicate = (it["predicate"] as? JsonPrimitive)?.value as? String
                     val option = (it["option"] as? JsonPrimitive)?.value as? String
@@ -54,16 +55,16 @@ object ParadoxConfigConditions: LibCDInitializer {
             return@registerCondition false
         }
 
-        manager.registerCondition(Identifier(MODID, "contains")) {
+        manager.registerCondition(Identifier(MOD_ID, "contains")) {
             if (it is JsonObject) {
                 val configID = (it["config"] as? JsonPrimitive)?.value as? String
 
 
-                if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "${MODID}:test.json5") {
+                if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "${MOD_ID}:test.json5") {
                     return@registerCondition false
                 }
                 else if (configID != null) {
-                    val config = CONFIGS[configID]
+                    val config = ConfigManager.getConfig(configID)
                     val contains = (it["contains"] as? JsonArray)
                     val option = (it["option"] as? JsonPrimitive)?.value as? String
 

@@ -5,12 +5,17 @@ import net.fabricmc.loader.api.FabricLoader
 import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
 import io.github.redstoneparadox.paradoxconfig.io.ConfigIO
 import io.github.redstoneparadox.paradoxconfig.util.NewConfigData
+import io.github.redstoneparadox.paradoxconfig.util.ifNull
 import java.io.File
 import java.io.FileNotFoundException
 
 object ConfigManager {
     private val OLD_CONFIGS: MutableMap<String, RootConfigCategory> = mutableMapOf()
     private val CONFIGS: MutableMap<String, ConfigCategory> = mutableMapOf()
+
+    fun getConfig(id: String): ConfigCategory? {
+        return OLD_CONFIGS[id].ifNull(CONFIGS[id])
+    }
 
     internal fun initConfig(rootPackage: String, configNames: Collection<String>, modid: String) {
         for (name in configNames) {
