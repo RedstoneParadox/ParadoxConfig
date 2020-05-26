@@ -14,13 +14,17 @@ object ParadoxConfig: PreLaunchEntrypoint {
 
     @Suppress("unused")
     override fun onPreLaunch() {
-        ConfigIO.addFormat(JanksonConfigIO())
+        val loader = FabricLoader.getInstance()
 
-        for (entrypoint in FabricLoader.getInstance().getEntrypoints("pconfigFormat", ConfigFormatInitializer::class.java)) {
+        if (loader.isModLoaded("jankson")) {
+            ConfigIO.addFormat(JanksonConfigIO())
+        }
+
+        for (entrypoint in loader.getEntrypoints("pconfigFormat", ConfigFormatInitializer::class.java)) {
             entrypoint.initializeConfigFormat()
         }
 
-        for (mod in FabricLoader.getInstance().allMods) {
+        for (mod in loader.allMods) {
             if (mod.metadata.containsCustomValue(MOD_ID)) {
                 val obj = mod.metadata.getCustomValue(MOD_ID).asObject
 
