@@ -6,6 +6,7 @@ import io.github.redstoneparadox.paradoxconfig.config.CollectionConfigOption
 import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import io.github.redstoneparadox.paradoxconfig.config.ConfigOption
 import io.github.redstoneparadox.paradoxconfig.config.DictionaryConfigOption
+import net.minecraft.util.Identifier
 
 class JanksonConfigIO: ConfigIO {
     private val jankson: Jankson
@@ -16,15 +17,24 @@ class JanksonConfigIO: ConfigIO {
     init {
         val builder = JanksonFactory.builder()
 
-        /*
+
         builder
 
+            .registerSerializer(Identifier::class.java) { id, marshaller ->
+                return@registerSerializer marshaller.serialize(id.toString())
+            }
+            .registerDeserializer(String::class.java, Identifier::class.java) { string, marshaller ->
+                return@registerDeserializer Identifier.tryParse(string)
+            }
+
+            /*
             .registerSerializer(MutableCollection::class.java) { collection, marshaller ->
                 val array = JsonArray()
                 collection.forEach { marshaller.serialize(it) }
                 return@registerSerializer array
             }
-         */
+            */
+
 
         jankson = builder.build()
     }

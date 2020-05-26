@@ -3,6 +3,7 @@ package io.github.redstoneparadox.paradoxconfig.config
 import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import io.github.redstoneparadox.paradoxconfig.util.toImmutable
+import net.minecraft.util.Identifier
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1
 import kotlin.reflect.full.declaredMemberProperties
@@ -179,6 +180,7 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
             Char::class -> "any character"
             Byte::class, Short::class, Int::class, Long::class -> "any number"
             Float::class, Double::class -> "any decimal number"
+            Identifier::class -> "any valid 'namespace:path' identifier"
             else -> "unknown"
         }
     }
