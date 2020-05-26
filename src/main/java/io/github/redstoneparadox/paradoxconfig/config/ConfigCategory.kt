@@ -170,7 +170,7 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
     }
 
     @PublishedApi
-    internal inline fun <reified T: Any> getPossibleValues(kclass: KClass<T>): String {
+    internal fun <T: Any> getPossibleValues(kclass: KClass<T>): String {
         return when (kclass) {
             Boolean::class -> "true/false"
             String::class -> "any string"

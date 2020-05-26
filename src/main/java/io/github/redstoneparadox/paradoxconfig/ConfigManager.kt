@@ -44,6 +44,7 @@ object ConfigManager {
                     loadConfig(config, data.modid)
                 }
                 is ConfigCategory -> {
+                    config.init()
                     CONFIGS["${data.modid}:${config.key}"]
                     loadConfig(config, data.modid)
                 }
@@ -94,7 +95,7 @@ object ConfigManager {
         else {
             ParadoxConfig.log("Config file $modid:${config.key} was not found; a new one will be created.")
             try {
-                file.mkdirs()
+                file.createNewFile()
                 file.writeText(configIO.write(config))
             } catch (e: SecurityException) {
                 ParadoxConfig.error("Could not create config file $modid:${config.key} due to security issues.")

@@ -8,7 +8,6 @@ import io.github.cottonmc.libcd.api.condition.ConditionManager
 import io.github.redstoneparadox.paradoxconfig.ConfigManager
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
-import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.CONFIGS
 import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.MOD_ID
 import io.github.redstoneparadox.paradoxconfig.util.compareTo
 
