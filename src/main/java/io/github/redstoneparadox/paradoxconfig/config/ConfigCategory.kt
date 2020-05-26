@@ -9,9 +9,9 @@ import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.isAccessible
 
 /**
- * Inheritors of this class represent a category in your config file. For the
- * root category, please extend [RootConfigCategory] instead so the metadata
- * for saving and loading the config can be provided.
+ * Inheritors of this class represent a category in your config file. When making
+ * the root config category, [key] should represent the full file name + the file
+ * extension of the config file.
  */
 abstract class ConfigCategory(val key : String = "", val comment: String = "") {
 
@@ -21,64 +21,6 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
 
     internal val optionsList: MutableList<ConfigOption<*>> = mutableListOf()
     private val categoryList: MutableList<ConfigCategory> = mutableListOf()
-
-    internal fun init() {
-        val kclass = this::class
-
-        for (innerclass in kclass.nestedClasses) {
-            val category = innerclass.objectInstance
-            if (category is ConfigCategory) {
-                categoriesMap[category.key] = category
-                categoryList.add(category)
-                category.init()
-            }
-        }
-
-        for (property in kclass.declaredMemberProperties) {
-            property.isAccessible = true
-            val delegate = (property as KProperty1<ConfigCategory, *>).getDelegate(this)
-            if (delegate is ConfigOption<*>) {
-                optionsMap[delegate.key] = delegate
-                optionsList.add(delegate)
-            }
-        }
-    }
-
-    fun getSubcategories(): List<ConfigCategory> {
-        return categoryList.toImmutable()
-    }
-
-    fun getOptions(): List<ConfigOption<*>> {
-        return optionsList.toImmutable()
-    }
-
-    internal fun serialize(configSerializer: ConfigSerializer<*>) {
-        if (key.isNotEmpty()) configSerializer.addCategory(key, comment)
-
-        for (option in optionsList) {
-            option.serialize(configSerializer)
-        }
-
-        for (category in categoryList) {
-            category.serialize(configSerializer)
-        }
-
-        if (key.isNotEmpty()) configSerializer.exitCategory()
-    }
-
-    internal fun deserialize(configDeserializer: ConfigDeserializer<*>) {
-        if (key.isNotEmpty()) configDeserializer.enterCategory(key)
-
-        for (option in optionsList) {
-            option.deserialize(configDeserializer)
-        }
-
-        for (category in categoryList) {
-            category.deserialize(configDeserializer)
-        }
-
-        if (key.isNotEmpty()) configDeserializer.exitCategory()
-    }
 
     /**
      * Creates a config option holding a value of type [T].
@@ -140,6 +82,66 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
     protected inline fun <reified  V: Any, reified T: MutableMap<String, V>> option(default: T, key: String, comment: String = ""): DictionaryConfigOption<V, T> {
         val valueClass = V::class
         return DictionaryConfigOption(valueClass, T::class, default, key, "$comment [Keys: any string, Values: ${getPossibleValues(valueClass)}]")
+    }
+
+    internal fun init() {
+        val kclass = this::class
+
+        for (innerclass in kclass.nestedClasses) {
+            val category = innerclass.objectInstance
+            if (category is ConfigCategory) {
+                categoriesMap[category.key] = category
+                categoryList.add(category)
+                category.init()
+            }
+        }
+
+        for (property in kclass.declaredMemberProperties) {
+            property.isAccessible = true
+            val delegate = (property as KProperty1<ConfigCategory, *>).getDelegate(this)
+            if (delegate is ConfigOption<*>) {
+                optionsMap[delegate.key] = delegate
+                optionsList.add(delegate)
+            }
+        }
+    }
+
+    fun getSubcategories(): List<ConfigCategory> {
+        return categoryList.toImmutable()
+    }
+
+    fun getOptions(): List<ConfigOption<*>> {
+        return optionsList.toImmutable()
+    }
+
+    @Deprecated("Not used by new serialization system.")
+    internal fun serialize(configSerializer: ConfigSerializer<*>) {
+        if (key.isNotEmpty()) configSerializer.addCategory(key, comment)
+
+        for (option in optionsList) {
+            option.serialize(configSerializer)
+        }
+
+        for (category in categoryList) {
+            category.serialize(configSerializer)
+        }
+
+        if (key.isNotEmpty()) configSerializer.exitCategory()
+    }
+
+    @Deprecated("Not used by new serialization system.")
+    internal fun deserialize(configDeserializer: ConfigDeserializer<*>) {
+        if (key.isNotEmpty()) configDeserializer.enterCategory(key)
+
+        for (option in optionsList) {
+            option.deserialize(configDeserializer)
+        }
+
+        for (category in categoryList) {
+            category.deserialize(configDeserializer)
+        }
+
+        if (key.isNotEmpty()) configDeserializer.exitCategory()
     }
 
     operator fun get(key: String): Any? {
