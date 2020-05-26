@@ -45,7 +45,7 @@ class JanksonConfigIO: ConfigIO {
 
         for (subcategory in category.getSubcategories()) {
             val pair = serializeCategory(subcategory)
-            obj.put(category.key, pair.first, pair.second)
+            obj.put(subcategory.key, pair.first, pair.second)
         }
 
         for (option in category.getOptions()) {
