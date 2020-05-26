@@ -7,9 +7,9 @@ package io.github.redstoneparadox.paradoxconfig
  * implementations to support new file formats. You should not
  * mess with game state or anything else here.
  *
- * This entrypoint is exposed as [prePConfigLoad] in the mod
+ * This entrypoint is exposed as [pconfigFormat] in the mod
  * json and runs for every environment.
  */
-interface PreConfigLoadEntrypoint {
-    fun onPreConfigLoad()
+interface ConfigFormatInitializer {
+    fun initializeConfigFormat()
 }

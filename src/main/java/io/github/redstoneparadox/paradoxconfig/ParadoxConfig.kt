@@ -12,6 +12,10 @@ object ParadoxConfig: PreLaunchEntrypoint {
 
     @Suppress("unused")
     override fun onPreLaunch() {
+        for (entrypoint in FabricLoader.getInstance().getEntrypoints("pconfigFormat", ConfigFormatInitializer::class.java)) {
+            entrypoint.initializeConfigFormat()
+        }
+
         for (mod in FabricLoader.getInstance().allMods) {
             if (mod.metadata.containsCustomValue(MOD_ID)) {
                 val obj = mod.metadata.getCustomValue(MOD_ID).asObject
