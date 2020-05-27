@@ -35,6 +35,14 @@ class WCardPanel : WPanel(), PageContainer {
         expandToFit(w)
     }
 
+    fun setCard(index: Int, w: WWidget) {
+        children.set(index, w)
+
+        w.setParent(this)
+        w.setLocation(0,0)
+        expandToFit(w)
+    }
+
     fun select(card: Int) {
         require(card >= 0 && card < children.size) { "card must be a valid child index" }
         selectedCard = card
