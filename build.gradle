@@ -18,14 +18,10 @@ minecraft {
 
 repositories {
     maven { url = "http://maven.fabricmc.net/" }
-    maven { url = "https://dl.bintray.com/io.github.redstoneparadox/mods" }
+    maven { url = "https://dl.bintray.com/redstoneparadox/mods/" }
     maven {
         name = 'CottonMC'
         url = 'http://server.bbkr.space:8081/artifactory/libs-release'
-    }
-    maven {
-        name = 'JitPack'
-        url = 'https://jitpack.io'
     }
 }
 
@@ -48,18 +44,10 @@ dependencies {
     modImplementation "io.github.cottonmc:LibGui:${project.libgui_version}"
     modImplementation ("io.github.prospector:modmenu:${project.modmenu_version}")
 
-    /*
-    modImplementation ("com.github.Siphalor:nbt-crafting:1.15-SNAPSHOT") {
-        transitive = false
-    }
-    */
-
-    /*
-    modImplementation("io.github.io.github.redstoneparadox:OakTree:${project.oak_tree_version}") {
+    modImplementation("io.github.redstoneparadox:OakTree:${project.oak_tree_version}") {
         exclude group: 'net.fabricmc.fabric-api'
     }
-    include "io.github.io.github.redstoneparadox:OakTree:${project.oak_tree_version}"
-     */
+    include "io.github.redstoneparadox:OakTree:${project.oak_tree_version}"
 }
 
 processResources {
