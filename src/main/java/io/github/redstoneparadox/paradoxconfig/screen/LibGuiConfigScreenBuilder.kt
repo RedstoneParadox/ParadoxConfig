@@ -11,7 +11,7 @@ import net.minecraft.text.LiteralText
 import org.lwjgl.system.CallbackI
 import java.util.function.Consumer
 
-class LibGuiConfigScreenBuilder: ConfigScreenBuilder() {
+abstract class LibGuiConfigScreenBuilder: ConfigScreenBuilder() {
     override fun createConfigScreen(configs: List<ConfigCategory>): Screen {
         val cardPanel = WCardPanel()
 

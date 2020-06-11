@@ -13,3 +13,4 @@ fun <T> T?.ifNull(t: T): T? {
     if (this == null) return t
     return this
 }
+
