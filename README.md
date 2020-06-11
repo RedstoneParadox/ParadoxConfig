@@ -25,3 +25,5 @@ dependencies {
 	include "io.github.redstoneparadox:paradox-config:VERSION"
 }
 ```
+
+Discord: https://discord.gg/3kAN8vC
