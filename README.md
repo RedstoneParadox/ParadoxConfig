@@ -4,6 +4,7 @@
 
 A lightweight, Kotlin-based config API for Minecraft.
 
+Discord: https://discord.gg/3kAN8vC
 
 ## Adding to your project:
 
@@ -25,5 +26,3 @@ dependencies {
 	include "io.github.redstoneparadox:paradox-config:VERSION"
 }
 ```
-
-Discord: https://discord.gg/3kAN8vC
