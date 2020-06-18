@@ -4,7 +4,7 @@
 
 A lightweight, Kotlin-based config API for Minecraft.
 
-Discord: https://discord.gg/3kAN8vC
+Discord: https://discord.gg/xSZHvCc
 
 ## Adding to your project:
 
