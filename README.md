@@ -19,7 +19,7 @@ repositories {
 dependencies {
   // ...
 
-	modApi("io.github.io.github.redstoneparadox:paradox-config:VERSION") {
+	modApi("io.github.redstoneparadox:paradox-config:VERSION") {
 		exclude group: 'net.fabricmc.fabric-api'
 		exclude group: 'net.fabricmc.fabric-language-kotlin'
 	}
