@@ -47,9 +47,6 @@ dependencies {
     modImplementation ("io.github.prospector:modmenu:${project.modmenu_version}"){
         transitive = false
     }
-    modImplementation ("com.github.Siphalor:nbt-crafting:1.15-SNAPSHOT") {
-        transitive = false
-    }
 }
 
 processResources {

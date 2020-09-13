@@ -5,7 +5,6 @@ import blue.endless.jankson.JsonObject
 import blue.endless.jankson.JsonPrimitive
 import io.github.cottonmc.libcd.api.LibCDInitializer
 import io.github.cottonmc.libcd.api.condition.ConditionManager
-import io.github.cottonmc.libcd.api.tweaker.TweakerManager
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 import redstoneparadox.paradoxconfig.ParadoxConfig.CONFIGS
@@ -16,10 +15,6 @@ import redstoneparadox.paradoxconfig.util.compareTo
  * Created by RedstoneParadox on 11/9/2019.
  */
 object ParadoxConfigCD: LibCDInitializer {
-    override fun initTweakers(manager: TweakerManager) {
-
-    }
-
     override fun initConditions(manager: ConditionManager) {
         manager.registerCondition(Identifier(MODID, "option")) {
 
