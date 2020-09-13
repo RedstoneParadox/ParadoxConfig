@@ -1,4 +1,4 @@
-package redstoneparadox.paradoxconfig.util
+package io.github.redstoneparadox.paradoxconfig.util
 
 /**
  * A hash map that allows for iterating through entries in the

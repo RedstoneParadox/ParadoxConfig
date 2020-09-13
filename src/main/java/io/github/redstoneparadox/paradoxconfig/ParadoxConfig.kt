@@ -1,11 +1,11 @@
-package redstoneparadox.paradoxconfig
+package io.github.redstoneparadox.paradoxconfig
 
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
-import redstoneparadox.paradoxconfig.ParadoxConfig.MODID
-import redstoneparadox.paradoxconfig.config.RootConfigCategory
+import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.MODID
+import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
 import java.io.File
 import java.io.FileNotFoundException
 

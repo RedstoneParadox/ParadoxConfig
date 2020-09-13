@@ -1,4 +1,4 @@
-package redstoneparadox.paradoxconfig.conditions
+package io.github.redstoneparadox.paradoxconfig.conditions
 
 import blue.endless.jankson.JsonArray
 import blue.endless.jankson.JsonObject
@@ -7,9 +7,9 @@ import io.github.cottonmc.libcd.api.LibCDInitializer
 import io.github.cottonmc.libcd.api.condition.ConditionManager
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
-import redstoneparadox.paradoxconfig.ParadoxConfig.CONFIGS
-import redstoneparadox.paradoxconfig.ParadoxConfig.MODID
-import redstoneparadox.paradoxconfig.util.compareTo
+import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.CONFIGS
+import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.MODID
+import io.github.redstoneparadox.paradoxconfig.util.compareTo
 
 /**
  * Created by RedstoneParadox on 11/9/2019.

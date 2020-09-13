@@ -1,9 +1,8 @@
-package redstoneparadox.paradoxconfig.config
+package io.github.redstoneparadox.paradoxconfig.config
 
-import redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
+import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
-import kotlin.reflect.full.cast
 
 class RangeConfigOption<T>(type: KClass<T>, value: T, key: String, comment: String, private val range: ClosedRange<T>): ConfigOption<T>(type, value, key, comment) where T : Any, T: Comparable<T> {
 

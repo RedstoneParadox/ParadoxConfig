@@ -1,4 +1,4 @@
-package redstoneparadox.paradoxconfig.util
+package io.github.redstoneparadox.paradoxconfig.util
 
 /**
  * Created by RedstoneParadox on 11/10/2019.
