@@ -6,6 +6,7 @@ import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
 import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.MODID
 import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
+import io.github.redstoneparadox.paradoxconfig.util.ReflectionUtil
 import java.io.File
 import java.io.FileNotFoundException
 
@@ -62,7 +63,7 @@ object ParadoxConfig: PreLaunchEntrypoint {
         for (data in configData) {
             for (configName in data.configNames) {
                 try {
-                    val config = Class.forName(configName).kotlin.objectInstance
+                    val config = ReflectionUtil.getClassForName(configName)?.kotlin?.objectInstance
 
                     if (config is RootConfigCategory) {
                         config.init()
