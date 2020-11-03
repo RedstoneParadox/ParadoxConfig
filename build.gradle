@@ -92,7 +92,7 @@ bintray {
         name = archivesBaseName
         licenses = ['MIT']
         version {
-            name = "0.3.6-alpha"
+            name = "0.3.7-alpha"
             released = new Date()
             githubRepo = "RedstoneParadox/" + archivesBaseName
         }
