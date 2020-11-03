@@ -18,7 +18,7 @@
 
   "environment": "*",
   "entrypoints": {
-    "libcd": [
+    "libcd:conditions": [
       {
         "adapter": "kotlin",
         "value": "io.github.redstoneparadox.paradoxconfig.conditions.ParadoxConfigCD"

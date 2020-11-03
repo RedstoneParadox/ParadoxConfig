@@ -3,8 +3,8 @@ package io.github.redstoneparadox.paradoxconfig.conditions
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
-import io.github.cottonmc.libcd.api.LibCDInitializer
 import io.github.cottonmc.libcd.api.condition.ConditionManager
+import io.github.cottonmc.libcd.api.init.ConditionInitializer
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.CONFIGS
@@ -15,7 +15,7 @@ import io.github.redstoneparadox.paradoxconfig.util.compareTo
 /**
  * Created by RedstoneParadox on 11/9/2019.
  */
-object ParadoxConfigCD: LibCDInitializer {
+object ParadoxConfigCD: ConditionInitializer {
     override fun initConditions(manager: ConditionManager) {
         manager.registerCondition(Identifier(MODID, "option")) {
 
