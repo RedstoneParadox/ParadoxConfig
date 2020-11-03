@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "pconfig",
-  "version": "0.3.4-alpha",
+  "version": "0.3.6-alpha",
 
   "name": "Paradox Config",
   "description": "A Kotlin-based configuration api for Minecraft mods.",
