@@ -25,6 +25,9 @@ public class ReflectionUtil {
             return valueField.get(jsonPrimitive);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
+        } catch (SecurityException e) {
+            System.out.println("Unable to access field for config reasons; please report to the Paradox Config issue tracker.");
+            e.printStackTrace();
         }
 
         return null;
