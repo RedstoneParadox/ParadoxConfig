@@ -27,25 +27,25 @@ object ParadoxConfigCD: ConditionInitializer {
                 }
                 else if (configID != null) {
                     val config = CONFIGS[configID]
-                    val value = (it["value"] as? JsonPrimitive)
+                    val primitive = (it["value"] as? JsonPrimitive)
                     val predicate = (it["predicate"] as? JsonPrimitive)?.asString
                     val option = (it["option"] as? JsonPrimitive)?.asString
 
-                    if (config != null && value != null && option != null) {
+                    if (config != null && primitive != null && option != null) {
                         val op = config[option]
                         if (predicate != null) {
                             return@registerCondition when (predicate) {
-                                "==" -> op == value
-                                "!=" -> op != value
-                                "<" -> if (op is Number) op < value.asNumber else false
-                                ">" -> if (op is Number) op > value.asNumber else false
-                                "<=" -> if (op is Number) op <= value.asNumber else false
-                                ">=" -> if (op is Number) op >= value.asNumber else false
+                                "==" -> op == ReflectionUtil.getPrimitiveValue(primitive)
+                                "!=" -> op != ReflectionUtil.getPrimitiveValue(primitive)
+                                "<" -> if (op is Number) op < primitive.asNumber else false
+                                ">" -> if (op is Number) op > primitive.asNumber else false
+                                "<=" -> if (op is Number) op <= primitive.asNumber else false
+                                ">=" -> if (op is Number) op >= primitive.asNumber else false
                                 else -> false
                             }
                         }
                         else {
-                            return@registerCondition op == value
+                            return@registerCondition op == ReflectionUtil.getPrimitiveValue(primitive)
                         }
                     }
                 }
