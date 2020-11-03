@@ -1,6 +1,6 @@
 # paradox-config
 
-[ ![Download](null/packages/redstoneparadox/mods/paradox-config/images/download.svg?version=0.3.5-alpha) ](https://bintray.com/redstoneparadox/mods/paradox-config/0.3.5-alpha/link)
+[ ![Download](https://api.bintray.com/packages/redstoneparadox/mods/paradox-config/images/download.svg?version=0.3.6-alpha) ](https://bintray.com/redstoneparadox/mods/paradox-config/0.3.6-alpha/link)
 
 A lightweight, Kotlin-based config API for Minecraft.
 
