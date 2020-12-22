@@ -29,6 +29,9 @@ repositories {
         url = 'http://server.bbkr.space:8081/artifactory/libs-release'
     }
     maven {
+        url = "https://ytg1234.github.io/maven"
+    }
+    maven {
         name = 'JitPack'
         url = 'https://jitpack.io'
     }
@@ -53,6 +56,7 @@ dependencies {
     modImplementation ("io.github.prospector:modmenu:${project.modmenu_version}"){
         transitive = false
     }
+    include(modImplementation("io.github.ytg1234:fabric-recipe-conditions:0.3.0"))
 
     afterEvaluate {
         testmodImplementation sourceSets.main.output
