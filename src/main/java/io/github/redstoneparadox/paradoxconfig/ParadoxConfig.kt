@@ -2,7 +2,6 @@ package io.github.redstoneparadox.paradoxconfig
 
 import io.github.redstoneparadox.paradoxconfig.codec.ConfigCodec
 import io.github.redstoneparadox.paradoxconfig.codec.JanksonConfigCodec
-import io.github.redstoneparadox.paradoxconfig.util.NewConfigData
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import org.apache.logging.log4j.LogManager
@@ -32,7 +31,7 @@ object ParadoxConfig: PreLaunchEntrypoint {
                 val classNames = obj.get("configs").asArray.map { it.asString }
                 if (mod.metadata.id == MOD_ID && !FabricLoader.getInstance().isDevelopmentEnvironment) continue
 
-                ConfigManager.initConfig(NewConfigData(rootPackage, classNames, mod.metadata.id))
+                ConfigManager.initConfigs(rootPackage, classNames, mod.metadata.id)
             }
         }
     }

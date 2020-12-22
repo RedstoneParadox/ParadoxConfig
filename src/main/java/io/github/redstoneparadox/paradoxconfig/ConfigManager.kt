@@ -3,8 +3,6 @@ package io.github.redstoneparadox.paradoxconfig
 import io.github.redstoneparadox.paradoxconfig.codec.ConfigCodec
 import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
-import io.github.redstoneparadox.paradoxconfig.util.NewConfigData
-import io.github.redstoneparadox.paradoxconfig.util.ReflectionUtil
 import io.github.redstoneparadox.paradoxconfig.util.ifNull
 import net.fabricmc.loader.api.FabricLoader
 import java.io.File
@@ -19,7 +17,7 @@ object ConfigManager {
         return OLD_CONFIGS[id].ifNull(CONFIGS[id])
     }
 
-    internal fun initConfig(rootPackage: String, configNames: Collection<String>, modid: String) {
+    internal fun initConfigs(rootPackage: String, configNames: Collection<String>, modid: String) {
         for (name in configNames) {
             val className = "${rootPackage}.$name"
 
@@ -31,27 +29,6 @@ object ConfigManager {
                 }
                 null -> ParadoxConfig.error("$className could not be found.")
                 else -> ParadoxConfig.error("$className does not extend RootConfigCategory")
-            }
-        }
-    }
-
-    internal fun initConfig(data: NewConfigData) {
-        for (name in data.configNames) {
-            val className = "${data.rootPackage}.$name"
-
-            when (val config = ReflectionUtil.getClassForName(className)?.kotlin?.objectInstance) {
-                is RootConfigCategory -> {
-                    config.init()
-                    OLD_CONFIGS["${data.modid}:${config.file}"] = config
-                    loadConfig(config, data.modid)
-                }
-                is ConfigCategory -> {
-                    config.init()
-                    CONFIGS["${data.modid}:${config.key}"]
-                    loadConfig(config, data.modid)
-                }
-                null -> ParadoxConfig.error("$className could not be found.")
-                else -> ParadoxConfig.error("$className does not extend ConfigCategory")
             }
         }
     }
