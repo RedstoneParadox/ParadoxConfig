@@ -15,6 +15,12 @@ group = project.maven_group
 minecraft {
 }
 
+sourceSets {
+    testmod {
+        compileClasspath += main.compileClasspath
+        runtimeClasspath += main.runtimeClasspath
+    }
+}
 
 repositories {
     maven { url = "http://maven.fabricmc.net/" }
@@ -46,6 +52,10 @@ dependencies {
     modImplementation "io.github.cottonmc:LibCD:${project.libcd_version}"
     modImplementation ("io.github.prospector:modmenu:${project.modmenu_version}"){
         transitive = false
+    }
+
+    afterEvaluate {
+        testmodImplementation sourceSets.main.output
     }
 }
 
@@ -134,3 +144,9 @@ publishing {
 }
 
 compileKotlin.kotlinOptions.jvmTarget = "1.8"
+
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+tasks.withType(KotlinCompile) {
+    kotlinOptions.jvmTarget = "1.8"
+}

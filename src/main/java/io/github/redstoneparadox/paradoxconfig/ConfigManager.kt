@@ -97,10 +97,14 @@ object ConfigManager {
         else {
             ParadoxConfig.log("Config file $modid:${config.key} was not found; a new one will be created.")
             try {
+                file.parentFile.mkdirs()
                 file.createNewFile()
                 file.writeText(configIO.encode(config))
             } catch (e: SecurityException) {
                 ParadoxConfig.error("Could not create config file $modid:${config.key} due to security issues.")
+                e.printStackTrace()
+            } catch (e: Exception) {
+                ParadoxConfig.error("Could not create config file $modid:${config.key} due to an exception.")
                 e.printStackTrace()
             }
         }

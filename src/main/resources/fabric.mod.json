@@ -27,7 +27,7 @@
     "libcd": [
       {
         "adapter": "kotlin",
-        "value": "io.github.redstoneparadox.paradoxconfig.conditions.ParadoxConfigConditions"
+        "value": "io.github.redstoneparadox.paradoxconfig.compat.ParadoxConfigConditions"
       }
     ]
   },
@@ -37,12 +37,5 @@
   "depends": {
     "fabricloader": ">=0.4.0",
     "fabric-language-kotlin": ">=1.3.71"
-  },
-
-  "custom": {
-    "pconfig": {
-      "package": "io.github.redstoneparadox.paradoxconfig.example",
-      "configs": ["ExampleConfig"]
-    }
   }
 }

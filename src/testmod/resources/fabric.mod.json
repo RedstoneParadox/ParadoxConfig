@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "pconfig_test",
+  "version": "${version}",
+
+  "name": "Paradox Config Test Mod",
+  "description": "Testmod for ParadoxConfig.",
+  "authors": [
+    "RedstoneParadox"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/RedstoneParadox/paradox-config"
+  },
+
+  "license": "MIT",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+  },
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric-language-kotlin": ">=1.3.71"
+  },
+
+  "custom": {
+    "pconfig": {
+      "package": "io.github.redstoneparadox.paradoxconfig",
+      "configs": ["ExampleConfig"]
+    }
+  }
+}

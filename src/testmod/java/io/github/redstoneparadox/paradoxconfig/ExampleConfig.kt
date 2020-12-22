@@ -1,4 +1,4 @@
-package io.github.redstoneparadox.paradoxconfig.example
+package io.github.redstoneparadox.paradoxconfig
 
 import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import net.minecraft.util.Identifier
