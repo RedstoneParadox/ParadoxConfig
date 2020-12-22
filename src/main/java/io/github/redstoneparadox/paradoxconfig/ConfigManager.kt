@@ -14,7 +14,7 @@ object ConfigManager {
     private val CONFIGS: MutableMap<String, ConfigCategory> = mutableMapOf()
 
     fun getConfig(id: String): ConfigCategory? {
-        return OLD_CONFIGS[id].ifNull(CONFIGS[id])
+        return OLD_CONFIGS[id] ?: CONFIGS[id]
     }
 
     internal fun initConfigs(rootPackage: String, configNames: Collection<String>, modid: String) {
@@ -22,13 +22,19 @@ object ConfigManager {
             val className = "${rootPackage}.$name"
 
             when (val config = Class.forName(className).kotlin.objectInstance) {
+                is ConfigCategory -> {
+                    config.init()
+                    CONFIGS["$modid:${config.key}"] = config
+                    loadConfig(config, modid)
+                }
                 is RootConfigCategory -> {
                     config.init()
                     OLD_CONFIGS["$modid:${config.file}"] = config
                     loadConfig(config, modid)
+                    ParadoxConfig.warn("$className extends RootConfigCategory, which is deprecated.")
                 }
                 null -> ParadoxConfig.error("$className could not be found.")
-                else -> ParadoxConfig.error("$className does not extend RootConfigCategory")
+                else -> ParadoxConfig.error("$className does not extend ConfigCategory")
             }
         }
     }
