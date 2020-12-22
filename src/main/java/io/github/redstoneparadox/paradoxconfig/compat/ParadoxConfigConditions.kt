@@ -1,4 +1,4 @@
-package io.github.redstoneparadox.paradoxconfig.conditions
+package io.github.redstoneparadox.paradoxconfig.compat
 
 import blue.endless.jankson.JsonArray
 import blue.endless.jankson.JsonObject

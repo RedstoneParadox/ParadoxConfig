@@ -19,7 +19,7 @@ class JanksonConfigCodec: ConfigCodec {
 
 
         builder
-            
+
             .registerSerializer(Identifier::class.java) { id, marshaller ->
                 return@registerSerializer marshaller.serialize(id.toString())
             }
