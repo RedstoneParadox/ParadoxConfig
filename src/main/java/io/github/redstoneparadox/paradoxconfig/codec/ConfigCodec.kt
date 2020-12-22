@@ -28,7 +28,7 @@ interface ConfigCodec {
             val ext = configCodec.fileExtension
 
             if (CODECS.containsKey(ext)) {
-                throw Exception("ConfigIO for file format $ext was already registered!")
+                throw Exception("ConfigCodec for file format $ext was already registered!")
             }
 
             CODECS[configCodec.fileExtension] = configCodec
