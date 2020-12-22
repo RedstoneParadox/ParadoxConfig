@@ -1,11 +1,13 @@
 package io.github.redstoneparadox.paradoxconfig.serialization.jankson
 
-import blue.endless.jankson.*
+import blue.endless.jankson.JsonElement
+import blue.endless.jankson.JsonObject
+import blue.endless.jankson.JsonPrimitive
 import blue.endless.jankson.api.SyntaxError
 import io.github.cottonmc.jankson.JanksonFactory
-import net.minecraft.util.Identifier
 import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
-import java.util.Stack
+import net.minecraft.util.Identifier
+import java.util.*
 import kotlin.reflect.KClass
 import kotlin.reflect.full.cast
 

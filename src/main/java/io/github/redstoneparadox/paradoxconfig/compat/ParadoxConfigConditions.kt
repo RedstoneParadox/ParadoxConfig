@@ -6,11 +6,11 @@ import com.google.gson.JsonPrimitive
 import io.github.cottonmc.libcd.api.LibCDInitializer
 import io.github.cottonmc.libcd.api.condition.ConditionManager
 import io.github.redstoneparadox.paradoxconfig.ConfigManager
-import net.fabricmc.loader.api.FabricLoader
-import net.minecraft.util.Identifier
 import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.MOD_ID
 import io.github.redstoneparadox.paradoxconfig.util.ReflectionUtil
 import io.github.redstoneparadox.paradoxconfig.util.compareTo
+import net.fabricmc.loader.api.FabricLoader
+import net.minecraft.util.Identifier
 
 /**
  * Created by RedstoneParadox on 11/9/2019.

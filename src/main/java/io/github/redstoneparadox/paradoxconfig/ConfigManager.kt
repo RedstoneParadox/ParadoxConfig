@@ -1,12 +1,12 @@
 package io.github.redstoneparadox.paradoxconfig
 
-import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
-import net.fabricmc.loader.api.FabricLoader
-import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
 import io.github.redstoneparadox.paradoxconfig.codec.ConfigCodec
+import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
+import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
 import io.github.redstoneparadox.paradoxconfig.util.NewConfigData
 import io.github.redstoneparadox.paradoxconfig.util.ReflectionUtil
 import io.github.redstoneparadox.paradoxconfig.util.ifNull
+import net.fabricmc.loader.api.FabricLoader
 import java.io.File
 import java.io.FileNotFoundException
 

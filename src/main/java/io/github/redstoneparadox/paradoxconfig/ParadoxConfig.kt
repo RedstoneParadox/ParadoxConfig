@@ -2,10 +2,10 @@ package io.github.redstoneparadox.paradoxconfig
 
 import io.github.redstoneparadox.paradoxconfig.codec.ConfigCodec
 import io.github.redstoneparadox.paradoxconfig.codec.JanksonConfigCodec
+import io.github.redstoneparadox.paradoxconfig.util.NewConfigData
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import org.apache.logging.log4j.LogManager
-import io.github.redstoneparadox.paradoxconfig.util.NewConfigData
 
 object ParadoxConfig: PreLaunchEntrypoint {
     const val MOD_ID: String = "pconfig"

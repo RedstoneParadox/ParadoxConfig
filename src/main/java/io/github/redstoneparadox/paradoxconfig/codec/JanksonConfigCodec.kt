@@ -1,6 +1,9 @@
 package io.github.redstoneparadox.paradoxconfig.codec
 
-import blue.endless.jankson.*
+import blue.endless.jankson.Jankson
+import blue.endless.jankson.JsonArray
+import blue.endless.jankson.JsonElement
+import blue.endless.jankson.JsonObject
 import io.github.cottonmc.jankson.JanksonFactory
 import io.github.redstoneparadox.paradoxconfig.config.CollectionConfigOption
 import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
