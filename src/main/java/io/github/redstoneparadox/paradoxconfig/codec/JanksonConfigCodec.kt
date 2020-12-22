@@ -1,4 +1,4 @@
-package io.github.redstoneparadox.paradoxconfig.io
+package io.github.redstoneparadox.paradoxconfig.codec
 
 import blue.endless.jankson.*
 import io.github.cottonmc.jankson.JanksonFactory
@@ -8,7 +8,7 @@ import io.github.redstoneparadox.paradoxconfig.config.ConfigOption
 import io.github.redstoneparadox.paradoxconfig.config.DictionaryConfigOption
 import net.minecraft.util.Identifier
 
-class JanksonConfigIO: ConfigIO {
+class JanksonConfigCodec: ConfigCodec {
     private val jankson: Jankson
 
     override val fileExtension: String
@@ -19,7 +19,7 @@ class JanksonConfigIO: ConfigIO {
 
 
         builder
-
+            
             .registerSerializer(Identifier::class.java) { id, marshaller ->
                 return@registerSerializer marshaller.serialize(id.toString())
             }

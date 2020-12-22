@@ -55,7 +55,7 @@ object ParadoxConfigConditions: LibCDInitializer {
         manager.registerCondition(Identifier(MOD_ID, "contains")) {
             if (it is JsonObject) {
                 val configID = (it["config"] as? JsonPrimitive)?.value as? String
-                
+
                 if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "${MOD_ID}:test.json5") {
                     return@registerCondition false
                 }

@@ -1,4 +1,4 @@
-package io.github.redstoneparadox.paradoxconfig.io
+package io.github.redstoneparadox.paradoxconfig.codec
 
 import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import io.github.redstoneparadox.paradoxconfig.util.unwrap
@@ -10,11 +10,10 @@ import io.github.redstoneparadox.paradoxconfig.util.unwrap
  * Implementors should not do any saving or loading
  * themselves.
  */
-interface ConfigIO {
-
+interface ConfigCodec {
     /**
      * Function to get the file extension
-     * for this ConfigIO.
+     * for this ConfigCodec.
      */
     val fileExtension: String
 
@@ -23,19 +22,19 @@ interface ConfigIO {
     fun write(config: ConfigCategory): String
 
     companion object {
-        private val FORMATS: MutableMap<String, ConfigIO> = mutableMapOf()
+        private val FORMATS: MutableMap<String, ConfigCodec> = mutableMapOf()
 
-        fun addFormat(configIO: ConfigIO) {
-            val ext = configIO.fileExtension
+        fun addFormat(configCodec: ConfigCodec) {
+            val ext = configCodec.fileExtension
 
             if (FORMATS.containsKey(ext)) {
                 throw Exception("ConfigIO for file format $ext was already registered!")
             }
 
-            FORMATS[configIO.fileExtension] = configIO
+            FORMATS[configCodec.fileExtension] = configCodec
         }
 
-        fun getConfigIO(ext: String): ConfigIO {
+        fun getConfigIO(ext: String): ConfigCodec {
             return FORMATS[ext].unwrap(Exception("ConfigIO for file format $ext was never registered!"))
         }
     }

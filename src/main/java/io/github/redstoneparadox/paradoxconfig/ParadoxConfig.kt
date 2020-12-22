@@ -1,7 +1,7 @@
 package io.github.redstoneparadox.paradoxconfig
 
-import io.github.redstoneparadox.paradoxconfig.io.ConfigIO
-import io.github.redstoneparadox.paradoxconfig.io.JanksonConfigIO
+import io.github.redstoneparadox.paradoxconfig.codec.ConfigCodec
+import io.github.redstoneparadox.paradoxconfig.codec.JanksonConfigCodec
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import org.apache.logging.log4j.LogManager
@@ -17,7 +17,7 @@ object ParadoxConfig: PreLaunchEntrypoint {
         val loader = FabricLoader.getInstance()
 
         if (loader.isModLoaded("jankson")) {
-            ConfigIO.addFormat(JanksonConfigIO())
+            ConfigCodec.addFormat(JanksonConfigCodec())
         }
 
         for (entrypoint in loader.getEntrypoints("pconfigFormat", ConfigFormatInitializer::class.java)) {

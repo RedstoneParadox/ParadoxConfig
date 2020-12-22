@@ -3,7 +3,7 @@ package io.github.redstoneparadox.paradoxconfig
 import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import net.fabricmc.loader.api.FabricLoader
 import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
-import io.github.redstoneparadox.paradoxconfig.io.ConfigIO
+import io.github.redstoneparadox.paradoxconfig.codec.ConfigCodec
 import io.github.redstoneparadox.paradoxconfig.util.NewConfigData
 import io.github.redstoneparadox.paradoxconfig.util.ReflectionUtil
 import io.github.redstoneparadox.paradoxconfig.util.ifNull
@@ -81,7 +81,7 @@ object ConfigManager {
 
     private fun loadConfig(config: ConfigCategory, modid: String) {
         val ext = config.key.split('.').last()
-        val configIO = ConfigIO.getConfigIO(ext)
+        val configIO = ConfigCodec.getConfigIO(ext)
         val file = File(FabricLoader.getInstance().configDirectory, "${modid}/${config.key}")
 
         if (file.exists()) {
