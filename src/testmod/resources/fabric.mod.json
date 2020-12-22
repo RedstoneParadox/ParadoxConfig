@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "pconfig_test",
+  "id": "goconfigure_test",
   "version": "${version}",
 
-  "name": "Paradox Config Test Mod",
-  "description": "Test Mod for ParadoxConfig.",
+  "name": "Go Configure Test Mod",
+  "description": "Test Mod for Go Configure.",
   "authors": [
     "RedstoneParadox"
   ],
@@ -21,7 +21,7 @@
     "main": [
       {
         "adapter": "kotlin",
-        "value": "io.github.redstoneparadox.paradoxconfig.ParadoxConfigTest"
+        "value": "io.github.redstoneparadox.goconfigure.ParadoxConfigTest"
       }
     ]
   },
@@ -32,7 +32,7 @@
 
   "custom": {
     "pconfig": {
-      "package": "io.github.redstoneparadox.paradoxconfig",
+      "package": "io.github.redstoneparadox.goconfigure",
       "configs": ["ExampleConfig"]
     }
   }
