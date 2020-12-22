@@ -68,6 +68,7 @@ object ParadoxConfig: PreLaunchEntrypoint {
                     if (config is RootConfigCategory) {
                         config.init()
                         CONFIGS["${data.modid}:${config.file}"] = config
+                        println(CONFIGS.entries)
                         loadConfig(config, data.modid)
                     }
                     else {
