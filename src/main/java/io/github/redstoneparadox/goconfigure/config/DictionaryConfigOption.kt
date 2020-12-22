@@ -1,8 +1,8 @@
 package io.github.redstoneparadox.goconfigure.config
 
 import io.github.redstoneparadox.goconfigure.GoConfigure
-import io.github.redstoneparadox.goconfigure.serialization.ConfigDeserializer
-import io.github.redstoneparadox.goconfigure.serialization.ConfigSerializer
+import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
+import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import kotlin.reflect.KClass
 import kotlin.reflect.full.cast
 

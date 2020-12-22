@@ -5,7 +5,7 @@ import blue.endless.jankson.JsonElement
 import blue.endless.jankson.JsonObject
 import blue.endless.jankson.JsonPrimitive
 import io.github.cottonmc.jankson.JanksonFactory
-import io.github.redstoneparadox.goconfigure.serialization.ConfigSerializer
+import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import net.minecraft.util.Identifier
 import java.util.*
 import kotlin.reflect.KClass
