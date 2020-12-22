@@ -1,8 +1,8 @@
 package io.github.redstoneparadox.goconfigure.config
 
-import io.github.goconfigure.paradoxconfig.serialization.ConfigDeserializer
-import io.github.goconfigure.paradoxconfig.serialization.ConfigSerializer
-import io.github.goconfigure.paradoxconfig.util.toImmutable
+import io.github.redstoneparadox.goconfigure.serialization.ConfigDeserializer
+import io.github.redstoneparadox.goconfigure.serialization.ConfigSerializer
+import io.github.redstoneparadox.goconfigure.util.toImmutable
 import net.minecraft.util.Identifier
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1

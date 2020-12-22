@@ -5,10 +5,10 @@ import blue.endless.jankson.JsonArray
 import blue.endless.jankson.JsonElement
 import blue.endless.jankson.JsonObject
 import io.github.cottonmc.jankson.JanksonFactory
-import io.github.goconfigure.paradoxconfig.config.CollectionConfigOption
-import io.github.goconfigure.paradoxconfig.config.ConfigCategory
-import io.github.goconfigure.paradoxconfig.config.ConfigOption
-import io.github.goconfigure.paradoxconfig.config.DictionaryConfigOption
+import io.github.redstoneparadox.goconfigure.config.CollectionConfigOption
+import io.github.redstoneparadox.goconfigure.config.ConfigCategory
+import io.github.redstoneparadox.goconfigure.config.ConfigOption
+import io.github.redstoneparadox.goconfigure.config.DictionaryConfigOption
 
 class JanksonConfigCodec: ConfigCodec {
     private val jankson: Jankson

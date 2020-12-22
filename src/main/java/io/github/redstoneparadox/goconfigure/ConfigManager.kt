@@ -1,8 +1,8 @@
 package io.github.redstoneparadox.goconfigure
 
-import io.github.goconfigure.paradoxconfig.codec.ConfigCodec
-import io.github.goconfigure.paradoxconfig.config.ConfigCategory
-import io.github.goconfigure.paradoxconfig.config.RootConfigCategory
+import io.github.redstoneparadox.goconfigure.codec.ConfigCodec
+import io.github.redstoneparadox.goconfigure.config.ConfigCategory
+import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
 import net.fabricmc.loader.api.FabricLoader
 import java.io.File
 import java.io.FileNotFoundException

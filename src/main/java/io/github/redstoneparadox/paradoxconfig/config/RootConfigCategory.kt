@@ -1,7 +1,7 @@
 package io.github.redstoneparadox.paradoxconfig.config
 
-import io.github.goconfigure.paradoxconfig.serialization.ConfigDeserializer
-import io.github.goconfigure.paradoxconfig.serialization.ConfigSerializer
+import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
+import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import io.github.redstoneparadox.goconfigure.config.ConfigCategory
 
 /**

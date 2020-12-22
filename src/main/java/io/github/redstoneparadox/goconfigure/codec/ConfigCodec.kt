@@ -1,7 +1,7 @@
 package io.github.redstoneparadox.goconfigure.codec
 
-import io.github.goconfigure.paradoxconfig.config.ConfigCategory
-import io.github.goconfigure.paradoxconfig.util.unwrap
+import io.github.redstoneparadox.goconfigure.config.ConfigCategory
+import io.github.redstoneparadox.goconfigure.util.unwrap
 
 /**
  * Classes that implement this interface are used to read

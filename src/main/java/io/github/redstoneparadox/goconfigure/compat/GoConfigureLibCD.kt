@@ -5,10 +5,10 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import io.github.cottonmc.libcd.api.LibCDInitializer
 import io.github.cottonmc.libcd.api.condition.ConditionManager
-import io.github.goconfigure.paradoxconfig.ConfigManager
-import io.github.goconfigure.paradoxconfig.GoConfigure.MOD_ID
+import io.github.redstoneparadox.goconfigure.ConfigManager
+import io.github.redstoneparadox.goconfigure.GoConfigure.MOD_ID
 import io.github.redstoneparadox.goconfigure.util.ReflectionUtil
-import io.github.goconfigure.paradoxconfig.util.compareTo
+import io.github.redstoneparadox.goconfigure.util.compareTo
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 

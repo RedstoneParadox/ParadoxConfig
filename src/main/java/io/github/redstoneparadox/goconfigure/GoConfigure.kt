@@ -1,15 +1,15 @@
 package io.github.redstoneparadox.goconfigure
 
-import io.github.goconfigure.paradoxconfig.codec.ConfigCodec
-import io.github.goconfigure.paradoxconfig.codec.JanksonConfigCodec
+import io.github.redstoneparadox.goconfigure.codec.ConfigCodec
+import io.github.redstoneparadox.goconfigure.codec.JanksonConfigCodec
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import org.apache.logging.log4j.LogManager
 
 object GoConfigure: PreLaunchEntrypoint {
-    const val MOD_ID: String = "pconfig"
+    const val MOD_ID: String = "goconfigure"
     private val LOGGER = LogManager.getFormatterLogger(MOD_ID)
-    private const val MOD_NAME = "ParadoxConfig"
+    private const val MOD_NAME = "Go Configure"
 
     @Suppress("unused")
     override fun onPreLaunch() {

@@ -2,10 +2,9 @@ package io.github.redstoneparadox.goconfigure.compat
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonPrimitive
-import io.github.goconfigure.paradoxconfig.ConfigManager
-import io.github.goconfigure.paradoxconfig.GoConfigure
-import io.github.redstoneparadox.goconfigure.util.ReflectionUtil
-import io.github.goconfigure.paradoxconfig.util.compareTo
+import io.github.redstoneparadox.goconfigure.ConfigManager
+import io.github.redstoneparadox.goconfigure.GoConfigure
+import io.github.redstoneparadox.goconfigure.util.compareTo
 import io.github.ytg1234.recipeconditions.api.RecipeConds
 import io.github.ytg1234.recipeconditions.api.condition.base.RecipeCondition
 import net.fabricmc.api.ModInitializer
