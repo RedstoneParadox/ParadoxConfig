@@ -1,4 +1,4 @@
-package io.github.redstoneparadox.goconfigure.serialization.jankson
+package io.github.redstoneparadox.paradoxconfig.serialization.jankson
 
 import blue.endless.jankson.JsonElement
 import blue.endless.jankson.JsonObject

@@ -1,4 +1,4 @@
-package io.github.redstoneparadox.goconfigure.serialization
+package io.github.redstoneparadox.paradoxconfig.serialization
 
 import kotlin.reflect.KClass
 
