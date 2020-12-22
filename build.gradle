@@ -1,8 +1,8 @@
 plugins {
     id 'fabric-loom'
     id 'maven-publish'
-    id "com.jfrog.bintray" version "1.7.3"
     id "org.jetbrains.kotlin.jvm"
+    id "com.jfrog.bintray" version "1.8.5"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -18,21 +18,24 @@ minecraft {
 
 repositories {
     maven { url = "http://maven.fabricmc.net/" }
-    maven { url = "https://dl.bintray.com/redstoneparadox/mods/" }
     maven {
         name = 'CottonMC'
         url = 'http://server.bbkr.space:8081/artifactory/libs-release'
+    }
+    maven {
+        name = 'JitPack'
+        url = 'https://jitpack.io'
     }
 }
 
 dependencies {
     //to change the versions see the gradle.properties file
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     // Fabric API. This is technically optional, but you probably want it anyway.
-    // modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
@@ -40,14 +43,11 @@ dependencies {
     // You may need to force-disable transitiveness on them.
 
     modImplementation "io.github.cottonmc:Jankson-Fabric:${project.jankson_version}"
-    modCompileOnly "io.github.cottonmc:LibCD:${project.libcd_version}"
-    modImplementation "io.github.cottonmc:LibGui:${project.libgui_version}"
-    modImplementation ("io.github.prospector:modmenu:${project.modmenu_version}")
-
-    modImplementation("io.github.redstoneparadox:OakTree:${project.oak_tree_version}") {
-        exclude group: 'net.fabricmc.fabric-api'
+    modImplementation "io.github.cottonmc:LibCD:${project.libcd_version}"
+    // modImplementation ("io.github.cottonmc:LibGui:${project.libgui_version}")
+    modImplementation ("io.github.prospector:modmenu:${project.modmenu_version}"){
+        transitive = false
     }
-    include "io.github.redstoneparadox:OakTree:${project.oak_tree_version}"
 }
 
 processResources {
@@ -85,14 +85,16 @@ jar {
 bintray {
     user = System.getenv('BINTRAY_USER')
     key = System.getenv('BINTRAY_KEY')
-    publications = ['MyPublication']
+    setPublications("bintray")
+    publish = true
     pkg {
-        repo = 'mods'
-        name = 'paradox-config'
+        repo = "mods"
+        name = archivesBaseName
         licenses = ['MIT']
-        vcsUrl = 'https://github.com/RedstoneParadox/paradox-config.git'
         version {
-            name = project.mod_version
+            name = "0.3.6-alpha"
+            released = new Date()
+            githubRepo = "RedstoneParadox/" + archivesBaseName
         }
     }
 }
@@ -100,19 +102,6 @@ bintray {
 // configure the maven publication
 publishing {
     publications {
-        MyPublication(MavenPublication) {
-
-            groupId project.maven_group
-            artifactId project.archives_base_name
-            version project.version
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-        }
-
         mavenJava(MavenPublication) {
             // add all the jars that should be included when publishing to maven
             artifact(remapJar) {
@@ -122,11 +111,26 @@ publishing {
                 builtBy remapSourcesJar
             }
         }
+
+        bintray(MavenPublication) {
+            groupId(group)
+            artifactId(archivesBaseName)
+            version(version)
+
+            artifact(remapJar) {
+                builtBy remapJar
+            }
+
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+        }
     }
 
     // select the repositories you want to publish to
     repositories {
-        mavenLocal()
+        // uncomment to publish to the local maven
+        // mavenLocal()
     }
 }
 

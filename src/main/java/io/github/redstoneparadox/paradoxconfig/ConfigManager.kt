@@ -5,6 +5,7 @@ import net.fabricmc.loader.api.FabricLoader
 import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
 import io.github.redstoneparadox.paradoxconfig.io.ConfigIO
 import io.github.redstoneparadox.paradoxconfig.util.NewConfigData
+import io.github.redstoneparadox.paradoxconfig.util.ReflectionUtil
 import io.github.redstoneparadox.paradoxconfig.util.ifNull
 import java.io.File
 import java.io.FileNotFoundException
@@ -38,7 +39,7 @@ object ConfigManager {
         for (name in data.configNames) {
             val className = "${data.rootPackage}.$name"
 
-            when (val config = Class.forName(className).kotlin.objectInstance) {
+            when (val config = ReflectionUtil.getClassForName(className)?.kotlin?.objectInstance) {
                 is RootConfigCategory -> {
                     config.init()
                     OLD_CONFIGS["${data.modid}:${config.file}"] = config
@@ -50,7 +51,7 @@ object ConfigManager {
                     loadConfig(config, data.modid)
                 }
                 null -> ParadoxConfig.error("$className could not be found.")
-                else -> ParadoxConfig.error("$className does not extend RootConfigCategory")
+                else -> ParadoxConfig.error("$className does not extend ConfigCategory")
             }
         }
     }
