@@ -1,8 +1,8 @@
-# paradox-config
+# Go Configure
 
 [ ![Download](https://api.bintray.com/packages/redstoneparadox/mods/paradox-config/images/download.svg?version=0.3.6-alpha) ](https://bintray.com/redstoneparadox/mods/paradox-config/0.3.6-alpha/link)
 
-A lightweight, Kotlin-based config API for Minecraft.
+A lightweight, Kotlin-based config API for Minecraft, formerly known as Paradox Config.
 
 Discord: https://discord.gg/xSZHvCc
 
