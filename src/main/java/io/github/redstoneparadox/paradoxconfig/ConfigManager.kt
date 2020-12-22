@@ -39,6 +39,7 @@ object ConfigManager {
         }
     }
 
+    @Deprecated("Uses old serialization system.")
     private fun loadConfig(config: RootConfigCategory, modid: String) {
         val serializer = config.serializer
         val deserializer = config.deserializer
