@@ -16,7 +16,7 @@ object ParadoxConfig: PreLaunchEntrypoint {
         val loader = FabricLoader.getInstance()
 
         if (loader.isModLoaded("jankson")) {
-            ConfigCodec.addFormat(JanksonConfigCodec())
+            ConfigCodec.addCodec(JanksonConfigCodec())
         }
 
         for (entrypoint in loader.getEntrypoints("pconfigFormat", ConfigFormatInitializer::class.java)) {

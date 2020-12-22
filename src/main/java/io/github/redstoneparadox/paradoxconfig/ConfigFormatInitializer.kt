@@ -3,7 +3,7 @@ package io.github.redstoneparadox.paradoxconfig
 /**
  * Entrypoint invoked before Paradox Config loads config files.
  *
- * This entrypoint should be used only for [ConfigIO]
+ * This entrypoint should be used only for [io.github.redstoneparadox.paradoxconfig.codec.ConfigCodec]
  * implementations to support new file formats. You should not
  * mess with game state or anything else here.
  *

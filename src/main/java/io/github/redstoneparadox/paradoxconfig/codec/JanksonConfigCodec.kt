@@ -9,7 +9,6 @@ import io.github.redstoneparadox.paradoxconfig.config.CollectionConfigOption
 import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import io.github.redstoneparadox.paradoxconfig.config.ConfigOption
 import io.github.redstoneparadox.paradoxconfig.config.DictionaryConfigOption
-import net.minecraft.util.Identifier
 
 class JanksonConfigCodec: ConfigCodec {
     private val jankson: Jankson
@@ -22,8 +21,8 @@ class JanksonConfigCodec: ConfigCodec {
         jankson = builder.build()
     }
 
-    override fun decode(string: String, config: ConfigCategory) {
-        val json = jankson.load(string)
+    override fun decode(data: String, config: ConfigCategory) {
+        val json = jankson.load(data)
         deserializeCategory(json, config)
     }
 
