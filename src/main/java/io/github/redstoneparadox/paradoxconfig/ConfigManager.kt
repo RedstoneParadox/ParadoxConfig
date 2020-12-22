@@ -81,16 +81,16 @@ object ConfigManager {
 
     private fun loadConfig(config: ConfigCategory, modid: String) {
         val ext = config.key.split('.').last()
-        val configIO = ConfigCodec.getConfigIO(ext)
+        val configCoded = ConfigCodec.getCodec(ext)
         val file = File(FabricLoader.getInstance().configDirectory, "${modid}/${config.key}")
 
         if (file.exists()) {
             try {
                 val configData = file.readText()
-                configIO.decode(configData, config)
-                file.writeText(configIO.encode(config))
+                configCoded.decode(configData, config)
+                file.writeText(configCoded.encode(config))
             } catch (e: Exception) {
-                ParadoxConfig.error("Could not create config file $modid:${config.key} due to an exception.")
+                ParadoxConfig.error("Could not write to config file $modid:${config.key} due to an exception.")
                 e.printStackTrace()
             }
         }
@@ -99,7 +99,7 @@ object ConfigManager {
             try {
                 file.parentFile.mkdirs()
                 file.createNewFile()
-                file.writeText(configIO.encode(config))
+                file.writeText(configCoded.encode(config))
             } catch (e: SecurityException) {
                 ParadoxConfig.error("Could not create config file $modid:${config.key} due to security issues.")
                 e.printStackTrace()

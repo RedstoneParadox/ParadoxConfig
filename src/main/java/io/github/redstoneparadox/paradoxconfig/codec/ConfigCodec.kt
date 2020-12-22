@@ -34,7 +34,7 @@ interface ConfigCodec {
             CODECS[configCodec.fileExtension] = configCodec
         }
 
-        fun getConfigIO(ext: String): ConfigCodec {
+        fun getCodec(ext: String): ConfigCodec {
             return CODECS[ext].unwrap(Exception("ConfigCodec for file format $ext was never registered!"))
         }
     }
