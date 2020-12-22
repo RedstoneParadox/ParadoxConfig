@@ -1,4 +1,4 @@
-package io.github.goconfigure.paradoxconfig.util
+package io.github.goconfigure.util
 
 /**
  * Created by RedstoneParadox on 11/10/2019.

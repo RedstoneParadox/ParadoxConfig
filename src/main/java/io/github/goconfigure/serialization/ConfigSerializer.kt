@@ -1,4 +1,4 @@
-package io.github.goconfigure.paradoxconfig.serialization
+package io.github.goconfigure.serialization
 
 import kotlin.reflect.KClass
 

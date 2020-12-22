@@ -1,7 +1,7 @@
-package io.github.goconfigure.paradoxconfig.config
+package io.github.goconfigure.config
 
-import io.github.goconfigure.paradoxconfig.serialization.ConfigDeserializer
-import io.github.goconfigure.paradoxconfig.serialization.ConfigSerializer
+import io.github.goconfigure.serialization.ConfigDeserializer
+import io.github.goconfigure.serialization.ConfigSerializer
 
 /**
  * Inheritors of this class represent the root config category in a

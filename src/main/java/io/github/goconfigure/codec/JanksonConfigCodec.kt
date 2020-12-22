@@ -1,14 +1,14 @@
-package io.github.goconfigure.paradoxconfig.codec
+package io.github.goconfigure.codec
 
 import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonArray
 import blue.endless.jankson.JsonElement
 import blue.endless.jankson.JsonObject
 import io.github.cottonmc.jankson.JanksonFactory
-import io.github.goconfigure.paradoxconfig.config.CollectionConfigOption
-import io.github.goconfigure.paradoxconfig.config.ConfigCategory
-import io.github.goconfigure.paradoxconfig.config.ConfigOption
-import io.github.goconfigure.paradoxconfig.config.DictionaryConfigOption
+import io.github.goconfigure.config.CollectionConfigOption
+import io.github.goconfigure.config.ConfigCategory
+import io.github.goconfigure.config.ConfigOption
+import io.github.goconfigure.config.DictionaryConfigOption
 
 class JanksonConfigCodec: ConfigCodec {
     private val jankson: Jankson

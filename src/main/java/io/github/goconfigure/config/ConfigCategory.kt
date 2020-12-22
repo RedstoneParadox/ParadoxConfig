@@ -1,8 +1,8 @@
-package io.github.goconfigure.paradoxconfig.config
+package io.github.goconfigure.config
 
-import io.github.goconfigure.paradoxconfig.serialization.ConfigDeserializer
-import io.github.goconfigure.paradoxconfig.serialization.ConfigSerializer
-import io.github.goconfigure.paradoxconfig.util.toImmutable
+import io.github.goconfigure.serialization.ConfigDeserializer
+import io.github.goconfigure.serialization.ConfigSerializer
+import io.github.goconfigure.util.toImmutable
 import net.minecraft.util.Identifier
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty1

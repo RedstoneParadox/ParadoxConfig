@@ -1,4 +1,4 @@
-package io.github.goconfigure.paradoxconfig.util;
+package io.github.goconfigure.util;
 
 import com.google.gson.JsonPrimitive;
 import org.jetbrains.annotations.Nullable;

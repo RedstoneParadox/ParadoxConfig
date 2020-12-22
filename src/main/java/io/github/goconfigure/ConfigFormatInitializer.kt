@@ -1,4 +1,4 @@
-package io.github.goconfigure.paradoxconfig
+package io.github.goconfigure
 
 /**
  * Entrypoint invoked before Paradox Config loads config files.

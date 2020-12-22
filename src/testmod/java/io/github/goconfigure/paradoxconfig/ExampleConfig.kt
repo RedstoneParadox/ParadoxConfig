@@ -1,6 +1,6 @@
 package io.github.goconfigure.paradoxconfig
 
-import io.github.goconfigure.paradoxconfig.config.ConfigCategory
+import io.github.goconfigure.config.ConfigCategory
 import net.minecraft.util.Identifier
 
 @Suppress("unused")

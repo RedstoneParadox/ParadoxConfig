@@ -1,11 +1,11 @@
-package io.github.goconfigure.paradoxconfig.compat
+package io.github.goconfigure.compat
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonPrimitive
-import io.github.goconfigure.paradoxconfig.ConfigManager
-import io.github.goconfigure.paradoxconfig.GoConfigure
-import io.github.goconfigure.paradoxconfig.util.ReflectionUtil
-import io.github.goconfigure.paradoxconfig.util.compareTo
+import io.github.goconfigure.ConfigManager
+import io.github.goconfigure.GoConfigure
+import io.github.goconfigure.util.ReflectionUtil
+import io.github.goconfigure.util.compareTo
 import io.github.ytg1234.recipeconditions.api.RecipeConds
 import io.github.ytg1234.recipeconditions.api.condition.base.RecipeCondition
 import net.fabricmc.api.ModInitializer

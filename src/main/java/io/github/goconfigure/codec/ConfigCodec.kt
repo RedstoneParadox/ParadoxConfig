@@ -1,7 +1,7 @@
-package io.github.goconfigure.paradoxconfig.codec
+package io.github.goconfigure.codec
 
-import io.github.goconfigure.paradoxconfig.config.ConfigCategory
-import io.github.goconfigure.paradoxconfig.util.unwrap
+import io.github.goconfigure.config.ConfigCategory
+import io.github.goconfigure.util.unwrap
 
 /**
  * Classes that implement this interface are used to read
