@@ -17,10 +17,8 @@ import io.github.redstoneparadox.paradoxconfig.util.compareTo
 object ParadoxConfigConditions: LibCDInitializer {
     override fun initConditions(manager: ConditionManager) {
         manager.registerCondition(Identifier(MOD_ID, "option")) {
-
             if (it is JsonObject) {
                 val configID = (it["config"] as? JsonPrimitive)?.value as? String
-
 
                 if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "${MOD_ID}:test.json5") {
                     return@registerCondition false
@@ -57,8 +55,7 @@ object ParadoxConfigConditions: LibCDInitializer {
         manager.registerCondition(Identifier(MOD_ID, "contains")) {
             if (it is JsonObject) {
                 val configID = (it["config"] as? JsonPrimitive)?.value as? String
-
-
+                
                 if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "${MOD_ID}:test.json5") {
                     return@registerCondition false
                 }
