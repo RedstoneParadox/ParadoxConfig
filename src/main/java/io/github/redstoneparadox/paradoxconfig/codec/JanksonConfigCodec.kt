@@ -39,7 +39,7 @@ class JanksonConfigCodec: ConfigCodec {
         jankson = builder.build()
     }
 
-    override fun read(string: String, config: ConfigCategory) {
+    override fun decode(string: String, config: ConfigCategory) {
         val json = jankson.load(string)
         deserializeCategory(json, config)
     }
@@ -73,7 +73,7 @@ class JanksonConfigCodec: ConfigCodec {
         }
     }
 
-    override fun write(config: ConfigCategory): String {
+    override fun encode(config: ConfigCategory): String {
         return serializeCategory(config).first.toJson(true, true)
     }
 

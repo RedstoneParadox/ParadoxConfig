@@ -17,25 +17,25 @@ interface ConfigCodec {
      */
     val fileExtension: String
 
-    fun read(string: String, config: ConfigCategory)
+    fun decode(string: String, config: ConfigCategory)
 
-    fun write(config: ConfigCategory): String
+    fun encode(config: ConfigCategory): String
 
     companion object {
-        private val FORMATS: MutableMap<String, ConfigCodec> = mutableMapOf()
+        private val CODECS: MutableMap<String, ConfigCodec> = mutableMapOf()
 
         fun addFormat(configCodec: ConfigCodec) {
             val ext = configCodec.fileExtension
 
-            if (FORMATS.containsKey(ext)) {
+            if (CODECS.containsKey(ext)) {
                 throw Exception("ConfigIO for file format $ext was already registered!")
             }
 
-            FORMATS[configCodec.fileExtension] = configCodec
+            CODECS[configCodec.fileExtension] = configCodec
         }
 
         fun getConfigIO(ext: String): ConfigCodec {
-            return FORMATS[ext].unwrap(Exception("ConfigIO for file format $ext was never registered!"))
+            return CODECS[ext].unwrap(Exception("ConfigCodec for file format $ext was never registered!"))
         }
     }
 }

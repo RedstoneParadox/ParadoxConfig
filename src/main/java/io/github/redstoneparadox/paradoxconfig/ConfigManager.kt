@@ -87,8 +87,8 @@ object ConfigManager {
         if (file.exists()) {
             try {
                 val configData = file.readText()
-                configIO.read(configData, config)
-                file.writeText(configIO.write(config))
+                configIO.decode(configData, config)
+                file.writeText(configIO.encode(config))
             } catch (e: Exception) {
                 ParadoxConfig.error("Could not create config file $modid:${config.key} due to an exception.")
                 e.printStackTrace()
@@ -98,7 +98,7 @@ object ConfigManager {
             ParadoxConfig.log("Config file $modid:${config.key} was not found; a new one will be created.")
             try {
                 file.createNewFile()
-                file.writeText(configIO.write(config))
+                file.writeText(configIO.encode(config))
             } catch (e: SecurityException) {
                 ParadoxConfig.error("Could not create config file $modid:${config.key} due to security issues.")
                 e.printStackTrace()
