@@ -19,26 +19,6 @@ class JanksonConfigCodec: ConfigCodec {
 
     init {
         val builder = JanksonFactory.builder()
-
-
-        builder
-
-            .registerSerializer(Identifier::class.java) { id, marshaller ->
-                return@registerSerializer marshaller.serialize(id.toString())
-            }
-            .registerDeserializer(String::class.java, Identifier::class.java) { string, marshaller ->
-                return@registerDeserializer Identifier.tryParse(string)
-            }
-
-            /*
-            .registerSerializer(MutableCollection::class.java) { collection, marshaller ->
-                val array = JsonArray()
-                collection.forEach { marshaller.serialize(it) }
-                return@registerSerializer array
-            }
-            */
-
-
         jankson = builder.build()
     }
 
