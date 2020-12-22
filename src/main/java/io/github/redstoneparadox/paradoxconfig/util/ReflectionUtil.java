@@ -1,6 +1,6 @@
 package io.github.redstoneparadox.paradoxconfig.util;
 
-import blue.endless.jankson.JsonPrimitive;
+import com.google.gson.JsonPrimitive;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
