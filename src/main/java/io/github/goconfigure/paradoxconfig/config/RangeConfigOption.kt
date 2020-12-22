@@ -1,6 +1,6 @@
-package io.github.goconfigure.config
+package io.github.goconfigure.paradoxconfig.config
 
-import io.github.goconfigure.serialization.ConfigDeserializer
+import io.github.goconfigure.paradoxconfig.serialization.ConfigDeserializer
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.cast

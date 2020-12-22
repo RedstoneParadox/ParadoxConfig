@@ -1,14 +1,14 @@
-package io.github.goconfigure.compat
+package io.github.goconfigure.paradoxconfig.compat
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import io.github.cottonmc.libcd.api.LibCDInitializer
 import io.github.cottonmc.libcd.api.condition.ConditionManager
-import io.github.goconfigure.ConfigManager
-import io.github.goconfigure.GoConfigure.MOD_ID
-import io.github.goconfigure.util.ReflectionUtil
-import io.github.goconfigure.util.compareTo
+import io.github.goconfigure.paradoxconfig.ConfigManager
+import io.github.goconfigure.paradoxconfig.GoConfigure.MOD_ID
+import io.github.goconfigure.paradoxconfig.util.ReflectionUtil
+import io.github.goconfigure.paradoxconfig.util.compareTo
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 

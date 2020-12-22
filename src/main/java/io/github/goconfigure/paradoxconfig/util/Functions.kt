@@ -1,4 +1,4 @@
-package io.github.goconfigure.util
+package io.github.goconfigure.paradoxconfig.util
 
 fun <T: Any> T?.unwrap(exception: Exception): T {
     if (this == null) throw exception

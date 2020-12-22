@@ -1,7 +1,7 @@
-package io.github.goconfigure
+package io.github.goconfigure.paradoxconfig
 
-import io.github.goconfigure.codec.ConfigCodec
-import io.github.goconfigure.codec.JanksonConfigCodec
+import io.github.goconfigure.paradoxconfig.codec.ConfigCodec
+import io.github.goconfigure.paradoxconfig.codec.JanksonConfigCodec
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import org.apache.logging.log4j.LogManager
