@@ -1,8 +1,8 @@
 package io.github.redstoneparadox.paradoxconfig.config
 
+import io.github.redstoneparadox.goconfigure.config.ConfigCategory
 import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
-import io.github.redstoneparadox.goconfigure.config.ConfigCategory
 
 /**
  * Inheritors of this class represent the root config category in a

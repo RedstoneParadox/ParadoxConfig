@@ -4,6 +4,7 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonPrimitive
 import io.github.redstoneparadox.goconfigure.ConfigManager
 import io.github.redstoneparadox.goconfigure.GoConfigure
+import io.github.redstoneparadox.goconfigure.util.ReflectionUtil
 import io.github.redstoneparadox.goconfigure.util.compareTo
 import io.github.ytg1234.recipeconditions.api.RecipeConds
 import io.github.ytg1234.recipeconditions.api.condition.base.RecipeCondition
@@ -34,8 +35,8 @@ object GoConfigureRecipeConditions: ModInitializer {
                     val op = config[option]
                     if (predicate != null) {
                         return@RecipeCondition when (predicate) {
-                            "==" -> op == _root_ide_package_.io.github.redstoneparadox.goconfigure.util.ReflectionUtil.getPrimitiveValue(primitive)
-                            "!=" -> op != _root_ide_package_.io.github.redstoneparadox.goconfigure.util.ReflectionUtil.getPrimitiveValue(primitive)
+                            "==" -> op == ReflectionUtil.getPrimitiveValue(primitive)
+                            "!=" -> op != ReflectionUtil.getPrimitiveValue(primitive)
                             "<" -> if (op is Number) op < primitive.asNumber else false
                             ">" -> if (op is Number) op > primitive.asNumber else false
                             "<=" -> if (op is Number) op <= primitive.asNumber else false
@@ -44,7 +45,7 @@ object GoConfigureRecipeConditions: ModInitializer {
                         }
                     }
                     else {
-                        return@RecipeCondition op == _root_ide_package_.io.github.redstoneparadox.goconfigure.util.ReflectionUtil.getPrimitiveValue(primitive)
+                        return@RecipeCondition op == ReflectionUtil.getPrimitiveValue(primitive)
                     }
                 }
             }

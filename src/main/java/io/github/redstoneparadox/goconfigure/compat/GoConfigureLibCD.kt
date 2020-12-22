@@ -35,8 +35,8 @@ object GoConfigureLibCD: LibCDInitializer {
                         val op = config[option]
                         if (predicate != null) {
                             return@registerCondition when (predicate) {
-                                "==" -> op == _root_ide_package_.io.github.redstoneparadox.goconfigure.util.ReflectionUtil.getPrimitiveValue(primitive)
-                                "!=" -> op != _root_ide_package_.io.github.redstoneparadox.goconfigure.util.ReflectionUtil.getPrimitiveValue(primitive)
+                                "==" -> op == ReflectionUtil.getPrimitiveValue(primitive)
+                                "!=" -> op != ReflectionUtil.getPrimitiveValue(primitive)
                                 "<" -> if (op is Number) op < primitive.asNumber else false
                                 ">" -> if (op is Number) op > primitive.asNumber else false
                                 "<=" -> if (op is Number) op <= primitive.asNumber else false
@@ -45,7 +45,7 @@ object GoConfigureLibCD: LibCDInitializer {
                             }
                         }
                         else {
-                            return@registerCondition op == _root_ide_package_.io.github.redstoneparadox.goconfigure.util.ReflectionUtil.getPrimitiveValue(primitive)
+                            return@registerCondition op == ReflectionUtil.getPrimitiveValue(primitive)
                         }
                     }
                 }
