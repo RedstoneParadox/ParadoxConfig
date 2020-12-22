@@ -15,6 +15,8 @@ import net.minecraft.util.registry.Registry
 @Suppress("unused")
 object GoConfigureRecipeConditions: ModInitializer {
     override fun onInitialize() {
+        if (!FabricLoader.getInstance().isModLoaded("recipeconditions")) return
+
         Registry.register(RecipeConds.RECIPE_CONDITION, Identifier(GoConfigure.MOD_ID, "option"), RecipeCondition { param ->
             val paramObject = param.`object`()
             val configID = (paramObject["config"] as? JsonPrimitive)?.asString
