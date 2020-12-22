@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Paradox Config Test Mod",
-  "description": "Testmod for ParadoxConfig.",
+  "description": "Test Mod for ParadoxConfig.",
   "authors": [
     "RedstoneParadox"
   ],
@@ -18,6 +18,12 @@
 
   "environment": "*",
   "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "io.github.redstoneparadox.paradoxconfig.ParadoxConfigTest"
+      }
+    ]
   },
   "depends": {
     "fabricloader": ">=0.4.0",
