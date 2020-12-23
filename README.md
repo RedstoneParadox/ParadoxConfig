@@ -1,4 +1,4 @@
-# Go Configure
+# Paradox Config
 
 [ ![Download](https://api.bintray.com/packages/redstoneparadox/mods/paradox-config/images/download.svg?version=0.3.6-alpha) ](https://bintray.com/redstoneparadox/mods/paradox-config/0.3.6-alpha/link)
 
