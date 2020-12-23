@@ -2,7 +2,7 @@
 
 [ ![Download](https://api.bintray.com/packages/redstoneparadox/mods/ParadoxConfig/images/download.svg) ](https://bintray.com/redstoneparadox/mods/ParadoxConfig/_latestVersion)
 
-A lightweight, Kotlin-based config API for Minecraft, formerly known as Paradox Config.
+A lightweight, Kotlin-based config API for Minecraft.
 
 Discord: https://discord.gg/xSZHvCc
 
