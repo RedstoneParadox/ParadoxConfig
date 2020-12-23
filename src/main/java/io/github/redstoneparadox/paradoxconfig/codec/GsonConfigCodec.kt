@@ -72,14 +72,14 @@ class GsonConfigCodec: ConfigCodec {
     private fun encodeCategory(category: ConfigCategory): JsonObject {
         val obj = JsonObject()
 
-        for (subcategory in category.getSubcategories()) {
-            val subcategoryObj = encodeCategory(subcategory)
-            obj.add(subcategory.key, subcategoryObj)
-        }
-
         for (option in category.getOptions()) {
             val optionElement = serializeOption(option)
             obj.add(option.key, optionElement)
+        }
+
+        for (subcategory in category.getSubcategories()) {
+            val subcategoryObj = encodeCategory(subcategory)
+            obj.add(subcategory.key, subcategoryObj)
         }
 
         return obj

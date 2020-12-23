@@ -60,14 +60,14 @@ class JanksonConfigCodec: ConfigCodec {
     private fun encodeCategory(category: ConfigCategory): Pair<JsonObject, String> {
         val obj = JsonObject()
 
-        for (subcategory in category.getSubcategories()) {
-            val pair = encodeCategory(subcategory)
-            obj.put(subcategory.key, pair.first, pair.second)
-        }
-
         for (option in category.getOptions()) {
             val pair = encodeOption(option)
             obj.put(option.key, pair.first, pair.second)
+        }
+
+        for (subcategory in category.getSubcategories()) {
+            val pair = encodeCategory(subcategory)
+            obj.put(subcategory.key, pair.first, pair.second)
         }
 
         return Pair(obj, category.comment)
