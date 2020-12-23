@@ -54,26 +54,26 @@ class JanksonConfigCodec: ConfigCodec {
     }
 
     override fun encode(config: ConfigCategory): String {
-        return serializeCategory(config).first.toJson(true, true)
+        return encodeCategory(config).first.toJson(true, true)
     }
 
-    private fun serializeCategory(category: ConfigCategory): Pair<JsonObject, String> {
+    private fun encodeCategory(category: ConfigCategory): Pair<JsonObject, String> {
         val obj = JsonObject()
 
         for (subcategory in category.getSubcategories()) {
-            val pair = serializeCategory(subcategory)
+            val pair = encodeCategory(subcategory)
             obj.put(subcategory.key, pair.first, pair.second)
         }
 
         for (option in category.getOptions()) {
-            val pair = serializeOption(option)
+            val pair = encodeOption(option)
             obj.put(option.key, pair.first, pair.second)
         }
 
         return Pair(obj, category.comment)
     }
 
-    private fun serializeOption(option: ConfigOption<*>): Pair<JsonElement, String> {
+    private fun encodeOption(option: ConfigOption<*>): Pair<JsonElement, String> {
         val any = option.get()
 
         if (any is Collection<*>) {
