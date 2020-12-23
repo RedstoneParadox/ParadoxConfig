@@ -13,8 +13,7 @@ import io.github.redstoneparadox.paradoxconfig.config.DictionaryConfigOption
 class JanksonConfigCodec: ConfigCodec {
     private val jankson: Jankson
 
-    override val fileExtension: String
-        get() = "json5"
+    override val fileExtension: String = "json5"
 
     init {
         val builder = JanksonFactory.builder()
