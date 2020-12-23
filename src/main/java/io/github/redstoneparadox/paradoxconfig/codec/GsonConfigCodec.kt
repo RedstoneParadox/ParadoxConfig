@@ -14,21 +14,21 @@ class GsonConfigCodec: ConfigCodec {
     private val gson: Gson
 
     init {
-        val builder = GsonBuilder()
+        gson = GsonBuilder()
+            .registerTypeAdapter(Identifier::class.java, object : TypeAdapter<Identifier>() {
+                val EMPTY: Identifier = Identifier("empty")
 
-        builder.registerTypeAdapter(Identifier::class.java, object : TypeAdapter<Identifier>() {
-            val EMPTY: Identifier = Identifier("empty")
+                override fun write(out: JsonWriter?, value: Identifier?) {
+                    out?.value(value.toString())
+                }
 
-            override fun write(out: JsonWriter?, value: Identifier?) {
-                out?.value(value.toString())
-            }
+                override fun read(`in`: JsonReader?): Identifier {
+                    return Identifier.tryParse(`in`?.nextString()) ?: EMPTY
+                }
+            })
+            .setPrettyPrinting()
+            .create()
 
-            override fun read(`in`: JsonReader?): Identifier {
-                return Identifier.tryParse(`in`?.nextString()) ?: EMPTY
-            }
-        })
-
-        gson = builder.create()
     }
 
     override fun decode(data: String, config: ConfigCategory) {
@@ -66,40 +66,40 @@ class GsonConfigCodec: ConfigCodec {
     }
 
     override fun encode(config: ConfigCategory): String {
-        return encodeCategory(config).first.toString()
+        return gson.toJson(encodeCategory(config))
     }
 
-    private fun encodeCategory(category: ConfigCategory): Pair<JsonObject, String> {
+    private fun encodeCategory(category: ConfigCategory): JsonObject {
         val obj = JsonObject()
 
         for (subcategory in category.getSubcategories()) {
-            val pair = encodeCategory(subcategory)
-            obj.add(subcategory.key, pair.first)
+            val subcategoryObj = encodeCategory(subcategory)
+            obj.add(subcategory.key, subcategoryObj)
         }
 
         for (option in category.getOptions()) {
-            val pair = serializeOption(option)
-            obj.add(option.key, pair.first)
+            val optionElement = serializeOption(option)
+            obj.add(option.key, optionElement)
         }
 
-        return Pair(obj, category.comment)
+        return obj
     }
 
-    private fun serializeOption(option: ConfigOption<*>): Pair<JsonElement, String> {
+    private fun serializeOption(option: ConfigOption<*>): JsonElement {
         val any = option.get()
 
         if (any is Collection<*>) {
             val array = JsonArray()
             any.forEach { array.add(gson.toJsonTree(it, (option as CollectionConfigOption<*,*>).getElementKClass().java)) }
-            return Pair(array, option.comment)
+            return array
         }
         if (any is Map<*, *>) {
             val obj = JsonObject()
             any.keys.forEach { if (it is String) { obj.add(it, gson.toJsonTree(any[it], (option as DictionaryConfigOption<*, *>).getValueKClass().java)) } }
-            return Pair(obj, option.comment)
+            return obj
         }
 
         val element = gson.toJsonTree(any, option.getKClass().java)
-        return Pair(element, option.comment)
+        return element
     }
 }

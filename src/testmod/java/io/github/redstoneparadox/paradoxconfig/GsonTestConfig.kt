@@ -3,8 +3,7 @@ package io.github.redstoneparadox.paradoxconfig
 import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import net.minecraft.util.Identifier
 
-@Suppress("unused")
-object ExampleConfig: ConfigCategory("example.json5") {
+object GsonTestConfig: ConfigCategory("gson_test.json") {
     val boolean by option(true, "boolean", "A boolean value.")
     val double by option(2.5, "double", "A double value.")
     val string by option("Hi", "string", "A string value.")

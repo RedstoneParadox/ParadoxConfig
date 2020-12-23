@@ -31,9 +31,12 @@
   },
 
   "custom": {
-    "pconfig": {
+    "paradoxconfig": {
       "package": "io.github.redstoneparadox.paradoxconfig",
-      "configs": ["ExampleConfig"]
+      "configs": [
+        "GsonTestConfig",
+        "JanksonTestConfig"
+      ]
     }
   }
 }
