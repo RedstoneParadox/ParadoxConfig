@@ -1,11 +1,11 @@
-package io.github.redstoneparadox.goconfigure.compat
+package io.github.redstoneparadox.paradoxconfig.compat
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonPrimitive
-import io.github.redstoneparadox.goconfigure.ConfigManager
-import io.github.redstoneparadox.goconfigure.GoConfigure
-import io.github.redstoneparadox.goconfigure.util.ReflectionUtil
-import io.github.redstoneparadox.goconfigure.util.compareTo
+import io.github.redstoneparadox.paradoxconfig.ConfigManager
+import io.github.redstoneparadox.paradoxconfig.ParadoxConfig
+import io.github.redstoneparadox.paradoxconfig.util.ReflectionUtil
+import io.github.redstoneparadox.paradoxconfig.util.compareTo
 import io.github.ytg1234.recipeconditions.api.RecipeConds
 import io.github.ytg1234.recipeconditions.api.condition.base.RecipeCondition
 import net.fabricmc.api.ModInitializer
@@ -14,15 +14,15 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 @Suppress("unused")
-object GoConfigureRecipeConditions: ModInitializer {
+object ParadoxConfigRecipeConditions: ModInitializer {
     override fun onInitialize() {
         if (!FabricLoader.getInstance().isModLoaded("recipeconditions")) return
 
-        Registry.register(RecipeConds.RECIPE_CONDITION, Identifier(GoConfigure.MOD_ID, "option"), RecipeCondition { param ->
+        Registry.register(RecipeConds.RECIPE_CONDITION, Identifier(ParadoxConfig.MOD_ID, "option"), RecipeCondition { param ->
             val paramObject = param.`object`()
             val configID = (paramObject["config"] as? JsonPrimitive)?.asString
 
-            if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "${GoConfigure.MOD_ID}:test.json5") {
+            if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "${ParadoxConfig.MOD_ID}:test.json5") {
                 return@RecipeCondition false
             }
             else if (configID != null) {
@@ -53,11 +53,11 @@ object GoConfigureRecipeConditions: ModInitializer {
             return@RecipeCondition false
         })
 
-        Registry.register(RecipeConds.RECIPE_CONDITION, Identifier(GoConfigure.MOD_ID, "contains"), RecipeCondition { param ->
+        Registry.register(RecipeConds.RECIPE_CONDITION, Identifier(ParadoxConfig.MOD_ID, "contains"), RecipeCondition { param ->
             val paramObject = param.`object`()
             val configID = (paramObject["config"] as? JsonPrimitive)?.asString
 
-            if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "${GoConfigure.MOD_ID}:test.json5") {
+            if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "${ParadoxConfig.MOD_ID}:test.json5") {
                 return@RecipeCondition false
             } else if (configID != null) {
                 val config = ConfigManager.getConfig(configID)
@@ -69,7 +69,7 @@ object GoConfigureRecipeConditions: ModInitializer {
 
                     if (optionCollection != null && optionCollection.size >= contains.size) {
                         for (element in contains) {
-                            if (!(element is JsonPrimitive && optionCollection.contains(_root_ide_package_.io.github.redstoneparadox.goconfigure.util.ReflectionUtil.getPrimitiveValue(element)))) {
+                            if (!(element is JsonPrimitive && optionCollection.contains(io.github.redstoneparadox.paradoxconfig.util.ReflectionUtil.getPrimitiveValue(element)))) {
                                 return@RecipeCondition false
                             }
 

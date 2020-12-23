@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "goconfigure",
+  "id": "paradoxconfig",
   "version": "${version}",
 
-  "name": "Go Configure",
+  "name": "Paradox Config",
   "description": "A Kotlin-based configuration api for Minecraft mods.",
   "authors": [
     "RedstoneParadox"
@@ -14,31 +14,31 @@
   },
 
   "license": "MIT",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/paradoxconfig/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "preLaunch": [
       {
         "adapter": "kotlin",
-        "value": "io.github.redstoneparadox.goconfigure.ParadoxConfig"
+        "value": "io.github.redstoneparadox.paradoxconfig.ParadoxConfig"
       }
     ],
     "main": [
       {
         "adapter": "kotlin",
-        "value": "io.github.redstoneparadox.goconfigure.compat.ParadoxConfigRecipeConditions"
+        "value": "io.github.redstoneparadox.paradoxconfig.compat.ParadoxConfigRecipeConditions"
       }
     ],
     "libcd": [
       {
         "adapter": "kotlin",
-        "value": "io.github.redstoneparadox.goconfigure.compat.ParadoxConfigConditions"
+        "value": "io.github.redstoneparadox.paradoxconfig.compat.ParadoxConfigLibCD"
       }
     ]
   },
   "mixins": [
-    "pconfig.mixins.json"
+    "paradoxconfig.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.4.0",

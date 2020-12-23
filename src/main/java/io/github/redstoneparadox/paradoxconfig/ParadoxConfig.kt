@@ -1,15 +1,15 @@
-package io.github.redstoneparadox.goconfigure
+package io.github.redstoneparadox.paradoxconfig
 
-import io.github.redstoneparadox.goconfigure.codec.ConfigCodec
-import io.github.redstoneparadox.goconfigure.codec.JanksonConfigCodec
+import io.github.redstoneparadox.paradoxconfig.codec.ConfigCodec
+import io.github.redstoneparadox.paradoxconfig.codec.JanksonConfigCodec
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import org.apache.logging.log4j.LogManager
 
-object GoConfigure: PreLaunchEntrypoint {
-    const val MOD_ID: String = "goconfigure"
-    private val LOGGER = LogManager.getFormatterLogger(MOD_ID)
-    private const val MOD_NAME = "Go Configure"
+object ParadoxConfig: PreLaunchEntrypoint {
+    const val MOD_ID: String = "paradoxconfig"
+    private const val MOD_NAME = "Paradox Config"
+    private val LOGGER = LogManager.getFormatterLogger(MOD_NAME)
 
     @Suppress("unused")
     override fun onPreLaunch() {
@@ -19,7 +19,7 @@ object GoConfigure: PreLaunchEntrypoint {
             ConfigCodec.addCodec(JanksonConfigCodec())
         }
 
-        for (entrypoint in loader.getEntrypoints("pconfigFormat", _root_ide_package_.io.github.redstoneparadox.goconfigure.ConfigFormatInitializer::class.java)) {
+        for (entrypoint in loader.getEntrypoints("pconfigFormat", ConfigFormatInitializer::class.java)) {
             entrypoint.initializeConfigFormat()
         }
 

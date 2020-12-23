@@ -1,7 +1,7 @@
-package io.github.redstoneparadox.goconfigure
+package io.github.redstoneparadox.paradoxconfig
 
-import io.github.redstoneparadox.goconfigure.codec.ConfigCodec
-import io.github.redstoneparadox.goconfigure.config.ConfigCategory
+import io.github.redstoneparadox.paradoxconfig.codec.ConfigCodec
+import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import io.github.redstoneparadox.paradoxconfig.config.RootConfigCategory
 import net.fabricmc.loader.api.FabricLoader
 import java.io.File
@@ -30,10 +30,10 @@ object ConfigManager {
                     config.init()
                     OLD_CONFIGS["$modid:${config.file}"] = config
                     loadConfig(config, modid)
-                    GoConfigure.warn("$className extends RootConfigCategory, which is deprecated.")
+                    ParadoxConfig.warn("$className extends RootConfigCategory, which is deprecated.")
                 }
-                null -> GoConfigure.error("$className could not be found.")
-                else -> GoConfigure.error("$className does not extend ConfigCategory")
+                null -> ParadoxConfig.error("$className could not be found.")
+                else -> ParadoxConfig.error("$className does not extend ConfigCategory")
             }
         }
     }
@@ -48,11 +48,11 @@ object ConfigManager {
             val configString = configFile.readText()
             if (deserializer.receiveSource(configString)) config.deserialize(deserializer)
         } catch (e: FileNotFoundException) {
-            GoConfigure.log("Config file $modid:${config.file} was not found; a new one will be created.")
+            ParadoxConfig.log("Config file $modid:${config.file} was not found; a new one will be created.")
             try {
                 configFile.parentFile.mkdirs()
             } catch (e: SecurityException) {
-                GoConfigure.error("Could not create config file $modid:${config.file} due to security issues.")
+                ParadoxConfig.error("Could not create config file $modid:${config.file} due to security issues.")
                 e.printStackTrace()
                 return
             }
@@ -73,21 +73,21 @@ object ConfigManager {
                 configCoded.decode(configData, config)
                 file.writeText(configCoded.encode(config))
             } catch (e: Exception) {
-                GoConfigure.error("Could not write to config file $modid:${config.key} due to an exception.")
+                ParadoxConfig.error("Could not write to config file $modid:${config.key} due to an exception.")
                 e.printStackTrace()
             }
         }
         else {
-            GoConfigure.log("Config file $modid:${config.key} was not found; a new one will be created.")
+            ParadoxConfig.log("Config file $modid:${config.key} was not found; a new one will be created.")
             try {
                 file.parentFile.mkdirs()
                 file.createNewFile()
                 file.writeText(configCoded.encode(config))
             } catch (e: SecurityException) {
-                GoConfigure.error("Could not create config file $modid:${config.key} due to security issues.")
+                ParadoxConfig.error("Could not create config file $modid:${config.key} due to security issues.")
                 e.printStackTrace()
             } catch (e: Exception) {
-                GoConfigure.error("Could not create config file $modid:${config.key} due to an exception.")
+                ParadoxConfig.error("Could not create config file $modid:${config.key} due to an exception.")
                 e.printStackTrace()
             }
         }

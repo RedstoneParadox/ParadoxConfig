@@ -1,6 +1,6 @@
-package io.github.redstoneparadox.goconfigure
+package io.github.redstoneparadox.paradoxconfig
 
-import io.github.goconfigure.paradoxconfig.config.ConfigCategory
+import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import net.minecraft.util.Identifier
 
 @Suppress("unused")

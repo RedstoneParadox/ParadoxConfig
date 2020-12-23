@@ -1,8 +1,9 @@
-package io.github.redstoneparadox.goconfigure
+package io.github.redstoneparadox.paradoxconfig
 
+import io.github.redstoneparadox.paradoxconfig.ExampleConfig
 import net.fabricmc.api.ModInitializer
 
-object GoConfigureTest: ModInitializer {
+object ParadoxConfigTest: ModInitializer {
     override fun onInitialize() {
         println("Example config option values:")
         println("boolean: ${ExampleConfig.boolean}")

@@ -1,4 +1,4 @@
-package io.github.redstoneparadox.goconfigure
+package io.github.redstoneparadox.paradoxconfig
 
 /**
  * Entrypoint invoked before Paradox Config loads config files.

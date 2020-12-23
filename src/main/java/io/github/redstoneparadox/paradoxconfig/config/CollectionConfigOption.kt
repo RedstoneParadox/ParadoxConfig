@@ -1,6 +1,6 @@
-package io.github.redstoneparadox.goconfigure.config
+package io.github.redstoneparadox.paradoxconfig.config
 
-import io.github.redstoneparadox.goconfigure.GoConfigure
+import io.github.redstoneparadox.paradoxconfig.ParadoxConfig
 import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import kotlin.reflect.KClass
@@ -21,7 +21,7 @@ class CollectionConfigOption<E: Any, U: MutableCollection<E>>(private val innerT
             serializer.writeValue(key, serializer.eClass.cast(out), comment)
         }
         else {
-            GoConfigure.error("Mismatch between expected and actual class of ${serializer::class}")
+            ParadoxConfig.error("Mismatch between expected and actual class of ${serializer::class}")
         }
     }
 

@@ -1,27 +1,27 @@
 {
   "schemaVersion": 1,
-  "id": "goconfigure_test",
+  "id": "paradoxconfig_test",
   "version": "${version}",
 
-  "name": "Go Configure Test Mod",
-  "description": "Test Mod for Go Configure.",
+  "name": "Paradox Config Test Mod",
+  "description": "Test Mod for Paradox Config.",
   "authors": [
     "RedstoneParadox"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/RedstoneParadox/paradox-config"
+    "sources": "https://github.com/RedstoneParadox/ParadoxConfig"
   },
 
   "license": "MIT",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/paradoxconfig/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
       {
         "adapter": "kotlin",
-        "value": "io.github.redstoneparadox.goconfigure.ParadoxConfigTest"
+        "value": "io.github.redstoneparadox.paradoxconfig.ParadoxConfigTest"
       }
     ]
   },
@@ -32,7 +32,7 @@
 
   "custom": {
     "pconfig": {
-      "package": "io.github.redstoneparadox.goconfigure",
+      "package": "io.github.redstoneparadox.paradoxconfig",
       "configs": ["ExampleConfig"]
     }
   }

@@ -1,4 +1,4 @@
-package io.github.redstoneparadox.goconfigure.util;
+package io.github.redstoneparadox.paradoxconfig.util;
 
 import com.google.gson.JsonPrimitive;
 import org.jetbrains.annotations.Nullable;

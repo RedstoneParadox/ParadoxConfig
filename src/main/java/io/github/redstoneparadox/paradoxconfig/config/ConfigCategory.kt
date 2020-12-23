@@ -1,6 +1,6 @@
-package io.github.redstoneparadox.goconfigure.config
+package io.github.redstoneparadox.paradoxconfig.config
 
-import io.github.redstoneparadox.goconfigure.util.toImmutable
+import io.github.redstoneparadox.paradoxconfig.util.toImmutable
 import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import net.minecraft.util.Identifier

@@ -1,14 +1,14 @@
-package io.github.redstoneparadox.goconfigure.codec
+package io.github.redstoneparadox.paradoxconfig.codec
 
 import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonArray
 import blue.endless.jankson.JsonElement
 import blue.endless.jankson.JsonObject
 import io.github.cottonmc.jankson.JanksonFactory
-import io.github.redstoneparadox.goconfigure.config.CollectionConfigOption
-import io.github.redstoneparadox.goconfigure.config.ConfigCategory
-import io.github.redstoneparadox.goconfigure.config.ConfigOption
-import io.github.redstoneparadox.goconfigure.config.DictionaryConfigOption
+import io.github.redstoneparadox.paradoxconfig.config.CollectionConfigOption
+import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
+import io.github.redstoneparadox.paradoxconfig.config.ConfigOption
+import io.github.redstoneparadox.paradoxconfig.config.DictionaryConfigOption
 
 class JanksonConfigCodec: ConfigCodec {
     private val jankson: Jankson

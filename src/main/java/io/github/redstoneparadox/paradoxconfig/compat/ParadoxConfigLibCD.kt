@@ -1,21 +1,21 @@
-package io.github.redstoneparadox.goconfigure.compat
+package io.github.redstoneparadox.paradoxconfig.compat
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
 import io.github.cottonmc.libcd.api.LibCDInitializer
 import io.github.cottonmc.libcd.api.condition.ConditionManager
-import io.github.redstoneparadox.goconfigure.ConfigManager
-import io.github.redstoneparadox.goconfigure.GoConfigure.MOD_ID
-import io.github.redstoneparadox.goconfigure.util.ReflectionUtil
-import io.github.redstoneparadox.goconfigure.util.compareTo
+import io.github.redstoneparadox.paradoxconfig.ConfigManager
+import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.MOD_ID
+import io.github.redstoneparadox.paradoxconfig.util.ReflectionUtil
+import io.github.redstoneparadox.paradoxconfig.util.compareTo
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 
 /**
  * Created by RedstoneParadox on 11/9/2019.
  */
-object GoConfigureLibCD: LibCDInitializer {
+object ParadoxConfigLibCD: LibCDInitializer {
     override fun initConditions(manager: ConditionManager) {
         manager.registerCondition(Identifier(MOD_ID, "option")) {
 
@@ -71,7 +71,7 @@ object GoConfigureLibCD: LibCDInitializer {
 
                         if (optionCollection != null && optionCollection.size >= contains.size) {
                             for (element in contains) {
-                                if (!(element is JsonPrimitive && optionCollection.contains(_root_ide_package_.io.github.redstoneparadox.goconfigure.util.ReflectionUtil.getPrimitiveValue(element)))) {
+                                if (!(element is JsonPrimitive && optionCollection.contains(io.github.redstoneparadox.paradoxconfig.util.ReflectionUtil.getPrimitiveValue(element)))) {
                                     return@registerCondition false
                                 }
 
