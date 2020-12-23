@@ -27,7 +27,7 @@ dependencies {
 }
 ```
 
-(For versions prior to 0.4.0-beta:)
+## Adding versions prior to 0.4.0 Beta to your project:
 
 build.gradle:
 ```gradle
