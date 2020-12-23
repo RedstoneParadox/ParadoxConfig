@@ -1,6 +1,7 @@
 package io.github.redstoneparadox.paradoxconfig
 
 import io.github.redstoneparadox.paradoxconfig.codec.ConfigCodec
+import io.github.redstoneparadox.paradoxconfig.codec.GsonConfigCodec
 import io.github.redstoneparadox.paradoxconfig.codec.JanksonConfigCodec
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
@@ -15,6 +16,7 @@ object ParadoxConfig: PreLaunchEntrypoint {
     override fun onPreLaunch() {
         val loader = FabricLoader.getInstance()
 
+        ConfigCodec.addCodec(GsonConfigCodec())
         if (loader.isModLoaded("jankson")) {
             ConfigCodec.addCodec(JanksonConfigCodec())
         }
