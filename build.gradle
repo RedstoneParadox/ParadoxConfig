@@ -2,7 +2,6 @@ plugins {
     id 'fabric-loom'
     id 'maven-publish'
     id "org.jetbrains.kotlin.jvm"
-    id "com.jfrog.bintray" version "1.8.5"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -28,12 +27,24 @@ repositories {
         name = 'CottonMC'
         url = 'http://server.bbkr.space:8081/artifactory/libs-release'
     }
+    /*
     maven {
         url = "https://ytg1234.github.io/maven"
+    }
+    */
+    maven {
+        name = "TerraformersMC"
+        url = "http://maven.terraformersmc.com/"
     }
     maven {
         name = 'JitPack'
         url = 'https://jitpack.io'
+    }
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 
@@ -56,7 +67,7 @@ dependencies {
     modImplementation ("io.github.prospector:modmenu:${project.modmenu_version}"){
         transitive = false
     }
-    include(modImplementation("io.github.ytg1234:fabric-recipe-conditions:0.3.0"))
+    //include(modImplementation("io.github.ytg1234:fabric-recipe-conditions:0.3.0"))
 
     afterEvaluate {
         testmodImplementation sourceSets.main.output
@@ -95,23 +106,6 @@ jar {
     from "LICENSE"
 }
 
-bintray {
-    user = System.getenv('BINTRAY_USER')
-    key = System.getenv('BINTRAY_KEY')
-    setPublications("bintray")
-    publish = true
-    pkg {
-        repo = "mods"
-        name = archivesBaseName
-        licenses = ['MIT']
-        version {
-            name = "0.4.0-beta"
-            released = new Date()
-            githubRepo = "RedstoneParadox/" + archivesBaseName
-        }
-    }
-}
-
 // configure the maven publication
 publishing {
     publications {
@@ -120,20 +114,6 @@ publishing {
             artifact(remapJar) {
                 builtBy remapJar
             }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-        }
-
-        bintray(MavenPublication) {
-            groupId(group)
-            artifactId(archivesBaseName)
-            version(version)
-
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-
             artifact(sourcesJar) {
                 builtBy remapSourcesJar
             }
@@ -148,9 +128,3 @@ publishing {
 }
 
 compileKotlin.kotlinOptions.jvmTarget = "1.8"
-
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-tasks.withType(KotlinCompile) {
-    kotlinOptions.jvmTarget = "1.8"
-}
