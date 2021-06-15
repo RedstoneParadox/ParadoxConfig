@@ -7,15 +7,14 @@ import io.github.redstoneparadox.paradoxconfig.util.unwrap
  * Classes that implement this interface are used to read
  * and write config files using a specific format.
  *
- * Implementors should not do any saving or loading
+ * Implementors should not save or load config files
  * themselves.
  *
  * Not to be confused with [com.mojang.serialization.Codec].
  */
 interface ConfigCodec {
     /**
-     * Function to get the file extension
-     * for this ConfigCodec.
+     * The file extension for this codec (i.e. json5).
      */
     val fileExtension: String
 
