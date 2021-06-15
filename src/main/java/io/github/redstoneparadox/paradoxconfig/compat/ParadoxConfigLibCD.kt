@@ -7,8 +7,8 @@ import io.github.cottonmc.libcd.api.LibCDInitializer
 import io.github.cottonmc.libcd.api.condition.ConditionManager
 import io.github.redstoneparadox.paradoxconfig.ConfigManager
 import io.github.redstoneparadox.paradoxconfig.ParadoxConfig.MOD_ID
-import io.github.redstoneparadox.paradoxconfig.util.ReflectionUtil
 import io.github.redstoneparadox.paradoxconfig.util.compareTo
+import io.github.redstoneparadox.paradoxconfig.util.getValue
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.util.Identifier
 
@@ -34,8 +34,8 @@ object ParadoxConfigLibCD: LibCDInitializer {
 
                         if (predicate != null) {
                             return@registerCondition when (predicate) {
-                                "==" -> op == ReflectionUtil.getPrimitiveValue(primitive)
-                                "!=" -> op != ReflectionUtil.getPrimitiveValue(primitive)
+                                "==" -> op == primitive.getValue()
+                                "!=" -> op != primitive.getValue()
                                 "<" -> if (op is Number) op < primitive.asNumber else false
                                 ">" -> if (op is Number) op > primitive.asNumber else false
                                 "<=" -> if (op is Number) op <= primitive.asNumber else false
@@ -44,7 +44,7 @@ object ParadoxConfigLibCD: LibCDInitializer {
                             }
                         }
                         else {
-                            return@registerCondition op == ReflectionUtil.getPrimitiveValue(primitive)
+                            return@registerCondition op == primitive.getValue()
                         }
                     }
                 }
@@ -69,7 +69,7 @@ object ParadoxConfigLibCD: LibCDInitializer {
 
                         if (optionCollection != null && optionCollection.size >= contains.size) {
                             for (element in contains) {
-                                if (!(element is JsonPrimitive && optionCollection.contains(ReflectionUtil.getPrimitiveValue(element)))) {
+                                if (!(element is JsonPrimitive && optionCollection.contains(element.getValue()))) {
                                     return@registerCondition false
                                 }
 
