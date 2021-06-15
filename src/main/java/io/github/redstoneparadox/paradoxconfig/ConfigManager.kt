@@ -46,9 +46,11 @@ object ConfigManager {
 
         try {
             val configString = configFile.readText()
+
             if (deserializer.receiveSource(configString)) config.deserialize(deserializer)
         } catch (e: FileNotFoundException) {
             ParadoxConfig.log("Config file $modid:${config.file} was not found; a new one will be created.")
+
             try {
                 configFile.parentFile.mkdirs()
             } catch (e: SecurityException) {
@@ -70,15 +72,16 @@ object ConfigManager {
         if (file.exists()) {
             try {
                 val configData = file.readText()
+
                 configCodec.decode(configData, config)
                 file.writeText(configCodec.encode(config))
             } catch (e: Exception) {
                 ParadoxConfig.error("Could not write to config file $modid:${config.key} due to an exception.")
                 e.printStackTrace()
             }
-        }
-        else {
+        } else {
             ParadoxConfig.log("Config file $modid:${config.key} was not found; a new one will be created.")
+
             try {
                 file.parentFile.mkdirs()
                 file.createNewFile()

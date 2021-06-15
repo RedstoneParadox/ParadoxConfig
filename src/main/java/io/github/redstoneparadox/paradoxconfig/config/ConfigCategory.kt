@@ -18,7 +18,7 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
     @PublishedApi
     internal val optionsMap: HashMap<String, ConfigOption<*>> = HashMap()
     private val categoriesMap: HashMap<String, ConfigCategory> = HashMap()
-    internal val optionsList: MutableList<ConfigOption<*>> = mutableListOf()
+    private val optionsList: MutableList<ConfigOption<*>> = mutableListOf()
     private val categoryList: MutableList<ConfigCategory> = mutableListOf()
 
     /**

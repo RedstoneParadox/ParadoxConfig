@@ -7,7 +7,6 @@ import kotlin.reflect.KProperty
 import kotlin.reflect.full.cast
 
 open class ConfigOption<T: Any>(protected val type: KClass<T>, protected var value: T, internal val key: String, val comment: String) {
-
     open operator fun getValue(thisRef : Any?, property: KProperty<*>): T {
         return value
     }

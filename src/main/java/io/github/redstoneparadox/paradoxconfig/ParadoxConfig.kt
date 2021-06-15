@@ -17,6 +17,7 @@ object ParadoxConfig: PreLaunchEntrypoint {
         val loader = FabricLoader.getInstance()
 
         ConfigCodec.addCodec(GsonConfigCodec())
+        
         if (loader.isModLoaded("jankson")) {
             ConfigCodec.addCodec(JanksonConfigCodec())
         }
@@ -28,9 +29,9 @@ object ParadoxConfig: PreLaunchEntrypoint {
         for (mod in loader.allMods) {
             if (mod.metadata.containsCustomValue(MOD_ID)) {
                 val obj = mod.metadata.getCustomValue(MOD_ID).asObject
-
                 val rootPackage = obj.get("package").asString
                 val classNames = obj.get("configs").asArray.map { it.asString }
+
                 if (mod.metadata.id == MOD_ID && !FabricLoader.getInstance().isDevelopmentEnvironment) continue
 
                 ConfigManager.initConfigs(rootPackage, classNames, mod.metadata.id)

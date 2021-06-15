@@ -18,14 +18,12 @@ import net.minecraft.util.Identifier
 object ParadoxConfigLibCD: LibCDInitializer {
     override fun initConditions(manager: ConditionManager) {
         manager.registerCondition(Identifier(MOD_ID, "option")) {
-
             if (it is JsonObject) {
                 val configID = (it["config"] as? JsonPrimitive)?.asString
 
                 if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "${MOD_ID}:test.json5") {
                     return@registerCondition false
-                }
-                else if (configID != null) {
+                } else if (configID != null) {
                     val config = ConfigManager.getConfig(configID)
                     val primitive = (it["value"] as? JsonPrimitive)
                     val predicate = (it["predicate"] as? JsonPrimitive)?.asString
@@ -33,6 +31,7 @@ object ParadoxConfigLibCD: LibCDInitializer {
 
                     if (config != null && primitive != null && option != null) {
                         val op = config[option]
+
                         if (predicate != null) {
                             return@registerCondition when (predicate) {
                                 "==" -> op == ReflectionUtil.getPrimitiveValue(primitive)
@@ -57,7 +56,6 @@ object ParadoxConfigLibCD: LibCDInitializer {
         manager.registerCondition(Identifier(MOD_ID, "contains")) {
             if (it is JsonObject) {
                 val configID = (it["config"] as? JsonPrimitive)?.asString
-
 
                 if (!FabricLoader.getInstance().isDevelopmentEnvironment && configID == "$MOD_ID:test.json5") {
                     return@registerCondition false
