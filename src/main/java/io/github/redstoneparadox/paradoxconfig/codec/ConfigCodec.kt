@@ -9,6 +9,8 @@ import io.github.redstoneparadox.paradoxconfig.util.unwrap
  *
  * Implementors should not do any saving or loading
  * themselves.
+ *
+ * Not to be confused with [com.mojang.serialization.Codec].
  */
 interface ConfigCodec {
     /**
