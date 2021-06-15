@@ -1,6 +1,5 @@
 package io.github.redstoneparadox.paradoxconfig.config
 
-import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 import kotlin.reflect.full.cast
@@ -12,17 +11,6 @@ class RangeConfigOption<T>(type: KClass<T>, value: T, key: String, comment: Stri
         }
         else {
             throw Exception()
-        }
-    }
-
-    @Deprecated("Not used by new serialization system.")
-    override fun <E: Any> deserialize(deserializer: ConfigDeserializer<E>) {
-        val any = deserializer.readValue(key)
-        if (any != null) {
-            val result = deserializer.tryDeserialize(any, type)
-            if (result != null && range.contains(result)) {
-                value = result
-            }
         }
     }
 

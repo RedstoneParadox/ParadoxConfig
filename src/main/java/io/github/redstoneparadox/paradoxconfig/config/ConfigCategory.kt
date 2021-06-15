@@ -1,7 +1,5 @@
 package io.github.redstoneparadox.paradoxconfig.config
 
-import io.github.redstoneparadox.paradoxconfig.serialization.ConfigDeserializer
-import io.github.redstoneparadox.paradoxconfig.serialization.ConfigSerializer
 import io.github.redstoneparadox.paradoxconfig.util.toImmutable
 import net.minecraft.util.Identifier
 import kotlin.reflect.KClass
@@ -111,36 +109,6 @@ abstract class ConfigCategory(val key : String = "", val comment: String = "") {
 
     fun getOptions(): List<ConfigOption<*>> {
         return optionsList.toImmutable()
-    }
-
-    @Deprecated("Not used by new serialization system.")
-    internal fun serialize(configSerializer: ConfigSerializer<*>) {
-        if (key.isNotEmpty()) configSerializer.addCategory(key, comment)
-
-        for (option in optionsList) {
-            option.serialize(configSerializer)
-        }
-
-        for (category in categoryList) {
-            category.serialize(configSerializer)
-        }
-
-        if (key.isNotEmpty()) configSerializer.exitCategory()
-    }
-
-    @Deprecated("Not used by new serialization system.")
-    internal fun deserialize(configDeserializer: ConfigDeserializer<*>) {
-        if (key.isNotEmpty()) configDeserializer.enterCategory(key)
-
-        for (option in optionsList) {
-            option.deserialize(configDeserializer)
-        }
-
-        for (category in categoryList) {
-            category.deserialize(configDeserializer)
-        }
-
-        if (key.isNotEmpty()) configDeserializer.exitCategory()
     }
 
     operator fun get(key: String): Any? {
