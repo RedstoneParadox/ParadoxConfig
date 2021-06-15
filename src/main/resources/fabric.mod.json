@@ -24,12 +24,6 @@
         "value": "io.github.redstoneparadox.paradoxconfig.ParadoxConfig"
       }
     ],
-    "main": [
-      {
-        "adapter": "kotlin",
-        "value": "io.github.redstoneparadox.paradoxconfig.compat.ParadoxConfigRecipeConditions"
-      }
-    ],
     "libcd": [
       {
         "adapter": "kotlin",

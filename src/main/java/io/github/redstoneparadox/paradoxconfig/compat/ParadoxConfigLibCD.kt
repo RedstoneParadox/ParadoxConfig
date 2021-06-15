@@ -71,7 +71,7 @@ object ParadoxConfigLibCD: LibCDInitializer {
 
                         if (optionCollection != null && optionCollection.size >= contains.size) {
                             for (element in contains) {
-                                if (!(element is JsonPrimitive && optionCollection.contains(io.github.redstoneparadox.paradoxconfig.util.ReflectionUtil.getPrimitiveValue(element)))) {
+                                if (!(element is JsonPrimitive && optionCollection.contains(ReflectionUtil.getPrimitiveValue(element)))) {
                                     return@registerCondition false
                                 }
 
