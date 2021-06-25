@@ -4,15 +4,31 @@ import blue.endless.jankson.Jankson
 import blue.endless.jankson.JsonArray
 import blue.endless.jankson.JsonElement
 import blue.endless.jankson.JsonObject
-import io.github.cottonmc.jankson.JanksonFactory
+import blue.endless.jankson.JsonPrimitive
+import blue.endless.jankson.api.Marshaller
 import io.github.redstoneparadox.paradoxconfig.config.CollectionConfigOption
 import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import io.github.redstoneparadox.paradoxconfig.config.ConfigOption
 import io.github.redstoneparadox.paradoxconfig.config.DictionaryConfigOption
+import net.minecraft.util.Identifier
 
 class JanksonConfigCodec: ConfigCodec {
     override val fileExtension: String = "json5"
-    private val jankson: Jankson = JanksonFactory.builder().build()
+    private val jankson: Jankson
+
+    init {
+        val builder = Jankson.builder()
+
+        builder
+            .registerDeserializer(String::class.java, Identifier::class.java) { s: String?, m: Marshaller? ->
+                Identifier(s)
+            }
+            .registerSerializer(Identifier::class.java) { i: Identifier, m: Marshaller? ->
+                JsonPrimitive(i.toString())
+            }
+
+        jankson = builder.build()
+    }
 
     override fun decode(data: String, config: ConfigCategory) {
         val json = jankson.load(data)
