@@ -3,6 +3,7 @@ package io.github.redstoneparadox.paradoxconfig
 import io.github.redstoneparadox.paradoxconfig.codec.ConfigCodec
 import io.github.redstoneparadox.paradoxconfig.codec.GsonConfigCodec
 import io.github.redstoneparadox.paradoxconfig.codec.JanksonConfigCodec
+import io.github.redstoneparadox.paradoxconfig.codec.TomlConfigCodec
 import net.fabricmc.loader.api.FabricLoader
 import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
 import org.apache.logging.log4j.LogManager
@@ -17,6 +18,7 @@ object ParadoxConfig: PreLaunchEntrypoint {
         val loader = FabricLoader.getInstance()
 
         ConfigCodec.addCodec(GsonConfigCodec())
+        ConfigCodec.addCodec(TomlConfigCodec())
         
         if (loader.isModLoaded("jankson")) {
             ConfigCodec.addCodec(JanksonConfigCodec())

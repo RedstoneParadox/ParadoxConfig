@@ -25,5 +25,16 @@ object ParadoxConfigTest: ModInitializer {
         println("greetings.english: ${GsonTestConfig.Greetings.english}")
         println("greetings.mapping: ${GsonTestConfig.Greetings.mapping}")
         println()
+
+        println("Toml Test Config:")
+        println("boolean: ${TomlTestConfig.boolean}")
+        println("double: ${TomlTestConfig.double}")
+        println("string: ${TomlTestConfig.string}")
+        println("rangedDouble: ${TomlTestConfig.rangedDouble}")
+        println("identifier: ${TomlTestConfig.identifier}")
+        println("greetings.english: ${TomlTestConfig.Greetings.english}")
+        println("greetings.mapping: ${TomlTestConfig.Greetings.mapping}")
+        println("greetings.subsubcategory.foo: ${TomlTestConfig.Greetings.SubSubCategory.foo}")
+        println()
     }
 }

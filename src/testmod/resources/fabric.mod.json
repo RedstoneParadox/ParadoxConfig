@@ -35,7 +35,8 @@
       "package": "io.github.redstoneparadox.paradoxconfig",
       "configs": [
         "GsonTestConfig",
-        "JanksonTestConfig"
+        "JanksonTestConfig",
+        "TomlTestConfig"
       ]
     }
   }

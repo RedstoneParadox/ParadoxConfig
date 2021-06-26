@@ -22,6 +22,7 @@ sourceSets {
 }
 
 repositories {
+    mavenCentral()
     maven { url = "https://maven.fabricmc.net/" }
     maven {
         name = 'CottonMC'
@@ -62,6 +63,12 @@ dependencies {
         transitive = false
     }
     //include(modImplementation("io.github.ytg1234:fabric-recipe-conditions:0.3.0"))
+
+    implementation('io.github.xtomlj:tomlj') {
+        version {
+            branch = 'main'
+        }
+    }
 
     afterEvaluate {
         testmodImplementation sourceSets.main.output
