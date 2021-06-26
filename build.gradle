@@ -64,11 +64,8 @@ dependencies {
     }
     //include(modImplementation("io.github.ytg1234:fabric-recipe-conditions:0.3.0"))
 
-    implementation('io.github.xtomlj:xtomlj') {
-        version {
-            branch = 'main'
-        }
-    }
+    implementation('com.moandjiezana.toml:toml4j:0.7.2')
+    include('com.moandjiezana.toml:toml4j:0.7.2')
 
     afterEvaluate {
         testmodImplementation sourceSets.main.output

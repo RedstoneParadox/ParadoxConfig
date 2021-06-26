@@ -1,38 +1,38 @@
 package io.github.redstoneparadox.paradoxconfig.codec
 
+import com.moandjiezana.toml.Toml
+import com.moandjiezana.toml.TomlWriter
 import io.github.redstoneparadox.paradoxconfig.config.ConfigCategory
 import net.minecraft.util.Identifier
-import org.tomlj.Toml
-import org.tomlj.TomlTable
+
 
 class TomlConfigCodec: ConfigCodec {
     override val fileExtension: String = "toml"
+    val writer: TomlWriter = TomlWriter()
 
     override fun decode(data: String, config: ConfigCategory) {
-        val result = Toml.parse(data)
-        if (!result.hasErrors()) {
-            decodeCategory(config, result)
-        }
+        val map = Toml().read(data).toMap()
+
+        decodeCategory(config, map)
     }
 
-    private fun decodeCategory(category: ConfigCategory, table: TomlTable) {
+    private fun decodeCategory(category: ConfigCategory, map: Map<String, Any>) {
         for (option in category.getOptions()) {
-            val value = table[option.key]
+            val value = map[option.key]
             option.set(value)
         }
 
         for (subcategory in category.getSubcategories()) {
-            val subcategoryTable = table[subcategory.key]
+            val subcategoryTable = map[subcategory.key]
 
-            if (subcategoryTable is TomlTable) decodeCategory(subcategory, subcategoryTable)
+            if (subcategoryTable is Map<*, *>) decodeCategory(subcategory, subcategoryTable as Map<String, Any>)
         }
     }
 
     override fun encode(config: ConfigCategory): String {
         val map: Map<String, Any> = encodeCategory(config)
 
-        //return writer.write(map)
-        TODO()
+        return writer.write(map)
     }
 
     private fun encodeCategory(category: ConfigCategory): Map<String, Any> {

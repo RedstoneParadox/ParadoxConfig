@@ -13,9 +13,3 @@ pluginManagement {
     }
 
 }
-
-sourceControl {
-    gitRepository("https://github.com/xtomlj/xtomlj.git") {
-        producesModule("io.github.xtomlj:xtomlj")
-    }
-}
