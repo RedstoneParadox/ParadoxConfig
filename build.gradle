@@ -86,6 +86,12 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         expand version: project.version
     }
+
+    filesMatching("fabric.mod.json") {
+        expand version: project.version
+    }
+
+    duplicatesStrategy(DuplicatesStrategy.WARN)
 }
 
 // ensure that the encoding is set to UTF-8, no matter what the system default is
