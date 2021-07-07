@@ -37,7 +37,7 @@ repositories {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
     }
-    maven { url "https://maven.shedaniel.me/" }
+    // maven { url "https://maven.shedaniel.me/" }
     maven {
         name = 'JitPack'
         url = 'https://jitpack.io'
@@ -64,9 +64,11 @@ dependencies {
         transitive = false
     }
 
+    /*
     modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+    */
 
     //include(modImplementation("io.github.ytg1234:fabric-recipe-conditions:0.3.0"))
 
