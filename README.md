@@ -1,7 +1,5 @@
 # Paradox Config
 
-[ ![Download](https://api.bintray.com/packages/redstoneparadox/mods/ParadoxConfig/images/download.svg) ](https://bintray.com/redstoneparadox/mods/ParadoxConfig/_latestVersion)
-
 A lightweight, Kotlin-based config API for Minecraft.
 
 Discord: https://discord.gg/crZpcjtdJR
@@ -11,39 +9,21 @@ Discord: https://discord.gg/crZpcjtdJR
 build.gradle:
 ```gradle
 repositories {
-	maven {
-		url = "https://dl.bintray.com/io.github.redstoneparadox/mods"
-	}
+	//...
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-  // ...
+ 	// ...
 
-	modApi("io.github.redstoneparadox:ParadoxConfig:<version>") {
+	modApi("com.github.RedstoneParadox:ParadoxConfig:<version>") {
 		exclude group: 'net.fabricmc.fabric-api'
 		exclude group: 'net.fabricmc.fabric-language-kotlin'
 	}
-	include "io.github.redstoneparadox:ParadoxConfig:<version>"
+	include "com.github.RedstoneParadox:ParadoxConfig:<version>"
 }
 ```
 
-## Adding versions prior to 0.4.0 Beta to your project:
+## Adding versions prior to 0.5.0 Beta to your project:
 
-build.gradle:
-```gradle
-repositories {
-	maven {
-		url = "https://dl.bintray.com/io.github.redstoneparadox/mods"
-	}
-}
-
-dependencies {
-  // ...
-
-	modApi("io.github.redstoneparadox:paradox-config:<version>") {
-		exclude group: 'net.fabricmc.fabric-api'
-		exclude group: 'net.fabricmc.fabric-language-kotlin'
-	}
-	include "io.github.redstoneparadox:paradox-config:<version>"
-}
-```
+You probably can't. Sorry.
