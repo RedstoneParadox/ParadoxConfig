@@ -10,17 +10,14 @@ build.gradle:
 ```gradle
 repositories {
 	//...
-	maven { url 'https://jitpack.io' }
+	maven { url "https://api.modrinth.com/maven" }
 }
 
 dependencies {
  	// ...
 
-	modApi("com.github.RedstoneParadox:ParadoxConfig:<version>") {
-		exclude group: 'net.fabricmc.fabric-api'
-		exclude group: 'net.fabricmc.fabric-language-kotlin'
-	}
-	include "com.github.RedstoneParadox:ParadoxConfig:<version>"
+	modApi "maven.modrinth:paradox-config:<version>"
+	include "maven.modrinth:paradox-config:<version>"
 }
 ```
 
