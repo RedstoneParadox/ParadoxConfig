@@ -1,4 +1,13 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+}
+
 plugins {
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
     id 'fabric-loom'
     id 'maven-publish'
     id "org.jetbrains.kotlin.jvm"
@@ -72,8 +81,7 @@ dependencies {
 
     //include(modImplementation("io.github.ytg1234:fabric-recipe-conditions:0.3.0"))
 
-    implementation('com.moandjiezana.toml:toml4j:0.7.2')
-    include('com.moandjiezana.toml:toml4j:0.7.2')
+    shadow "com.moandjiezana.toml:toml4j:${project.toml4j_version}"
 
     afterEvaluate {
         testmodImplementation sourceSets.main.output
@@ -109,6 +117,10 @@ jar {
     from ("LICENSE") {
         rename { "${it}_${project.archivesBaseName}"}
     }
+}
+
+shadowJar {
+    configurations = [project.configurations.compileClasspath]
 }
 
 // configure the maven publication
