@@ -9,8 +9,9 @@
     "RedstoneParadox"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/RedstoneParadox/paradox-config"
+    "homepage": "https://github.com/RedstoneParadox/ParadoxConfig",
+    "sources": "https://github.com/RedstoneParadox/ParadoxConfig",
+    "issues": "https://github.com/RedstoneParadox/ParadoxConfig/issues"
   },
 
   "license": "MIT",
