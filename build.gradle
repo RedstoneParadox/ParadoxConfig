@@ -122,7 +122,25 @@ jar {
 }
 
 shadowJar {
-    configurations = [project.configurations.compileClasspath]
+    classifier = "shadow"
+    configurations = [project.configurations.shadow]
+    dependencies {
+        exclude(dependency('com.google.code.gson:gson:'))
+    }
+}
+
+task remapJar(type: net.fabricmc.loom.task.RemapJarTask, overwrite: true) {
+    dependsOn shadowJar
+    from zipTree(shadowJar.archiveFile)
+
+    classifier = "release"
+    //	input = shadowJar.archiveFile
+    //	classifier = "release"
+    //output = file("build/libs/${project.buildDir.absolutePath}/libs/${archivesBaseName}-${project.version}.jar")
+}
+
+build {
+    dependsOn shadowJar
 }
 
 // configure the maven publication
