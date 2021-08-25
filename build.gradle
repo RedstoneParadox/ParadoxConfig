@@ -4,14 +4,18 @@ buildscript {
             url "https://plugins.gradle.org/m2/"
         }
     }
+    dependencies {
+        classpath 'gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0'
+    }
 }
 
 plugins {
-    id 'com.github.johnrengelman.shadow' version '7.0.0'
     id 'fabric-loom'
     id 'maven-publish'
     id "org.jetbrains.kotlin.jvm"
 }
+
+apply plugin: "com.github.johnrengelman.shadow"
 
 sourceCompatibility = JavaVersion.VERSION_16
 targetCompatibility = JavaVersion.VERSION_16
@@ -78,8 +82,6 @@ dependencies {
         exclude(group: "net.fabricmc.fabric-api")
     }
     */
-
-    //include(modImplementation("io.github.ytg1234:fabric-recipe-conditions:0.3.0"))
 
     shadow "com.moandjiezana.toml:toml4j:${project.toml4j_version}"
 
