@@ -83,6 +83,7 @@ dependencies {
     }
     */
 
+    implementation "com.moandjiezana.toml:toml4j:${project.toml4j_version}"
     shadow "com.moandjiezana.toml:toml4j:${project.toml4j_version}"
 
     afterEvaluate {
